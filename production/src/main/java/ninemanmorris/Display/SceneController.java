@@ -1,4 +1,4 @@
-package ninemanmorris;
+package ninemanmorris.Display;
 
 import java.io.IOException;
 
@@ -20,8 +20,9 @@ public class SceneController {
     public void switchScene(String name, Node node) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(name));
+            System.out.println(loader.getLocation());
             root = loader.load();
-            stage = (Stage)node.getScene().getWindow();
+            stage = (Stage) node.getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
@@ -31,14 +32,14 @@ public class SceneController {
     }
 
     public void switchToTitleScene(ActionEvent event) throws IOException {
-        name = "title_screen.fxml";
+        name = "/ninemanmorris/Display/title_screen.fxml";
         node = (Node)event.getSource();
         switchScene(name, node);
     }
 
     public void switchToGameScene(ActionEvent event) throws IOException {
-        name = "game_screen.fxml";
-        node = (Node)event.getSource();
+        name = "/ninemanmorris/Game/game_screen.fxml";
+        node = (Node) event.getSource();
         switchScene(name, node);
     }
 }
