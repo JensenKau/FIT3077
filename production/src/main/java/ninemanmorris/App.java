@@ -6,9 +6,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 
 /**
@@ -23,9 +20,8 @@ public class App extends Application {
     public void start(Stage stage) throws IOException {
         try {
             // initialisation
-            FXMLLoader loader = new FXMLLoader();
-            FileInputStream fileInputStream = new FileInputStream(new File("src/main/resources/ninemanmorris/title_screen.fxml"));
-            Parent root = loader.load(fileInputStream);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("title_screen.fxml"));
+            Parent root = loader.load();
             Scene scene = new Scene(root, 720, 720);
             Image icon = new Image("file:src/main/resources/img/9mm_token_blue.png");
 

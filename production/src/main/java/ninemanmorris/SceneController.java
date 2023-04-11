@@ -1,7 +1,5 @@
 package ninemanmorris;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 
 import javafx.event.ActionEvent;
@@ -16,14 +14,13 @@ public class SceneController {
     private Stage stage;
     private Scene scene;
     private Parent root;
-    private String pathname;
+    private String name;
     private Node node;
 
-    public void switchScene(String pathname, Node node) {
+    public void switchScene(String name, Node node) {
         try {
-            FXMLLoader loader = new FXMLLoader();
-            FileInputStream fileInputStream = new FileInputStream(new File(pathname));
-            root = loader.load(fileInputStream);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(name));
+            root = loader.load();
             stage = (Stage)node.getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);
@@ -34,14 +31,14 @@ public class SceneController {
     }
 
     public void switchToTitleScene(ActionEvent event) throws IOException {
-        pathname = "src/main/resources/ninemanmorris/title_screen.fxml";
+        name = "title_screen.fxml";
         node = (Node)event.getSource();
-        switchScene(pathname, node);
+        switchScene(name, node);
     }
 
     public void switchToGameScene(ActionEvent event) throws IOException {
-        pathname = "src/main/resources/ninemanmorris/game_screen.fxml";
+        name = "game_screen.fxml";
         node = (Node)event.getSource();
-        switchScene(pathname, node);
+        switchScene(name, node);
     }
 }
