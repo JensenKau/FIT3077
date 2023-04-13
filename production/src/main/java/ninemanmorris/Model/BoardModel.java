@@ -1,27 +1,35 @@
 package ninemanmorris.Model;
 
 public class BoardModel {
-  private final PositionModel[] boardPositions;
+  private final PositionModel[][] BOARD_POSITIONS;
+  private final int MORRIS_GAME = 9; // can change depending on the board being played
+  private final int MIDDLE_POINT = MORRIS_GAME / 3;
+  private final int SIZE = MIDDLE_POINT * 2 + 1;
+
 
   public BoardModel() {
-    boardPositions = new PositionModel[24];
-    int empty_position = 0; // just to track the empty position in the array
+    BOARD_POSITIONS = new PositionModel[SIZE][SIZE];
 
     // add the horizontal and vertical positions
-    for (int i = -3; i < 0; i++) {
-      boardPositions[empty_position++] = new PositionModel(i, 0);
-      boardPositions[empty_position++] = new PositionModel(0, i);
-      boardPositions[empty_position++] = new PositionModel(i * -1, 0);
-      boardPositions[empty_position++] = new PositionModel(0, i * -1);
+    for (int i = 0; i < MIDDLE_POINT; i++) {
+      BOARD_POSITIONS[i][MIDDLE_POINT] = new PositionModel(i, MIDDLE_POINT);
+      BOARD_POSITIONS[MIDDLE_POINT][i] = new PositionModel(MIDDLE_POINT, i);
+      BOARD_POSITIONS[i + MIDDLE_POINT + 1][MIDDLE_POINT] = new PositionModel(i + MIDDLE_POINT + 1, MIDDLE_POINT);
+      BOARD_POSITIONS[MIDDLE_POINT][i + MIDDLE_POINT + 1] = new PositionModel(MIDDLE_POINT, i + MIDDLE_POINT + 1);
     }
 
     // add the diagonal positions
-    for (int i = -3; i < 0; i++) {
-      boardPositions[empty_position++] = new PositionModel(i, i);
-      boardPositions[empty_position++] = new PositionModel(i * -1, i * -1);
-      boardPositions[empty_position++] = new PositionModel(i, i * -1);
-      boardPositions[empty_position++] = new PositionModel(i * -1, i);
+    for (int i = 0; i < MIDDLE_POINT; i++) {
+      BOARD_POSITIONS[i][i] = new PositionModel(i, i);
+      BOARD_POSITIONS[i + MIDDLE_POINT + 1][i + MIDDLE_POINT + 1] = new PositionModel(i + MIDDLE_POINT + 1,
+          i + MIDDLE_POINT + 1);
+      BOARD_POSITIONS[MIDDLE_POINT * 2 - i][i] = new PositionModel(MIDDLE_POINT * 2 - i, i);
+      BOARD_POSITIONS[i][MIDDLE_POINT * 2 - i] = new PositionModel(i, MIDDLE_POINT * 2 - i);
     }
+  }
+  
+  public PositionModel getPosition(int x, int y) {
+    return BOARD_POSITIONS[x][y];
   }
   
   // check if it is a valid move

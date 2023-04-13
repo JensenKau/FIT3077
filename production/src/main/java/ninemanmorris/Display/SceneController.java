@@ -20,7 +20,6 @@ public class SceneController {
     public void switchScene(String name, Node node) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(name));
-            System.out.println(loader.getLocation());
             root = loader.load();
             stage = (Stage) node.getScene().getWindow();
             scene = new Scene(root);

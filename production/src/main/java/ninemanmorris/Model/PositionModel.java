@@ -13,4 +13,12 @@ public class PositionModel {
     this.isOccupiedByRed = false;
     this.isOccupiedByBlue = false;
   }
+
+  public boolean getIsOccupiedByRed() {
+    return isOccupiedByRed;
+  }
+
+  public boolean getIsOccupiedByBlue() {
+    return isOccupiedByBlue;
+  }
 }
