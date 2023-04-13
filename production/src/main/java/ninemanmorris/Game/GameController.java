@@ -52,7 +52,6 @@ public class GameController {
 
   public void placingPhase() {
     EventHandler<MouseEvent> placingHandler = new EventHandler<MouseEvent>() {
-      int placingTimes = 0;
 
       @Override
       public void handle(MouseEvent e) {
@@ -62,7 +61,7 @@ public class GameController {
           int colIndex = GridPane.getColumnIndex(clickedNode);
           int rowIndex = GridPane.getRowIndex(clickedNode);
           System.out.println("Clicked at " + colIndex + ", " + rowIndex);
-          
+
           placeToken(rowIndex, colIndex, isPlayer1Turn); // also switches turns here
 
           if (player1.getTokenCount() == 0 && player2.getTokenCount() == 0) {
@@ -117,41 +116,28 @@ public class GameController {
       // check if the position is empty
       if (isPositionEmpty(x, y)) {
 
-        // place the token
+        Image image;
+        ImageView imageView;
+
         if (isRed) {
           board.getPosition(x, y).setIsOccupiedByRed(true);
-          Image redTokenImage = new Image(getClass().getResource("/img/9mm_token_red.png").toExternalForm());
-          ImageView redTokenImageView = new ImageView(redTokenImage);
-          redTokenImageView.setFitWidth(40);
-          redTokenImageView.setFitHeight(40);
-
-          // getting the stack pane on the grid and adding the image onto it
-          for (Node node : grid.getChildren()) {
-            if (GridPane.getRowIndex(node) == x && GridPane.getColumnIndex(node) == y) {
-              if (node instanceof StackPane) {
-                StackPane desiredStackPane = (StackPane) node;
-                desiredStackPane.getChildren().add(redTokenImageView);
-              }
-              break;
-            }
-          }
+          image = new Image(getClass().getResource("/img/9mm_token_red.png").toExternalForm());
         } else {
           board.getPosition(x, y).setIsOccupiedByBlue(true);
+          image = new Image(getClass().getResource("/img/9mm_token_blue.png").toExternalForm());
+        }
+        imageView = new ImageView(image);
+        imageView.setFitWidth(40);
+        imageView.setFitHeight(40);
 
-          Image blueTokenImage = new Image(getClass().getResource("/img/9mm_token_blue.png").toExternalForm());
-          ImageView blueTokenImageView = new ImageView(blueTokenImage);
-          blueTokenImageView.setFitWidth(40);
-          blueTokenImageView.setFitHeight(40);
-
-          // getting the stack pane on the grid and adding the image onto it
-          for (Node node : grid.getChildren()) {
-            if (GridPane.getRowIndex(node) == x && GridPane.getColumnIndex(node) == y) {
-              if (node instanceof StackPane) {
-                StackPane desiredStackPane = (StackPane) node;
-                desiredStackPane.getChildren().add(blueTokenImageView);
-              }
-              break;
+        // getting the stack pane on the grid and adding the image onto it
+        for (Node node : grid.getChildren()) {
+          if (GridPane.getRowIndex(node) == x && GridPane.getColumnIndex(node) == y) {
+            if (node instanceof StackPane) {
+              StackPane desiredStackPane = (StackPane) node;
+              desiredStackPane.getChildren().add(imageView);
             }
+            break;
           }
         }
         currentPlayer.setTokenCount(currentPlayer.getTokenCount() - 1);
