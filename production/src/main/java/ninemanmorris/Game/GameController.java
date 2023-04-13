@@ -52,7 +52,6 @@ public class GameController {
 
   public void placingPhase() {
     EventHandler<MouseEvent> placingHandler = new EventHandler<MouseEvent>() {
-      int placingTimes = 0;
 
       @Override
       public void handle(MouseEvent e) {
