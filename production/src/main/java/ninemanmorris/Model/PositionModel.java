@@ -21,4 +21,12 @@ public class PositionModel {
   public boolean getIsOccupiedByBlue() {
     return isOccupiedByBlue;
   }
+
+  public void setIsOccupiedByRed(boolean isOccupiedByRed) {
+    this.isOccupiedByRed = isOccupiedByRed;
+  }
+
+  public void setIsOccupiedByBlue(boolean isOccupiedByBlue) {
+    this.isOccupiedByBlue = isOccupiedByBlue;
+  }
 }
