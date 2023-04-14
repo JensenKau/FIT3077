@@ -31,15 +31,5 @@ public class BoardModel {
   public PositionModel getPosition(int x, int y) {
     return BOARD_POSITIONS[x][y];
   }
-  
-  // check if it is a valid move
-  // public boolean isValidMove(int x, int y) {
-  //   for (PositionModel position : boardPositions) {
-  //     if (position.getX() == x && position.getY() == y) {
-  //       return true;
-  //     }
-  //   }
-  //   return false;
-  // }
 
 }
