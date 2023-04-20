@@ -4,10 +4,8 @@ module ninemanmorris {
     requires javafx.fxml;
 
     opens ninemanmorris to javafx.fxml;
-    opens ninemanmorris.Game to javafx.fxml;
-    opens ninemanmorris.Display to javafx.fxml;
+    opens ninemanmorris.Controller to javafx.fxml;
 
     exports ninemanmorris;
-    exports ninemanmorris.Game;
-    exports ninemanmorris.Display;
+    exports ninemanmorris.Controller;
 }

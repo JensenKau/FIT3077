@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.VBox?>
 
 
-<VBox alignment="CENTER" prefHeight="720.0" prefWidth="720.0" spacing="20.0" style="-fx-background-image: url('file:src/main/resources/img/9mm_title.png'); -fx-background-size: 720;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ninemanmorris.Display.SceneController">
+<VBox alignment="CENTER" prefHeight="720.0" prefWidth="720.0" spacing="20.0" style="-fx-background-image: url('file:src/main/resources/img/9mm_title.png'); -fx-background-size: 720;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ninemanmorris.Controller.SceneController">
    <children>
       <Label text="TITLE SCREEN" />
       <Button fx:id="primaryButton" onAction="#switchToGameScene" text="Switch to Game Map" />

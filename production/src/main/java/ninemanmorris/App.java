@@ -20,7 +20,7 @@ public class App extends Application {
     public void start(Stage stage) throws IOException {
         try {
             // initialisation
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ninemanmorris/Display/title_screen.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/title_screen.fxml"));
             Parent root = loader.load();
             Scene scene = new Scene(root, 720, 720);
             Image icon = new Image("file:src/main/resources/img/9mm_token_blue.png");
