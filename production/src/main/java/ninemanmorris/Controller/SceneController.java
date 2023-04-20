@@ -1,4 +1,4 @@
-package ninemanmorris.Display;
+package ninemanmorris.Controller;
 
 import java.io.IOException;
 
@@ -31,13 +31,13 @@ public class SceneController {
     }
 
     public void switchToTitleScene(ActionEvent event) throws IOException {
-        name = "/ninemanmorris/Display/title_screen.fxml";
+        name = "/fxml/title_screen.fxml";
         node = (Node)event.getSource();
         switchScene(name, node);
     }
 
     public void switchToGameScene(ActionEvent event) throws IOException {
-        name = "/ninemanmorris/Game/game_screen.fxml";
+        name = "/fxml/game_screen.fxml";
         node = (Node) event.getSource();
         switchScene(name, node);
     }
