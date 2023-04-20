@@ -42,7 +42,7 @@
                      </Label>
                       <ImageView fx:id="red_token" fitHeight="40" fitWidth="40" pickOnBounds="true" preserveRatio="true" >
                         <image>
-                           <Image url="@../../img/9mm_token_red.png" />
+                           <Image url="@../img/9mm_token_red.png" />
                         </image>
                      </ImageView>
                   </HBox>
@@ -75,7 +75,7 @@
                      </Label>
                      <ImageView fx:id="blue_token" fitHeight="40" fitWidth="40" pickOnBounds="true" preserveRatio="true" >
                         <image>
-                           <Image url="@../../img/9mm_token_blue.png"/>
+                           <Image url="@../img/9mm_token_blue.png"/>
                         </image>
                      </ImageView>
                   </children>
