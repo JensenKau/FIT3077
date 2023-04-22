@@ -8,4 +8,5 @@ module ninemanmorris {
 
     exports ninemanmorris;
     exports ninemanmorris.Controller;
+    exports ninemanmorris.Enum;
 }
