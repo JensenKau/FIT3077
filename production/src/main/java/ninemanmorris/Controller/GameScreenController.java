@@ -15,7 +15,7 @@ import javafx.scene.text.Text;
 import ninemanmorris.Model.BoardModel;
 import ninemanmorris.Model.PlayerModel;
 
-public class GameController extends ScreenController{
+public class GameScreenController extends ScreenController{
 
   @FXML
   private GridPane grid;
@@ -35,7 +35,7 @@ public class GameController extends ScreenController{
   private PlayerModel player2 = new PlayerModel("Player 2", false);
   private PlayerModel currentPlayer = player1;
 
-  public GameController() {
+  public GameScreenController() {
     super("/fxml/game_screen.fxml");
   }
   
