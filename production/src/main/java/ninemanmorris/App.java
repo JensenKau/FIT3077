@@ -1,11 +1,13 @@
 package ninemanmorris;
 
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import ninemanmorris.Controller.GameController;
+import ninemanmorris.Controller.TitleScreenController;
+import ninemanmorris.Enum.PageEnum;
+import ninemanmorris.Manager.ScreenManager;
+
 import java.io.IOException;
 
 /**
@@ -18,24 +20,21 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        try {
-            // initialisation
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/title_screen.fxml"));
-            Parent root = loader.load();
-            Scene scene = new Scene(root, 720, 720);
-            Image icon = new Image("file:src/main/resources/img/9mm_token_blue.png");
+        
+        Image icon = new Image("file:src/main/resources/img/9mm_token_blue.png");
+        stage.setTitle("Nine Mens' Morris");
+        stage.getIcons().add(icon);
+        stage.setResizable(false);
 
-            // styling the stage
-            stage.setTitle("Nine Mens' Morris");
-            stage.getIcons().add(icon);
-            stage.setResizable(false);
-            stage.setScene(scene);
+        TitleScreenController titleScreenController = new TitleScreenController();
+        ScreenManager.getInstance().appendScreenController(PageEnum.TITLE_SCENE, titleScreenController);
 
-            stage.show();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        GameController gameController = new GameController();
+        ScreenManager.getInstance().appendScreenController(PageEnum.GAME_SCENE, gameController);
 
+        System.out.println(ScreenManager.getInstance().getEnumToScreenController());
+
+        titleScreenController.getView(stage);
     }
 
 }
