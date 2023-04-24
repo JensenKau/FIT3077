@@ -1,23 +1,19 @@
 package ninemanmorris.screen.screencontroller;
 
+import java.io.IOException;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
-import ninemanmorris.Enum.PageEnum;
+import ninemanmorris.screen.ScreenPage;
 
-public class TitleScreenController extends ScreenController{
+public class TitleScreenController extends ScreenController {
 
     @FXML
     private Button startGameButton;
 
-    public TitleScreenController() {
-        super("/fxml/title_screen.fxml");
-    }
-
-    public void startGameHandler(ActionEvent event) {
-        Node node = (Node) event.getSource();
-        super.switchSceneHandler(node, PageEnum.GAME_SCENE);
+    public void startTwoPlayerGame(ActionEvent event) throws IOException {
+        switchScene(ScreenPage.GAME_SCREEN.toString());
     }
 
     // initialise a show pop up listener for instruction button

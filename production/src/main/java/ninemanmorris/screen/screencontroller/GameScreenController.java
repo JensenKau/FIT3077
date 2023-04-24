@@ -34,10 +34,6 @@ public class GameScreenController extends ScreenController {
   private PlayerModel player1 = new PlayerModel("Player 1", true);
   private PlayerModel player2 = new PlayerModel("Player 2", false);
   private PlayerModel currentPlayer = player1;
-
-  public GameScreenController() {
-    super("/fxml/game_screen.fxml");
-  }
   
   public void initialize() { 
     run(); // just runs the game when the view is loaded
