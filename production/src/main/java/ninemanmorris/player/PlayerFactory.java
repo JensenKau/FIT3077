@@ -1,8 +1,6 @@
 package ninemanmorris.player;
 
-import ninemanmorris.player.playertype.ComputerAI;
-import ninemanmorris.player.playertype.HumanPlayer;
-import ninemanmorris.player.playertype.Player;
+import ninemanmorris.player.playertype.*;
 
 public class PlayerFactory {
 
