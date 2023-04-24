@@ -2,8 +2,8 @@ package ninemanmorris.Manager;
 
 import java.util.EnumMap;
 
-import ninemanmorris.Controller.ScreenController;
 import ninemanmorris.Enum.PageEnum;
+import ninemanmorris.screen.screencontroller.ScreenController;
 
 public class ScreenManager {
 

@@ -1,4 +1,4 @@
-package ninemanmorris.Controller;
+package ninemanmorris.screen.screencontroller;
 
 
 import javafx.event.EventHandler;
@@ -15,7 +15,7 @@ import javafx.scene.text.Text;
 import ninemanmorris.Model.BoardModel;
 import ninemanmorris.Model.PlayerModel;
 
-public class GameScreenController extends ScreenController{
+public class GameScreenController extends ScreenController {
 
   @FXML
   private GridPane grid;

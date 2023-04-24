@@ -1,4 +1,4 @@
-package ninemanmorris.Controller;
+package ninemanmorris.screen.screencontroller;
 
 import java.io.IOException;
 

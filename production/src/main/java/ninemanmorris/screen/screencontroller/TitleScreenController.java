@@ -1,4 +1,4 @@
-package ninemanmorris.Controller;
+package ninemanmorris.screen.screencontroller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
