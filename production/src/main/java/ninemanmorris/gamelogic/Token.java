@@ -1,20 +1,14 @@
 package ninemanmorris.gamelogic;
 
-import ninemanmorris.player.playertype.Player;
-
 public class Token {
     
-    private Player player;
+    private boolean isRedPlayer;
 
-    public Token(Player player) {
-        this.player = player;
-    }
-
-    public Player getPlayer() {
-        return player;
+    public Token(boolean isRedPlayer) {
+        this.isRedPlayer = isRedPlayer;
     }
 
     public boolean getIsRedPlayer() {
-        return player.getIsRed();
+        return this.isRedPlayer;
     }
 }

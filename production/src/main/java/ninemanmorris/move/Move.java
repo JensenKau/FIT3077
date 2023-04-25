@@ -7,12 +7,15 @@ public abstract class Move {
     private int row;
     private int col;
     private boolean switchTurn;
+    private boolean isRedMove;
+
+    public Move(boolean isRedMove) {
+        this.isRedMove = isRedMove;
+    }
     
     public abstract Move performMove(Position pos);
 
     public abstract Position[] previewMove(Position[][] positions);
-
-    public abstract boolean validateMove(Position position);
 
     public int[] getMovePosition() {
         return new int[] {row, col};
@@ -33,5 +36,9 @@ public abstract class Move {
 
     protected void enableSwitchTurn() {
         this.switchTurn = true;
+    }
+
+    protected boolean getIsRedMove() {
+        return this.isRedMove;
     }
 }

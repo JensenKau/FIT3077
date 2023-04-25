@@ -4,22 +4,20 @@ import ninemanmorris.gamelogic.Position;
 
 public class PlaceToken extends Move {
 
+    private int tokenCount;
+
+    public PlaceToken(boolean isRedMove) {
+        super(isRedMove);
+        this.tokenCount = 9;
+    }
+
     @Override
     public Move performMove(Position pos) {
-        // TODO Auto-generated method stub
         return null;
     }
 
     @Override
     public Position[] previewMove(Position[][] positions) {
-        // TODO Auto-generated method stub
         return null;
     }
-
-    @Override
-    public boolean validateMove(Position position) {
-        // TODO Auto-generated method stub
-        return false;
-    }
-    
 }

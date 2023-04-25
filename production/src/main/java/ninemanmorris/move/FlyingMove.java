@@ -4,6 +4,10 @@ import ninemanmorris.gamelogic.Position;
 
 public class FlyingMove extends Move {
 
+    public FlyingMove(boolean isRedMove) {
+        super(isRedMove);
+    }
+
     @Override
     public Move performMove(Position pos) {
         // TODO Auto-generated method stub
@@ -14,11 +18,5 @@ public class FlyingMove extends Move {
     public Position[] previewMove(Position[][] positions) {
         // TODO Auto-generated method stub
         return null;
-    }
-
-    @Override
-    public boolean validateMove(Position position) {
-        // TODO Auto-generated method stub
-        return false;
     }
 }

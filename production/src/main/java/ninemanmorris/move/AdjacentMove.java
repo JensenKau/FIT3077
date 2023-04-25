@@ -4,6 +4,10 @@ import ninemanmorris.gamelogic.Position;
 
 public class AdjacentMove extends Move {
 
+    public AdjacentMove(boolean isRedMove) {
+        super(isRedMove);
+    }
+
     @Override
     public Move performMove(Position pos) {
         // TODO Auto-generated method stub
@@ -15,11 +19,4 @@ public class AdjacentMove extends Move {
         // TODO Auto-generated method stub
         return null;
     }
-
-    @Override
-    public boolean validateMove(Position position) {
-        // TODO Auto-generated method stub
-        return false;
-    }
-    
 }
