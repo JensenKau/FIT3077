@@ -6,11 +6,6 @@ public class Position {
     private Position[] verticalNeighbours;
     private Token token;
 
-    public Position(Position[] horizontalNeighbours, Position[] verticalNeighbours) {
-        this.horizontalNeighbours = horizontalNeighbours;
-        this.verticalNeighbours = verticalNeighbours;
-    }
-
     public Token getToken() {
         return token;
     }
