@@ -1,5 +1,17 @@
 package ninemanmorris.gamelogic;
 
+import ninemanmorris.gamelogic.game.LocalGame;
+import ninemanmorris.gamelogic.game.MorrisGame;
+import ninemanmorris.player.PlayerFactory;
+import ninemanmorris.player.PlayerType;
+
 public class MorrisGameFactory {
     
+    private MorrisGameFactory() {
+
+    }
+
+    public static MorrisGame createMorrisGame(PlayerType p1, PlayerType p2) {
+        return new LocalGame(PlayerFactory.createPlayer(p1), PlayerFactory.createPlayer(p2));
+    }
 }
