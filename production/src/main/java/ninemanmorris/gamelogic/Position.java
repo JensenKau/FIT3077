@@ -49,6 +49,7 @@ public class Position {
         return checkMill(true) || checkMill(false);
     }
 
+    // FIXME: possibly have errors (neighbour is part of a mill but self is not)
     private boolean checkMill(boolean isVertical) {
         Position[] neighbours = (isVertical) ? verticalNeighbours : horizontalNeighbours;
 

@@ -17,6 +17,8 @@ public abstract class Move {
 
     public abstract Position[] previewMove(Position[][] positions);
 
+    public abstract Move validateCurrentMove(Position[][] positions);
+
     public int[] getMovePosition() {
         return new int[] {row, col};
     }

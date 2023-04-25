@@ -1,6 +1,7 @@
 package ninemanmorris.move;
 
 import ninemanmorris.gamelogic.Position;
+import ninemanmorris.gamelogic.Token;
 
 public class PlaceToken extends Move {
 
@@ -11,13 +12,37 @@ public class PlaceToken extends Move {
         this.tokenCount = 9;
     }
 
+    // TODO: switch turn logic
+
     @Override
     public Move performMove(Position pos) {
-        return null;
+        Move nextMove = null;
+
+        if (pos.getToken() == null) {
+            pos.addToken(new Token(getIsRedMove()));
+            tokenCount -= 1;
+        } 
+
+        if (tokenCount > 0) {
+            nextMove = this;
+        } else {
+            nextMove = new AdjacentMove(getIsRedMove());
+        }
+
+        if (pos.getIsMill()) {
+            nextMove = new RemoveToken(getIsRedMove(), nextMove);
+        } 
+
+        return nextMove;
     }
 
     @Override
     public Position[] previewMove(Position[][] positions) {
         return null;
+    }
+
+    @Override
+    public Move validateCurrentMove(Position[][] positions) {
+        return this;
     }
 }

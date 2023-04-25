@@ -4,19 +4,30 @@ import ninemanmorris.gamelogic.Position;
 
 public class RemoveToken extends Move {
 
-    public RemoveToken(boolean isRedMove) {
+    private Move previousMove;
+
+    public RemoveToken(boolean isRedMove, Move previousMove) {
         super(isRedMove);
+        this.previousMove = previousMove;
     }
 
     @Override
     public Move performMove(Position pos) {
-        // TODO Auto-generated method stub
-        return null;
+        if (pos.getToken() != null && !pos.getIsMill() && pos.getIsRedToken() != getIsRedMove()) {
+            pos.removeToken();
+            return previousMove;
+        }
+
+        return this;
     }
 
     @Override
     public Position[] previewMove(Position[][] positions) {
-        // TODO Auto-generated method stub
         return null;
+    }
+
+    @Override
+    public Move validateCurrentMove(Position[][] positions) {
+        return this;
     }
 }

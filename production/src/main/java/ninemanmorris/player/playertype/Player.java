@@ -10,7 +10,7 @@ public abstract class Player {
 
     public Player(boolean isRed) {
         this.isRed = isRed;
-        this.currentMove = new PlaceToken();
+        this.currentMove = new PlaceToken(isRed);
     }
 
     public boolean getIsRed() {

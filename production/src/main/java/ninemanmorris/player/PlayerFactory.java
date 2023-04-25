@@ -8,11 +8,11 @@ public class PlayerFactory {
 
     }
 
-    public static Player createPlayer(PlayerType playerType) {
+    public static Player createPlayer(PlayerType playerType, boolean isRed) {
         if (playerType == PlayerType.HUMAN) {
-            return new HumanPlayer();
+            return new HumanPlayer(isRed);
         } else if (playerType == PlayerType.COMPUTER) {
-            return new ComputerAI();
+            return new ComputerAI(isRed);
         }
 
         return null;
