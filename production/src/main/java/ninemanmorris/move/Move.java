@@ -4,8 +4,9 @@ import ninemanmorris.gamelogic.Position;
 
 public abstract class Move {
 
-    private int x;
-    private int y;
+    private int row;
+    private int col;
+    private boolean switchTurn;
     
     public abstract Move performMove(Position pos);
 
@@ -14,11 +15,23 @@ public abstract class Move {
     public abstract boolean validateMove(Position position);
 
     public int[] getMovePosition() {
-        return new int[] {x, y};
+        return new int[] {row, col};
     }
 
-    public void setMovePosition(int x, int y) {
-        this.x = x;
-        this.y = y;
+    public void setMovePosition(int row, int col) {
+        this.row = row;
+        this.col = col;
+    }
+
+    public boolean getSwitchTurn() {
+        return switchTurn;
+    }
+
+    public void resetSwitchTurn() {
+        this.switchTurn = false;
+    }
+
+    protected void enableSwitchTurn() {
+        this.switchTurn = true;
     }
 }
