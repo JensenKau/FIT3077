@@ -43,7 +43,11 @@ public abstract class MorrisGame implements IMorrisGameInputHandler {
         return currentPlayerTurn;
     }
 
-    protected void setCurrentPlayerTurn(Player currentPlayerTurn) {
-        this.currentPlayerTurn = currentPlayerTurn;
+    protected void switchPlayerTurn() {
+        if (currentPlayerTurn == players[0]) {
+            this.currentPlayerTurn = players[1];
+        } else {
+            this.currentPlayerTurn = players[0];
+        }
     }
 }

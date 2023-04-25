@@ -9,7 +9,7 @@ public class LocalGame extends MorrisGame {
     }
 
     @Override
-    public void handleInput(int x, int y) {
-        
+    public void handleInput(int row, int col) {
+
     }
 }
