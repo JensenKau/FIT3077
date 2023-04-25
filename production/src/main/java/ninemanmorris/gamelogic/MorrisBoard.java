@@ -20,7 +20,7 @@ public class MorrisBoard {
 
     private void createNeighbours() {
         for (int i = 0; i < board.length; i++) {
-            for (int j = 0; j < board[0].length; j++) {
+            for (int j = 0; j < board[i].length; j++) {
                 if (board[i][j] != null) {
                     board[i][j].setHorizontalNeighbours(identifyNeighbour(i, j, false));
                     board[i][j].setVerticalNeighbours(identifyNeighbour(i, j, true));
@@ -103,6 +103,20 @@ public class MorrisBoard {
     }
 
     public Boolean[][] generatePlayerBoard(boolean isRed) {
-        return null;
+        Boolean[][] output = new Boolean[BOARD_LENGTH][BOARD_WIDTH];
+
+        for (int i = 0; i < output.length; i++) {
+            for (int j = 0; j < output[i].length; j++) {
+                if (board[i][j] != null && board[i][j].getIsRedToken() != null) {
+                    if (isRed) {
+                        output[i][j] = board[i][j].getIsRedToken();
+                    } else {
+                        output[i][j] = !board[i][j].getIsRedToken();
+                    }
+                }
+            }
+        }
+
+        return output;
     }
 }
