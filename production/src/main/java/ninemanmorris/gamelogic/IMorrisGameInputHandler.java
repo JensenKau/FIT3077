@@ -1,5 +1,6 @@
 package ninemanmorris.gamelogic;
 
-public class IMorrisGameInputHandler {
+public interface IMorrisGameInputHandler {
     
+    void handleInput(int x, int y);
 }

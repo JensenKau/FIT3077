@@ -1,5 +1,8 @@
 package ninemanmorris.gamelogic;
 
-public class IMorrisGameSubscriber {
-    
+public interface IMorrisGameSubscriber {
+
+    void update(boolean isRed, Boolean[][] board);
+
+    void updateGameEnd(boolean isRed);
 }
