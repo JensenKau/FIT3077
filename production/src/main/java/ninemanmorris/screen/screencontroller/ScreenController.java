@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 
 public abstract class ScreenController {
 
-    private final static int WINDOW_WIDTH = 720;
+    private final static int WINDOW_WIDTH = 860;
     private final static int WINDOW_HEIGHT = 720;
 
     private Stage stage;

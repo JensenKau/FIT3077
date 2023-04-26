@@ -11,7 +11,7 @@ public class MorrisGameFactory {
 
     }
 
-    public static MorrisGame createMorrisGame(PlayerType p1, PlayerType p2) {
-        return new LocalGame(PlayerFactory.createPlayer(p1, true), PlayerFactory.createPlayer(p2, false));
+    public static MorrisGame createMorrisGame(PlayerType p1, PlayerType p2, IMorrisGameSubscriber subscriber) {
+        return new LocalGame(PlayerFactory.createPlayer(p1, true), PlayerFactory.createPlayer(p2, false), subscriber);
     }
 }

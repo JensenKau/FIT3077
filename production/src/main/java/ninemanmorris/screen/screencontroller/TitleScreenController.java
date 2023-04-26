@@ -25,7 +25,7 @@ public class TitleScreenController extends ScreenController {
         FXMLLoader loader = switchScene(ScreenPage.GAME_SCREEN.toString());
         GameScreenController controller = loader.getController();
 
-        controller.setMorrisGame(MorrisGameFactory.createMorrisGame(PlayerType.HUMAN, PlayerType.HUMAN));
+        controller.setMorrisGame(MorrisGameFactory.createMorrisGame(PlayerType.HUMAN, PlayerType.HUMAN, controller));
     }
 
     // initialise a show pop up listener for instruction button

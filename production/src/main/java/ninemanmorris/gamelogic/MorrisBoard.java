@@ -3,6 +3,7 @@ package ninemanmorris.gamelogic;
 import java.util.ArrayList;
 
 import ninemanmorris.move.Move;
+import ninemanmorris.move.RemoveToken;
 
 public class MorrisBoard {
     
@@ -27,6 +28,18 @@ public class MorrisBoard {
                 if (board[i][j] != null) {
                     board[i][j].setHorizontalNeighbours(identifyNeighbour(i, j, false));
                     board[i][j].setVerticalNeighbours(identifyNeighbour(i, j, true));
+
+                    System.out.println(i + " " + j);
+
+                    for (Position pos : board[i][j].getHorizontalNeighbours()) {
+                        System.out.print(pos.row + " " + pos.col + " ");
+                    }
+
+                    for (Position pos : board[i][j].getVerticalNeighbours()) {
+                        System.out.print(pos.row + " " + pos.col + " ");
+                    }
+
+                    System.out.println();
                 }
             }
         }
@@ -37,30 +50,34 @@ public class MorrisBoard {
         int rowAdder = (isRow) ? 1 : 0;
         int colAdder = (!isRow) ? 1 : 0;
 
-        row = (isRow) ? row - 1 : row;
-        col = (!isRow) ? col - 1 : col;
+        int currentRow = (isRow) ? row - 1 : row;
+        int currentCol = (!isRow) ? col - 1 : col;
 
-        while (row >= 0 && col >= 0) {
-            if (board[row][col] != null) {
-                neighbours.add(board[row][col]);
+        while (currentRow >= 0 && currentCol >= 0) {
+            if (board[currentRow][currentCol] != null) {
+                neighbours.add(board[currentRow][currentCol]);
+                break;
+            } if (currentCol == 3 && currentRow == 3) {
                 break;
             }
 
-            row -= rowAdder;
-            col -= colAdder;
+            currentRow -= rowAdder;
+            currentCol -= colAdder;
         }
 
-        row = (isRow) ? row + 1 : row;
-        col = (!isRow) ? col + 1 : col;
+        currentRow = (isRow) ? row + 1 : row;
+        currentCol = (!isRow) ? col + 1 : col;
 
-        while (row < BOARD_LENGTH && col < BOARD_WIDTH) {
-            if (board[row][col] != null) {
-                neighbours.add(board[row][col]);
+        while (currentRow < BOARD_LENGTH && currentCol < BOARD_WIDTH) {
+            if (board[currentRow][currentCol] != null) {
+                neighbours.add(board[currentRow][currentCol]);
+                break;
+            } if (currentCol == 3 && currentRow == 3) {
                 break;
             }
 
-            row += rowAdder;
-            col += colAdder;
+            currentRow += rowAdder;
+            currentCol += colAdder;
         }
 
         return neighbours.toArray(new Position[neighbours.size()]);
@@ -83,7 +100,7 @@ public class MorrisBoard {
                 col += step;
             }
 
-            board[row][col] = new Position();
+            board[row][col] = new Position(row, col);
             dist -= 1;
 
             if (dist == 0) {
@@ -113,6 +130,7 @@ public class MorrisBoard {
         position = board[row][col];
         output = move.performMove(position);
         switchTurn = move.getSwitchTurn();
+        move.resetSwitchTurn();
 
         return output;
     }
@@ -125,16 +143,16 @@ public class MorrisBoard {
         this.switchTurn = false;
     }
 
-    public Boolean[][] generatePlayerBoard(boolean isRed) {
+    public Boolean[][] generatePlayerBoard() {
         Boolean[][] output = new Boolean[BOARD_LENGTH][BOARD_WIDTH];
 
         for (int i = 0; i < output.length; i++) {
             for (int j = 0; j < output[i].length; j++) {
                 if (board[i][j] != null && board[i][j].getIsRedToken() != null) {
-                    if (isRed) {
-                        output[i][j] = board[i][j].getIsRedToken();
+                    if (board[i][j].getIsRedToken()) {
+                        output[i][j] = true;
                     } else {
-                        output[i][j] = !board[i][j].getIsRedToken();
+                        output[i][j] = false;
                     }
                 }
             }

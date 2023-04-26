@@ -1,8 +1,13 @@
 package ninemanmorris.screen.screencontroller;
 
+import java.util.Arrays;
+
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
@@ -24,12 +29,15 @@ public class GameScreenController extends ScreenController implements IMorrisGam
     @FXML
     private Label blue_token_count;
 
+    private static final String RED_TOKEN_IMG = "/img/9mm_token_red.png";
+    private static final String BLUE_TOKEN_IMG = "/img/9mm_token_blue.png";
+
     private IMorrisGameInputHandler morrisGame;
     private boolean isRedTurn;
-    private Boolean[][] board;
+    private Boolean[][] tokenBoard;
 
     public void initialize() {
-        
+        createGridClick();
     }
 
     public void setMorrisGame(IMorrisGameInputHandler morrisGame) {
@@ -39,7 +47,55 @@ public class GameScreenController extends ScreenController implements IMorrisGam
     @Override
     public void update(boolean isRed, Boolean[][] board) {
         this.isRedTurn = isRed;
-        this.board = board;
+        this.tokenBoard = board;
+
+        // for (Node node : grid.getChildren()) {
+        //     int rowIndex = GridPane.getRowIndex(node);
+        //     int colIndex = GridPane.getColumnIndex(node);
+
+        //     if (board[rowIndex][colIndex] != null) {
+        //         Image token = null;
+        //         ImageView imageView = null;
+
+        //         if (board[rowIndex][colIndex]) {
+        //             token = new Image(getClass().getResource(RED_TOKEN_IMG).toExternalForm());
+        //         } else {
+        //             token = new Image(getClass().getResource(BLUE_TOKEN_IMG).toExternalForm());
+        //         }
+
+        //         imageView = new ImageView(token);
+        //         imageView.setFitWidth(40);
+        //         imageView.setFitHeight(40);
+
+        //         grid.getChildren().remove(node);
+        //     }
+        // }
+
+        grid.getChildren().remove(49, grid.getChildren().size());
+
+        for (int i = 0; i < tokenBoard.length; i++) {
+            for (int j = 0; j < tokenBoard[0].length; j++) {
+                if (tokenBoard[i][j] != null) {
+                    Image token = null;
+                    ImageView imageView = null;
+                    
+                    if (tokenBoard[i][j]) {
+                        token = new Image(getClass().getResource(RED_TOKEN_IMG).toExternalForm());
+                    } else {
+                        token = new Image(getClass().getResource(BLUE_TOKEN_IMG).toExternalForm());
+                    }
+
+                    imageView = new ImageView(token);
+                    imageView.setFitWidth(40);
+                    imageView.setFitHeight(40);
+
+                    grid.add(imageView, j, i);
+                }
+            }
+        }
+
+        System.out.println(Arrays.deepToString(tokenBoard));
+        
 
         updatePlayerTurn();
     }
@@ -61,18 +117,23 @@ public class GameScreenController extends ScreenController implements IMorrisGam
         }
     }
 
-    public void gridClick(MouseEvent event) {
-        Node clickedNode = event.getPickResult().getIntersectedNode();
+    public void createGridClick() {
+        EventHandler<MouseEvent> placingHandler = new EventHandler<MouseEvent>() {
 
-        if (clickedNode != null) {
-            int rowIndex = GridPane.getRowIndex(clickedNode);
-            int colIndex = GridPane.getColumnIndex(clickedNode);
-            System.out.println("clicked on: " + rowIndex + " " + colIndex);
+            @Override
+            public void handle(MouseEvent event) {
+                Node clickedNode = event.getPickResult().getIntersectedNode();
 
-            if (board[rowIndex][colIndex] != null && board[rowIndex][colIndex]) {
-                System.out.println("executed");
-                morrisGame.handleInput(rowIndex, colIndex);
-            }
-        }
+                if (clickedNode != null) {
+                    int rowIndex = GridPane.getRowIndex(clickedNode);
+                    int colIndex = GridPane.getColumnIndex(clickedNode);
+                    System.out.println("clicked on: " + rowIndex + " " + colIndex);
+
+                    morrisGame.handleInput(rowIndex, colIndex);
+                }
+            }  
+        };
+
+        grid.addEventHandler(MouseEvent.MOUSE_CLICKED, placingHandler);
     }
 }

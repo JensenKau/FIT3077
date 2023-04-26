@@ -6,6 +6,14 @@ public class Position {
     private Position[] verticalNeighbours;
     private Token token;
 
+    public int row;
+    public int col;
+
+    public Position(int row, int col) {
+        this.row = row;
+        this.col = col;
+    }
+
     public Token getToken() {
         return token;
     }
@@ -51,26 +59,22 @@ public class Position {
 
     // FIXME: possibly have errors (neighbour is part of a mill but self is not)
     private boolean checkMill(boolean isVertical) {
+        Position currentPosition = this;
         Position[] neighbours = (isVertical) ? verticalNeighbours : horizontalNeighbours;
 
-        for (int i = 0; i < neighbours.length; i++) {
-            Position[] currentNeighbours = (isVertical) ? neighbours[i].getVerticalNeighbours() : neighbours[i].getHorizontalNeighbours();
-
-            if (currentNeighbours.length == 2) {
-                boolean checkNull = currentNeighbours[0].getToken() != null && neighbours[i] != null && currentNeighbours[1].getToken() != null;
-
-                if (checkNull && currentNeighbours[0].getIsRedToken() == neighbours[i].getIsRedToken() == currentNeighbours[1].getIsRedToken()) {
-                    return true;
-                }
+        if (neighbours.length == 1) {
+            currentPosition = neighbours[0];
+            
+            if (isVertical) {
+                neighbours = currentPosition.getVerticalNeighbours();
+            } else {
+                neighbours = currentPosition.getHorizontalNeighbours();
             }
         }
 
-        if (neighbours.length == 2) {
-            boolean checkNull = neighbours[0].getToken() != null && token != null && neighbours[1].getToken() != null;
-
-            if (checkNull && neighbours[0].getIsRedToken() == this.getIsRedToken() == neighbours[1].getIsRedToken()) {
-                return true;
-            }
+        boolean checkNull = neighbours[0].getToken() != null && neighbours[1].getToken() != null && currentPosition.getToken() != null;
+        if (checkNull && neighbours[0].getIsRedToken() == neighbours[1].getIsRedToken() && neighbours[1].getIsRedToken() == currentPosition.getIsRedToken()) {
+            return true;
         }
 
         return false;

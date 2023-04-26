@@ -14,20 +14,23 @@ public abstract class MorrisGame implements IMorrisGameInputHandler {
     private Player currentPlayerTurn;
     private ArrayList<IMorrisGameSubscriber> subscribers;
 
-    public MorrisGame(Player p1, Player p2) {
+    public MorrisGame(Player p1, Player p2, IMorrisGameSubscriber subscriber) {
         subscribers = new ArrayList<>();
         players = new Player[] {p1, p2};
         currentPlayerTurn = p1;
         gameBoard = new MorrisBoard();
+
+        addSubscriber(subscriber);
     }
 
     public void addSubscriber(IMorrisGameSubscriber subscriber) {
         subscribers.add(subscriber);
+        subscriber.update(currentPlayerTurn.getIsRed(), gameBoard.generatePlayerBoard());
     }
 
     public void udpateSubscribers() {
         for (IMorrisGameSubscriber subscriber : subscribers) {
-            subscriber.update(currentPlayerTurn.getIsRed(), gameBoard.generatePlayerBoard(currentPlayerTurn.getIsRed()));
+            subscriber.update(currentPlayerTurn.getIsRed(), gameBoard.generatePlayerBoard());
         }
     }
 

@@ -14,6 +14,7 @@ public class PlaceToken extends Move {
     
     @Override
     public Move performMove(Position pos) {
+        System.out.println(getIsRedMove() + " " + tokenCount);
         Move nextMove = null;
 
         if (pos.getToken() == null) {
