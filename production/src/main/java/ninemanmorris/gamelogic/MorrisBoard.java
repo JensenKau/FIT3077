@@ -98,11 +98,23 @@ public class MorrisBoard {
     }
 
     public Move executeMove(Move move) {
-        return null;
+        int[] coordinates = move.getMovePosition();
+        return executeMove(move, coordinates[0], coordinates[1]);
     }
 
-    public Move executeMove(Move move, int x, int y) {
-        return null;
+    public Move executeMove(Move move, int row, int col) {
+        Position position = null;
+        Move output = null;
+
+        if (board[row][col] == null) {
+            return move;
+        } 
+
+        position = board[row][col];
+        output = move.performMove(position);
+        switchTurn = move.getSwitchTurn();
+
+        return output;
     }
 
     public boolean getSwtichTurn() {
