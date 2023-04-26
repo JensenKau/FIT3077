@@ -30,6 +30,7 @@ public class AdjacentMove extends Move {
                 if (pos.getIsMill()) {
                     output = new RemoveToken(getIsRedMove(), new AdjacentMove(getIsRedMove()));
                 } else {
+                    enableSwitchTurn();
                     output = new AdjacentMove(getIsRedMove());
                 }
 

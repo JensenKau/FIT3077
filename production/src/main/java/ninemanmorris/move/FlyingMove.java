@@ -30,6 +30,7 @@ public class FlyingMove extends Move {
                 if (pos.getIsMill()) {
                     output = new RemoveToken(getIsRedMove(), new FlyingMove(getIsRedMove()));
                 } else {
+                    enableSwitchTurn();
                     output = new FlyingMove(getIsRedMove());
                 }
 

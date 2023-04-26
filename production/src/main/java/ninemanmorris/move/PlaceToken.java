@@ -11,9 +11,7 @@ public class PlaceToken extends Move {
         super(isRedMove);
         this.tokenCount = 9;
     }
-
-    // TODO: switch turn logic
-
+    
     @Override
     public Move performMove(Position pos) {
         Move nextMove = null;
@@ -31,7 +29,9 @@ public class PlaceToken extends Move {
 
         if (pos.getIsMill()) {
             nextMove = new RemoveToken(getIsRedMove(), nextMove);
-        } 
+        } else {
+            enableSwitchTurn();
+        }
 
         return nextMove;
     }

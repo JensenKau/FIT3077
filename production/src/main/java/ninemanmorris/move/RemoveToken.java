@@ -15,6 +15,7 @@ public class RemoveToken extends Move {
     public Move performMove(Position pos) {
         if (pos.getToken() != null && !pos.getIsMill() && pos.getIsRedToken() != getIsRedMove()) {
             pos.removeToken();
+            enableSwitchTurn();
             return previousMove;
         }
 
