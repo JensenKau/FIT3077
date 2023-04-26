@@ -3,6 +3,7 @@ package ninemanmorris;
 import javafx.application.Application;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import ninemanmorris.screen.screencontroller.TitleScreenController;
 
 import java.io.IOException;
 
@@ -21,6 +22,9 @@ public class App extends Application {
         stage.setTitle("Nine Mens' Morris");
         stage.getIcons().add(icon);
         stage.setResizable(false);
+
+        TitleScreenController controller = new TitleScreenController();
+        controller.loadStartScreen(stage);
     }
 
 }
