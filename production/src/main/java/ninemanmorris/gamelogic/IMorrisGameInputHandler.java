@@ -2,5 +2,5 @@ package ninemanmorris.gamelogic;
 
 public interface IMorrisGameInputHandler {
     
-    void handleInput(int x, int y);
+    void handleInput(int row, int col);
 }
