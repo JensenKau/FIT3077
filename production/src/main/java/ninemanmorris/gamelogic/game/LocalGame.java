@@ -10,6 +10,20 @@ public class LocalGame extends MorrisGame {
 
     @Override
     public void handleInput(int row, int col) {
+        do {
+            Player currentPlayer = getCurrentPlayerTurn();
 
+            if (!getCurrentPlayerTurn().getIsRequireInput()) {
+                currentPlayer.setMove(getGameBoard().executeMove(currentPlayer.getMove()));
+            } else {
+                currentPlayer.setMove(getGameBoard().executeMove(currentPlayer.getMove(), row, col));
+            }
+
+            if (getGameBoard().getSwtichTurn()) {
+                switchPlayerTurn();
+                getGameBoard().resetSwitchTurn();
+            }
+
+        } while (!getCurrentPlayerTurn().getIsRequireInput());
     }
 }

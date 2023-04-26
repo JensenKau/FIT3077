@@ -11,8 +11,11 @@ public class MorrisBoard {
 
     private Position[][] board;
 
+    private boolean switchTurn;
+
     public MorrisBoard() {
         board = new Position[BOARD_LENGTH][BOARD_WIDTH];
+        switchTurn = false;
 
         createPositions();
         createNeighbours();
@@ -100,6 +103,14 @@ public class MorrisBoard {
 
     public Move executeMove(Move move, int x, int y) {
         return null;
+    }
+
+    public boolean getSwtichTurn() {
+        return switchTurn;
+    }
+
+    public void resetSwitchTurn() {
+        this.switchTurn = false;
     }
 
     public Boolean[][] generatePlayerBoard(boolean isRed) {
