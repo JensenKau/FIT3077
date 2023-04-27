@@ -72,14 +72,34 @@ public class GameScreenController extends ScreenController implements IMorrisGam
         //     }
         // }
 
-        grid.getChildren().remove(49, grid.getChildren().size());
+        // grid.getChildren().remove(49, grid.getChildren().size());
+        for (Node node : grid.getChildren()) {
+            StackPane desiredStackPane = (StackPane) node;
+            desiredStackPane.getChildren().clear();
+        }
+        
+        
+        EventHandler<MouseEvent> placingImageHandler = new EventHandler<MouseEvent>() {
+
+            @Override
+            public void handle(MouseEvent event) {
+                Node clickedNode = event.getPickResult().getIntersectedNode().getParent();
+
+                if (clickedNode != null) {
+                    int rowIndex = GridPane.getRowIndex(clickedNode);
+                    int colIndex = GridPane.getColumnIndex(clickedNode);
+                    System.out.println("clicked on: " + rowIndex + " " + colIndex);
+                    morrisGame.handleInput(rowIndex, colIndex);
+                }
+            }
+        };
 
         for (int i = 0; i < tokenBoard.length; i++) {
             for (int j = 0; j < tokenBoard[0].length; j++) {
                 if (tokenBoard[i][j] != null) {
                     Image token = null;
                     ImageView imageView = null;
-                    
+
                     if (tokenBoard[i][j]) {
                         token = new Image(getClass().getResource(RED_TOKEN_IMG).toExternalForm());
                     } else {
@@ -95,10 +115,11 @@ public class GameScreenController extends ScreenController implements IMorrisGam
                         int row = GridPane.getRowIndex(node);
                         int column = GridPane.getColumnIndex(node);
                         if (row == i && column == j) {
-                            StackPane desiredStackPane = (StackPane) node;                  
+                            StackPane desiredStackPane = (StackPane) node;
+                            imageView.addEventHandler(MouseEvent.MOUSE_CLICKED, placingImageHandler);
                             desiredStackPane.getChildren().add(imageView);
                         }
-                    }                  
+                    }
                 }
             }
         }
@@ -140,7 +161,7 @@ public class GameScreenController extends ScreenController implements IMorrisGam
 
                     morrisGame.handleInput(rowIndex, colIndex);
                 }
-            }  
+            }
         };
 
         grid.addEventHandler(MouseEvent.MOUSE_CLICKED, placingHandler);
