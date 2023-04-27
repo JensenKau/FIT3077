@@ -3,10 +3,7 @@ package ninemanmorris;
 import javafx.application.Application;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import ninemanmorris.Controller.GameScreenController;
-import ninemanmorris.Controller.TitleScreenController;
-import ninemanmorris.Enum.PageEnum;
-import ninemanmorris.Manager.ScreenManager;
+import ninemanmorris.screen.screencontroller.TitleScreenController;
 
 import java.io.IOException;
 
@@ -14,10 +11,18 @@ import java.io.IOException;
  * JavaFX App
  */
 public class App extends Application {
+    /**
+     * Starts the game application
+     * @param args
+     */
     public static void main(String[] args) {
         launch();
     }
-
+    
+    /**
+     * Callback method invoked when the game has launched
+     * @param stage - A Stage instance for the game GUI
+     */
     @Override
     public void start(Stage stage) throws IOException {
         
@@ -26,15 +31,8 @@ public class App extends Application {
         stage.getIcons().add(icon);
         stage.setResizable(false);
 
-        TitleScreenController titleScreenController = new TitleScreenController();
-        ScreenManager.getInstance().appendScreenController(PageEnum.TITLE_SCENE, titleScreenController);
-
-        GameScreenController gameController = new GameScreenController();
-        ScreenManager.getInstance().appendScreenController(PageEnum.GAME_SCENE, gameController);
-
-        System.out.println(ScreenManager.getInstance().getEnumToScreenController());
-
-        titleScreenController.getView(stage);
+        TitleScreenController controller = new TitleScreenController();
+        controller.loadStartScreen(stage);
     }
 
 }
