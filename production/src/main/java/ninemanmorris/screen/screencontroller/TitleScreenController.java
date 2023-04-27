@@ -11,16 +11,29 @@ import ninemanmorris.gamelogic.MorrisGameFactory;
 import ninemanmorris.player.PlayerType;
 import ninemanmorris.screen.ScreenPage;
 
+/**
+ * Controller for the title screen of the game
+ */
 public class TitleScreenController extends ScreenController {
 
     @FXML
     private Button startGameButton;
 
+    /**
+     * Load the start screen of the game
+     * @param stage - Stage to load the start screen of the game on
+     * @throws IOException
+     */
     public void loadStartScreen(Stage stage) throws IOException {
         setStage(stage);
         switchScene(ScreenPage.TITLE_SCREEN.toString());
     }
 
+    /**
+     * Start a new game with two human players
+     * @param event - ActionEvent that triggers the start of a new game
+     * @throws IOException
+     */
     public void startTwoPlayerGame(ActionEvent event) throws IOException {
         FXMLLoader loader = switchScene(ScreenPage.GAME_SCREEN.toString());
         GameScreenController controller = loader.getController();

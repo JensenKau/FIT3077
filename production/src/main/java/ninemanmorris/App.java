@@ -11,10 +11,18 @@ import java.io.IOException;
  * JavaFX App
  */
 public class App extends Application {
+    /**
+     * Starts the game application
+     * @param args
+     */
     public static void main(String[] args) {
         launch();
     }
-
+    
+    /**
+     * Callback method invoked when the game has launched
+     * @param stage - A Stage instance for the game GUI
+     */
     @Override
     public void start(Stage stage) throws IOException {
         
