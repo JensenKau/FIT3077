@@ -10,6 +10,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import ninemanmorris.gamelogic.IMorrisGameInputHandler;
 import ninemanmorris.gamelogic.IMorrisGameSubscriber;
@@ -89,7 +90,15 @@ public class GameScreenController extends ScreenController implements IMorrisGam
                     imageView.setFitWidth(40);
                     imageView.setFitHeight(40);
 
-                    grid.add(imageView, j, i);
+                    // grid.add(imageView, j, i);
+                    for (Node node : grid.getChildren()) {
+                        int row = GridPane.getRowIndex(node);
+                        int column = GridPane.getColumnIndex(node);
+                        if (row == i && column == j) {
+                            StackPane desiredStackPane = (StackPane) node;                  
+                            desiredStackPane.getChildren().add(imageView);
+                        }
+                    }                  
                 }
             }
         }
