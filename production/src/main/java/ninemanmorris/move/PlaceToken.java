@@ -3,10 +3,18 @@ package ninemanmorris.move;
 import ninemanmorris.gamelogic.Position;
 import ninemanmorris.gamelogic.Token;
 
+/**
+ * Represents a specific type of move that the player can make in the 9 men's morris game,
+ * where the player places a token on the board
+ */
 public class PlaceToken extends Move {
 
     private int tokenCount;
 
+    /**
+     * The PlaceToken constructor for creating a PlaceToken move
+     * @param isRedMove - true if the move belongs to the red player, false otherwise
+     */
     public PlaceToken(boolean isRedMove) {
         super(isRedMove);
         this.tokenCount = 9;

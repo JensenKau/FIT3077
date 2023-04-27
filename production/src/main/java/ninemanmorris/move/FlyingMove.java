@@ -2,10 +2,18 @@ package ninemanmorris.move;
 
 import ninemanmorris.gamelogic.Position;
 
+/**
+ * Represents a specific type of move that the player can make in the 9 men's morris game,
+ * where the player selects a token and places it into any empty position on the board
+ */
 public class FlyingMove extends Move {
 
     private Position selectedPos;
 
+    /**
+     * The constructor for creating a FlyingMove
+     * @param isRedMove - true if the move belongs to the red player, false otherwise
+     */
     public FlyingMove(boolean isRedMove) {
         super(isRedMove);
     }
