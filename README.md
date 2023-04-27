@@ -12,7 +12,7 @@ Nine men morris game with amazing graphics.
 Please see the FIT3077_Software_Engineering_Architecture_Design_Sprint_Two.pdf for the Design Rationale.
 
 # UML
-Please see the UML class diagram in the FIT3077_Software_Engineering_Architecture_Design_Sprint_Two.pdf.
+Please see the UML class diagram in the FIT3077 - UML Class Diagram .pdf or the LucidChart link which can be found in the FIT3077_Software_Engineering_Architecture_Design_Sprint_Two.pdf.
 
 # Tools and Frameworks
 The Framework used is JavaFX with FXML.
