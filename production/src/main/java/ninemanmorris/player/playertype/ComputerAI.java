@@ -4,6 +4,9 @@ import ninemanmorris.move.Move;
 
 import java.util.Random;
 
+/**
+ * Represents a Computer AI player
+ */
 public class ComputerAI extends Player {
 
     private static final boolean IS_REQUIRE_INPUT = false;
@@ -12,6 +15,10 @@ public class ComputerAI extends Player {
     private static final int BOARD_LENGTH = 7;
     private static final int BOARD_WIDTH = 7;
 
+    /**
+     * Constructor for ComputerAI
+     * @param isRed - true if the current player is a red player, false otherwise
+     */
     public ComputerAI(boolean isRed) {
         super(isRed);
     }
@@ -21,6 +28,9 @@ public class ComputerAI extends Player {
         return IS_REQUIRE_INPUT;
     }
     
+    /**
+     * Insert random move positions and return the move 
+     */
     @Override
     public Move getMove() {
         Move currentMove = super.getMove();
