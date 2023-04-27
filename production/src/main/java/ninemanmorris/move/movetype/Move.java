@@ -1,4 +1,4 @@
-package ninemanmorris.move;
+package ninemanmorris.move.movetype;
 
 import ninemanmorris.gamelogic.Position;
 

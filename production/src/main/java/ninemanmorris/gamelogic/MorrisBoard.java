@@ -2,7 +2,7 @@ package ninemanmorris.gamelogic;
 
 import java.util.ArrayList;
 
-import ninemanmorris.move.Move;
+import ninemanmorris.move.movetype.Move;
 
 /**
  * Represents the 9 men's morris board
