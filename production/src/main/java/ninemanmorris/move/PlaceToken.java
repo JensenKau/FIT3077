@@ -24,11 +24,14 @@ public class PlaceToken extends Move {
     public Move performMove(Position pos) {
         System.out.println(getIsRedMove() + " " + tokenCount);
         Move nextMove = null;
+        boolean posHasToken = pos.getToken() != null;
 
-        if (pos.getToken() == null) {
+        if (!posHasToken) {
             pos.addToken(new Token(getIsRedMove()));
             tokenCount -= 1;
-        } 
+        } else {
+            nextMove = this;
+        }
 
         if (tokenCount > 0) {
             nextMove = this;
@@ -38,7 +41,7 @@ public class PlaceToken extends Move {
 
         if (pos.getIsMill()) {
             nextMove = new RemoveToken(getIsRedMove(), nextMove);
-        } else {
+        } else if (!posHasToken) {
             enableSwitchTurn();
         }
 
