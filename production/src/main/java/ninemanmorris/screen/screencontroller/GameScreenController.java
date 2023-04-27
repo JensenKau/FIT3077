@@ -126,7 +126,7 @@ public class GameScreenController extends ScreenController implements IMorrisGam
 
         System.out.println(Arrays.deepToString(tokenBoard));
         
-
+        updateTokenPlayer(board);
         updatePlayerTurn();
     }
 
@@ -136,6 +136,26 @@ public class GameScreenController extends ScreenController implements IMorrisGam
         } else {
             turn.setText("Blue Turn");
         }
+    }
+
+    private void updateTokenPlayer(Boolean[][] board) {
+        int redCount = 0;
+        int blueCount = 0;
+
+        for (Boolean[] row : board) {
+            for (Boolean col : row) {
+                if (col != null) {
+                    if (col) {
+                        redCount++;
+                    } else {
+                        blueCount++;
+                    }
+                }
+            }
+        }
+
+        red_token_count.setText(String.valueOf(9 - redCount));
+        blue_token_count.setText(String.valueOf(9 - blueCount));
     }
 
     @Override
