@@ -12,12 +12,12 @@
             <Font name="Galvji" size="36.0" />
          </font>
       </Button>
-      <Button fx:id="instructionButton" minWidth="250.0" style="-fx-background-color: null;" text="Instructions">
+      <Button fx:id="instructionButton" minWidth="250.0" style="-fx-background-color: transparent;" text="Instructions">
          <font>
             <Font name="Galvji" size="36.0" />
          </font>
       </Button>
-      <Button fx:id="quitGameButton" prefWidth="250.0" style="-fx-background-color: null;" text="Quit Game">
+      <Button fx:id="quitGameButton" prefWidth="250.0" onAction="#quitGame" style="-fx-background-color: transparent; -fx-cursor: hand;" text="Quit Game">
          <font>
             <Font name="Galvji" size="36.0" />
          </font>
