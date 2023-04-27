@@ -90,4 +90,10 @@ public class AdjacentMove extends Move {
         }
         return this;
     }
+
+    @Override
+    public String getMoveQuote() {
+        return MoveQuote.MOVE_PHASE.toString();
+    }
+    
 }

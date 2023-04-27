@@ -54,4 +54,10 @@ public class PlaceToken extends Move {
     public Move validateCurrentMove(Position[][] positions) {
         return this;
     }
+
+    @Override
+    public String getMoveQuote() {
+        return MoveQuote.PLACE_PHASE.toString();
+    }
+
 }

@@ -42,6 +42,12 @@ public abstract class Move {
     public abstract Move validateCurrentMove(Position[][] positions);
 
     /**
+     * Get the quote specific for this move
+     * @return A string representation of the quote for this move
+     */
+    public abstract String getMoveQuote();
+
+    /**
      * Get the row and col that has been selected for this move
      * @return The row and col that has been selected for this move
      */
@@ -88,4 +94,5 @@ public abstract class Move {
     protected boolean getIsRedMove() {
         return this.isRedMove;
     }
+
 }

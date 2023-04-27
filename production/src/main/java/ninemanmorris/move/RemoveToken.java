@@ -40,4 +40,9 @@ public class RemoveToken extends Move {
     public Move validateCurrentMove(Position[][] positions) {
         return this;
     }
+
+    @Override
+    public String getMoveQuote() {
+        return MoveQuote.REMOVE_PHASE.toString();
+    }
 }

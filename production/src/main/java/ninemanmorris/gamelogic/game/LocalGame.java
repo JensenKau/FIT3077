@@ -29,7 +29,7 @@ public class LocalGame extends MorrisGame {
                 currentPlayer.setMove(getGameBoard().executeMove(currentPlayer.getMove(), row, col));
             }
 
-            if (getGameBoard().getSwtichTurn()) {
+            if (getGameBoard().getSwitchTurn()) {
                 switchPlayerTurn();
                 getGameBoard().resetSwitchTurn();
             }
