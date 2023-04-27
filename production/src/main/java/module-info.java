@@ -8,5 +8,4 @@ module ninemanmorris {
 
     exports ninemanmorris;
     exports ninemanmorris.screen;
-    exports ninemanmorris.Enum;
 }
