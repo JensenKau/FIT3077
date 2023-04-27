@@ -33,12 +33,16 @@ public class GameScreenController extends ScreenController implements IMorrisGam
     @FXML
     private Label blue_token_count;
 
+    @FXML
+    private Text move_quote;
+
     private static final String RED_TOKEN_IMG = "/img/9mm_token_red.png";
     private static final String BLUE_TOKEN_IMG = "/img/9mm_token_blue.png";
 
     private IMorrisGameInputHandler morrisGame;
     private boolean isRedTurn;
     private Boolean[][] tokenBoard;
+    private String moveQuote;
 
     /**
      * Initialise the game
@@ -60,11 +64,13 @@ public class GameScreenController extends ScreenController implements IMorrisGam
      * Update the look of the board
      * @param isRed - determine it is red's turn or not
      * @param board - The current state of the morris board
+     * @param moveQuote - determine the quote of the move to be displayed
      */
     @Override
-    public void update(boolean isRed, Boolean[][] board) {
+    public void update(boolean isRed, Boolean[][] board, String moveQuote) {
         this.isRedTurn = isRed;
         this.tokenBoard = board;
+        this.moveQuote = moveQuote;
 
         // for (Node node : grid.getChildren()) {
         //     int rowIndex = GridPane.getRowIndex(node);
@@ -144,6 +150,7 @@ public class GameScreenController extends ScreenController implements IMorrisGam
         
         updateTokenPlayer(board);
         updatePlayerTurn();
+        updateMoveQuote();
     }
 
     /**
@@ -179,6 +186,14 @@ public class GameScreenController extends ScreenController implements IMorrisGam
 
         red_token_count.setText(String.valueOf(9 - redCount));
         blue_token_count.setText(String.valueOf(9 - blueCount));
+    }
+
+    /**
+     * Updates the number of tokens left for each player
+     * @param board - The current state of the morris board
+     */
+    private void updateMoveQuote() {
+        move_quote.setText(moveQuote);
     }
 
     /**

@@ -24,7 +24,7 @@
 <!-- <VBox alignment="CENTER" prefHeight="720.0" prefWidth="860.0" spacing="20.0" style="-fx-background-image: url('file:/users/christinechiongcy/Documents/Y3S1/FIT3077/project/production/src/main/resources/img/9mm_map.png'); -fx-background-size: 860;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ninemanmorris.Game.GameController">  -->
     <children>
         <AnchorPane prefHeight="720" prefWidth="720" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
-            <Text fill="RED" layoutX="251.0" layoutY="21.0" opacity="0.62" text="Place your tokens on the board" textAlignment="CENTER">
+            <Text fx:id="move_quote" fill="RED" layoutX="251.0" layoutY="21.0" opacity="0.62" text="Place your tokens on the board" textAlignment="CENTER">
             <font>
                <Font name="System Bold" size="24.0" />
             </font>

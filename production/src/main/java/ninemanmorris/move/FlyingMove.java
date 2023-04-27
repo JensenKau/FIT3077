@@ -61,4 +61,10 @@ public class FlyingMove extends Move {
     public Move validateCurrentMove(Position[][] positions) {
         return this;
     }
+
+    @Override
+    public String getMoveQuote() {
+        return MoveQuote.FLY_PHASE.toString();
+    }
+
 }

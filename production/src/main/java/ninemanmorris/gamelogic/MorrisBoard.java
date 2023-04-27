@@ -163,7 +163,7 @@ public class MorrisBoard {
      * Get if the player should switch turn
      * @return true if player should switch, false otherwise
      */
-    public boolean getSwtichTurn() {
+    public boolean getSwitchTurn() {
         return switchTurn;
     }
 
