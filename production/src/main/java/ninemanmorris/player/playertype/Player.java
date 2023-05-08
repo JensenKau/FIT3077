@@ -1,7 +1,7 @@
 package ninemanmorris.player.playertype;
 
-import ninemanmorris.move.Move;
-import ninemanmorris.move.PlaceToken;
+import ninemanmorris.move.movetype.Move;
+import ninemanmorris.move.movetype.PlaceToken;
 
 /**
  * Represents a player 

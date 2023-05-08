@@ -1,6 +1,7 @@
-package ninemanmorris.move;
+package ninemanmorris.move.movetype;
 
 import ninemanmorris.gamelogic.Position;
+import ninemanmorris.move.MoveQuote;
 
 /**
  * Represents a specific type of move that the player can make in the 9 men's morris game,
@@ -39,5 +40,10 @@ public class RemoveToken extends Move {
     @Override
     public Move validateCurrentMove(Position[][] positions) {
         return this;
+    }
+
+    @Override
+    public String getMoveQuote() {
+        return MoveQuote.REMOVE_PHASE.toString();
     }
 }

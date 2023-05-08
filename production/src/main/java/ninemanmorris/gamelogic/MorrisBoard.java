@@ -2,7 +2,7 @@ package ninemanmorris.gamelogic;
 
 import java.util.ArrayList;
 
-import ninemanmorris.move.Move;
+import ninemanmorris.move.movetype.Move;
 
 /**
  * Represents the 9 men's morris board
@@ -163,7 +163,7 @@ public class MorrisBoard {
      * Get if the player should switch turn
      * @return true if player should switch, false otherwise
      */
-    public boolean getSwtichTurn() {
+    public boolean getSwitchTurn() {
         return switchTurn;
     }
 
