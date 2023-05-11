@@ -95,6 +95,8 @@ public class GameScreenController extends ScreenController implements IMorrisGam
         // }
 
         // grid.getChildren().remove(49, grid.getChildren().size());
+
+
         for (Node node : grid.getChildren()) {
             StackPane desiredStackPane = (StackPane) node;
             desiredStackPane.getChildren().clear();
@@ -213,26 +215,28 @@ public class GameScreenController extends ScreenController implements IMorrisGam
      * Initialise clickable grid for the game
      */
     public void createGridClick() {
-        EventHandler<MouseEvent> placingHandler = new EventHandler<MouseEvent>() {
+        // EventHandler<MouseEvent> placingHandler = new EventHandler<MouseEvent>() {
 
-            /**
-             * Determines what happens when the grid is clicked
-             * @param event - MouseEvent that triggers when a grid is clicked
-             */
-            @Override
-            public void handle(MouseEvent event) {
-                Node clickedNode = event.getPickResult().getIntersectedNode();
+        //     /**
+        //      * Determines what happens when the grid is clicked
+        //      * @param event - MouseEvent that triggers when a grid is clicked
+        //      */
+        //     @Override
+        //     public void handle(MouseEvent event) {
+        //         Node clickedNode = event.getPickResult().getIntersectedNode();
 
-                if (clickedNode != null) {
-                    int rowIndex = GridPane.getRowIndex(clickedNode);
-                    int colIndex = GridPane.getColumnIndex(clickedNode);
-                    System.out.println("clicked on: " + rowIndex + " " + colIndex);
+        //         if (clickedNode != null) {
+        //             int rowIndex = GridPane.getRowIndex(clickedNode);
+        //             int colIndex = GridPane.getColumnIndex(clickedNode);
+        //             System.out.println("clicked on: " + rowIndex + " " + colIndex);
 
-                    morrisGame.handleInput(rowIndex, colIndex);
-                }
-            }
-        };
+        //             morrisGame.handleInput(rowIndex, colIndex);
+        //         }
+        //     }
+        // };
 
-        grid.addEventHandler(MouseEvent.MOUSE_CLICKED, placingHandler);
+        // grid.addEventHandler(MouseEvent.MOUSE_CLICKED, placingHandler);
+
+        new GameScreenGrid(grid);
     }
 }
