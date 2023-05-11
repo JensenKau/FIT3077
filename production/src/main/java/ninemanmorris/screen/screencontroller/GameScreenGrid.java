@@ -12,7 +12,8 @@ public class GameScreenGrid {
     private static final String RED_TOKEN_IMG = "/img/9mm_token_red.png";
     private static final String BLUE_TOKEN_IMG = "/img/9mm_token_blue.png";
 
-    private static final int DEFAULT_POOL_SIZE = 15;
+    private static final int DEFAULT_TOKEN_POOL_SIZE = 15;
+    private static final int DEFAULT_LIIGHT_POOL_SIZE = 30;
     
     private GridPane uiGrid;
     private StackPane[][] stackPanes;
@@ -50,7 +51,7 @@ public class GameScreenGrid {
 
         this.uiGrid.addEventHandler(MouseEvent.MOUSE_CLICKED, gridClickHandler);
 
-        this.redTokenPool = new ObjectPool<>(DEFAULT_POOL_SIZE, new IObjectPoolHandler<ImageView>() {
+        this.redTokenPool = new ObjectPool<>(DEFAULT_TOKEN_POOL_SIZE, new IObjectPoolHandler<ImageView>() {
 
             @Override
             public ImageView createItem() {
@@ -66,7 +67,7 @@ public class GameScreenGrid {
             
         });
 
-        this.blueTokenPool = new ObjectPool<>(DEFAULT_POOL_SIZE, new IObjectPoolHandler<ImageView>() {
+        this.blueTokenPool = new ObjectPool<>(DEFAULT_TOKEN_POOL_SIZE, new IObjectPoolHandler<ImageView>() {
 
             @Override
             public ImageView createItem() {
@@ -86,15 +87,22 @@ public class GameScreenGrid {
     public void updateBoard(Boolean[][] newState) {
         for (int i = 0; i < newState.length; i++) {
             for (int j = 0; j < newState[i].length; j++) {
-                // TODO: retrieve from pool and add it here (be sure to also remove old item)
+                // TODO: retrieve from pool and add it here (be sure to also remove old item and return to pool)
                 
             }
         }
     }
 
     public void updateInteractablePos(boolean[][] newState) {
-
+        for (int i = 0; i < newState.length; i++) {
+            for (int j = 0; j < newState[i].length; j++) {
+                
+            }
+        }
     }
 
-    
+    // TODO: figure out how to get mill from backend
+    public void updateMill(boolean[][] newState) {
+
+    }
 }
