@@ -13,7 +13,8 @@ public class GameScreenGrid {
     private static final String BLUE_TOKEN_IMG = "/img/9mm_token_blue.png";
 
     private static final int DEFAULT_TOKEN_POOL_SIZE = 15;
-    private static final int DEFAULT_LIIGHT_POOL_SIZE = 30;
+    private static final int DEFAULT_SELECTABLE_POOL_SIZE = 30;
+    private static final int DEFAULT_MILL_POOL_SIZE = 20;
     
     private GridPane uiGrid;
     private StackPane[][] stackPanes;
