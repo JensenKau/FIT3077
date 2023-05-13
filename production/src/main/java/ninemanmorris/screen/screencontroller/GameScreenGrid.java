@@ -102,7 +102,8 @@ public class GameScreenGrid {
     private void createLines() {
         while (lines.size() < 20) {
             Line currentLine = new Line(0, 0, 0, 0);
-            // currentLine.setStrokeWidth(15);
+            currentLine.setStrokeWidth(20);
+            currentLine.setEffect(new GaussianBlur());
             currentLine.setStyle("-fx-stroke: #7aee11;");
             currentLine.setVisible(false);
 
