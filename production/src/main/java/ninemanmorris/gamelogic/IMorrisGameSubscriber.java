@@ -22,4 +22,6 @@ public interface IMorrisGameSubscriber {
      * @param isRed - the player that won
      */
     void updateGameEnd(boolean isRed);
+
+    void updateGameDraw();
 }

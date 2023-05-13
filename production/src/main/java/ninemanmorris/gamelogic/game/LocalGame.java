@@ -31,6 +31,8 @@ public class LocalGame extends MorrisGame {
 
             if (getGameBoard().getWinPlayer() != null) {
                 delcareWinner(getGameBoard().getWinPlayer());
+            } if (getGameBoard().getIsDrawGame()) {
+                declareDraw();
             }
 
             if (getGameBoard().getSwitchTurn()) {

@@ -127,4 +127,36 @@ public class AdjacentMove extends Move {
         return MoveType.MOVE_PHASE;
     }
     
+    @Override
+    public Boolean getWinPlayer(Position[][] positions) {
+        boolean redMove = false;
+        boolean blueMove = false;
+
+        for (int i = 0; i < positions.length; i++) {
+            for (int j = 0; j < positions[i].length; j++) {
+                if (positions[i][j] != null && positions[i][j].getToken() != null && checkIsMovable(positions[i][j])) {
+                    if (positions[i][j].getIsRedToken()) {
+                        redMove = true;
+                    } else {
+                        blueMove = true;
+                    }
+                }
+
+                if (redMove && blueMove) {
+                    break;
+                }
+            }
+        }
+
+        if (redMove && blueMove) {
+            return super.getWinPlayer(positions);
+        } else if (redMove) {
+            return true;
+        } else if (blueMove) {
+            return false;
+        } else {
+            enableDraw();
+            return null;
+        }
+    }
 }

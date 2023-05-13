@@ -17,6 +17,7 @@ public class MorrisBoard {
 
     private boolean switchTurn;
     private Boolean winPlayer;
+    private boolean isDrawGame;
 
     /**
      * Constuctor for creating a MorrisBoard
@@ -158,6 +159,7 @@ public class MorrisBoard {
         output = move.performMove(position, board);
         switchTurn = move.getSwitchTurn();
         winPlayer = move.getWinPlayer(board);
+        isDrawGame = move.getIsDraw();
         move.resetSwitchTurn();
 
         return output;
@@ -169,6 +171,10 @@ public class MorrisBoard {
 
     public Boolean getWinPlayer() {
         return winPlayer;
+    }
+
+    public boolean getIsDrawGame() {
+        return isDrawGame;
     }
 
     /**

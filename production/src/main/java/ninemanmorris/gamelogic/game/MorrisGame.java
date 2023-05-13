@@ -72,6 +72,12 @@ public abstract class MorrisGame implements IMorrisGameInputHandler {
         }
     }
 
+    protected void declareDraw() {
+        for (IMorrisGameSubscriber subscriber : subscribers) {
+            subscriber.updateGameDraw();
+        }
+    }
+
     protected void validatePlayerMove() {
         players[0].setMove(gameBoard.validatePlayerMove(players[0].getMove()));
         players[1].setMove(gameBoard.validatePlayerMove(players[1].getMove()));

@@ -12,6 +12,7 @@ public abstract class Move {
     private int col;
     private boolean switchTurn;
     private boolean isRedMove;
+    private boolean isDraw;
 
     /**
      * The move constructor to instantiate a Move object
@@ -121,4 +122,11 @@ public abstract class Move {
         return this.isRedMove;
     }
 
+    public boolean getIsDraw() {
+        return isDraw;
+    }
+
+    protected void enableDraw() {
+        isDraw = true;
+    }
 }

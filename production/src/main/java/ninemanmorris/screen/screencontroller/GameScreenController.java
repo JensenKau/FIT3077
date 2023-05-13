@@ -126,4 +126,13 @@ public class GameScreenController extends ScreenController implements IMorrisGam
     public void handleInput(int row, int col) {
         morrisGame.handleInput(row, col);
     }
+
+    @Override
+    public void updateGameDraw() {
+        try {
+            switchScene(ScreenPage.RESULT_SCREEN.toString());
+        } catch (Exception e) {
+            e.getStackTrace();
+        }
+    }
 }
