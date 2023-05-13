@@ -66,7 +66,7 @@ public class GameScreenController extends ScreenController implements IMorrisGam
     public void update(boolean isRed, int redToken, int blueToken, Boolean[][] board, boolean[][] interactables, List<int[][]> mills, MoveType move) {
         this.isRedTurn = isRed;
 
-        gameGrid.updateAll(board, interactables, mills);
+        gameGrid.updateAll(board, interactables, move, mills);
 
         updatePlayerTurn();
         updateMoveQuote(move);
@@ -104,7 +104,9 @@ public class GameScreenController extends ScreenController implements IMorrisGam
             newQuote = "Move your tokens to any empty spot";
         } else if (move == MoveType.REMOVE_PHASE) {
             newQuote = "Remove one of your opponent's token";
-        } 
+        } else if (move == MoveType.SELECT_PHASE) {
+            newQuote = "Select your token";
+        }
 
         move_quote.setText(newQuote);
     }

@@ -78,6 +78,9 @@ public class FlyingMove extends Move {
 
     @Override
     public MoveType getMoveType() {
+        if (selectedPos == null) {
+            return MoveType.SELECT_PHASE;
+        }
         return MoveType.FLY_PHASE;
     }
 

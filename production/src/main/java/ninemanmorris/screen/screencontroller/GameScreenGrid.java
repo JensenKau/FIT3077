@@ -16,6 +16,7 @@ import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
+import ninemanmorris.shared.MoveType;
 
 public class GameScreenGrid {
 
@@ -24,9 +25,10 @@ public class GameScreenGrid {
 
     private static final int DEFAULT_LINE_AMT = 20;
 
-    private static final int LIGHT_INDEX = 0;
-    private static final int RED_INDEX = 1;
-    private static final int BLUE_INDEX = 2;
+    private static final int GREEN_LIGHT_INDEX = 0;
+    private static final int WHITE_LIGHT_INDEX = 1;
+    private static final int RED_INDEX = 2;
+    private static final int BLUE_INDEX = 3;
 
     private static final int TOKEN_WIDTH_HEIGHT = 40;
     
@@ -79,18 +81,22 @@ public class GameScreenGrid {
             for (int j = 0; j < stackPanes[i].length; j++) {
                 ImageView red = new ImageView(redTokenImg);
                 ImageView blue = new ImageView(blueTokenImg);
-                Circle circle = new Circle(27);
+                Circle greenCircle = new Circle(27);
+                Circle whiteCircle = new Circle(27);
                 stackPanes[i][j] = new StackPane();
 
-                circle.setEffect(new GaussianBlur());
-                circle.setStyle("-fx-fill: #7aee11;");
+                greenCircle.setEffect(new GaussianBlur());
+                greenCircle.setStyle("-fx-fill: #7aee11;");
+                whiteCircle.setEffect(new GaussianBlur());
+                whiteCircle.setStyle("-fx-fill: #ffffff;");
 
                 red.setFitWidth(TOKEN_WIDTH_HEIGHT);
                 red.setFitHeight(TOKEN_WIDTH_HEIGHT);
                 blue.setFitWidth(TOKEN_WIDTH_HEIGHT);
                 blue.setFitHeight(TOKEN_WIDTH_HEIGHT);
 
-                stackPanes[i][j].getChildren().add(circle);
+                stackPanes[i][j].getChildren().add(greenCircle);
+                stackPanes[i][j].getChildren().add(whiteCircle);
                 stackPanes[i][j].getChildren().add(red);
                 stackPanes[i][j].getChildren().add(blue);
 
@@ -117,9 +123,9 @@ public class GameScreenGrid {
         this.parentPane.getChildren().addAll(0, lines);
     }
 
-    public void updateAll(Boolean[][] board, boolean[][] interactables, List<int[][]> mills) {
+    public void updateAll(Boolean[][] board, boolean[][] interactables, MoveType moveType, List<int[][]> mills) {
         updateBoard(board);
-        updateInteractablePos(interactables);
+        updateInteractablePos(interactables, moveType);
         updateMill(mills);
     }
 
@@ -137,10 +143,17 @@ public class GameScreenGrid {
         }
     }
 
-    public void updateInteractablePos(boolean[][] newState) {
+    public void updateInteractablePos(boolean[][] newState, MoveType movetype) {
         for (int i = 0; i < newState.length; i++) {
             for (int j = 0; j < newState[i].length; j++) {
-                stackPanes[i][j].getChildren().get(LIGHT_INDEX).setVisible(newState[i][j]);
+                if (movetype == MoveType.SELECT_PHASE) {
+                    stackPanes[i][j].getChildren().get(WHITE_LIGHT_INDEX).setVisible(newState[i][j]);
+                    stackPanes[i][j].getChildren().get(GREEN_LIGHT_INDEX).setVisible(false);
+                } else {
+                    stackPanes[i][j].getChildren().get(WHITE_LIGHT_INDEX).setVisible(false);
+                    stackPanes[i][j].getChildren().get(GREEN_LIGHT_INDEX).setVisible(newState[i][j]);
+                }
+                
             }
         }
     }

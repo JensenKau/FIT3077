@@ -124,6 +124,9 @@ public class AdjacentMove extends Move {
 
     @Override
     public MoveType getMoveType() {
+        if (selectedPos == null) {
+            return MoveType.SELECT_PHASE;
+        }
         return MoveType.MOVE_PHASE;
     }
     
