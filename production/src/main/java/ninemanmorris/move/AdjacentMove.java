@@ -96,12 +96,12 @@ public class AdjacentMove extends Move {
 
                 } else {
                     boolean currentIsNeighbour = isNeighbour(selectedPos.getHorizontalNeighbours(), positions[i][j]) || isNeighbour(selectedPos.getVerticalNeighbours(), positions[i][j]);
-                    output[i][j] = positions[i][j].getToken() == null && currentIsNeighbour && positions[i][j] != selectedPos;
+                    output[i][j] = positions[i][j] != null && positions[i][j].getToken() == null && currentIsNeighbour && positions[i][j] != selectedPos;
                 }
             }
         }
 
-        return output;  
+        return output; 
     }
 
     @Override

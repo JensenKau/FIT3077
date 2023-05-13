@@ -63,7 +63,7 @@ public class FlyingMove extends Move {
                     output[i][j] = positions[i][j] != null && positions[i][j].getToken() != null && positions[i][j].getIsRedToken() == getIsRedMove();
 
                 } else {
-                    output[i][j] = positions[i][j].getToken() == null && positions[i][j] != selectedPos;
+                    output[i][j] = positions[i][j] != null && positions[i][j].getToken() == null && positions[i][j] != selectedPos;
                 }
             }
         }
