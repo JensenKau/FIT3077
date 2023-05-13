@@ -162,6 +162,11 @@ public class MorrisBoard {
         isDrawGame = move.getIsDraw();
         move.resetSwitchTurn();
 
+        if (move != output && winPlayer == null && !isDrawGame) {
+            winPlayer = output.getWinPlayer(board);
+            isDrawGame = output.getIsDraw();
+        }
+
         return output;
     }
 
