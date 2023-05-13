@@ -66,6 +66,17 @@ public abstract class MorrisGame implements IMorrisGameInputHandler {
         }
     }
 
+    protected void delcareWinner(boolean isRed) {
+        for (IMorrisGameSubscriber subscriber : subscribers) {
+            subscriber.updateGameEnd(isRed);
+        }
+    }
+
+    protected void validatePlayerMove() {
+        players[0].setMove(gameBoard.validatePlayerMove(players[0].getMove()));
+        players[1].setMove(gameBoard.validatePlayerMove(players[1].getMove()));
+    }
+
     /**
      * Get the morris game board
      * @return The morris game board

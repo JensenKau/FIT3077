@@ -24,7 +24,7 @@ public class PlaceToken extends Move {
     }
     
     @Override
-    public Move performMove(Position pos) {
+    public Move performMove(Position pos, Position[][] board) {
         Move nextMove = null;
 
         if (pos.getToken() == null) {
@@ -66,7 +66,11 @@ public class PlaceToken extends Move {
 
     @Override
     public MoveType getMoveType() {
-        return MoveType.PLACE_PHSE;
+        return MoveType.PLACE_PHASE;
     }
 
+    @Override
+    public Boolean getWinPlayer(Position[][] positions) {
+        return null;
+    }
 }

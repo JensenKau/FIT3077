@@ -26,7 +26,7 @@ public abstract class Move {
      * @param pos - The position that the player has selected
      * @return The next move that the player can make
      */
-    public abstract Move performMove(Position pos);
+    public abstract Move performMove(Position pos, Position[][] board);
 
     /**
      * Get a list of positions that can be selected for the current move
@@ -47,6 +47,31 @@ public abstract class Move {
      * @return A string representation of the quote for this move
      */
     public abstract MoveType getMoveType();
+
+    public Boolean getWinPlayer(Position[][] positions) {
+        int redCount = 0;
+        int blueCount = 0;
+
+        for (int i = 0; i < positions.length; i++) {
+            for (int j = 0; j < positions[i].length; j++) {
+                if (positions[i][j] != null && positions[i][j].getToken() != null) {
+                    if (positions[i][j].getIsRedToken()) {
+                        redCount += 1;
+                    } else if (!positions[i][j].getIsRedToken()) {
+                        blueCount += 1;
+                    }
+                }
+            }
+        }
+
+        if (redCount >= 3 && blueCount >= 3) {
+            return null;
+        } else if (redCount < 3) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     /**
      * Get the row and col that has been selected for this move

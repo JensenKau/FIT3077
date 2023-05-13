@@ -5,7 +5,7 @@ package ninemanmorris.shared;
  */
 public enum MoveType {
     
-    PLACE_PHSE,
+    PLACE_PHASE,
     MOVE_PHASE,
     FLY_PHASE,
     REMOVE_PHASE,

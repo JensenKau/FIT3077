@@ -20,7 +20,7 @@ public class AdjacentMove extends Move {
     }
 
     @Override
-    public Move performMove(Position pos) {
+    public Move performMove(Position pos, Position[][] board) {
         Move output = null;
 
         if (selectedPos == null) {
@@ -110,7 +110,7 @@ public class AdjacentMove extends Move {
 
         for (int i = 0; i < positions.length; i++) {
             for (int j = 0; j < positions[i].length; j++) {
-                if (positions[i][j].getToken() != null && positions[i][j].getIsRedToken() == getIsRedMove()) {
+                if (positions[i][j] != null && positions[i][j].getToken() != null && positions[i][j].getIsRedToken() == getIsRedMove()) {
                     count += 1;
                 }
             }

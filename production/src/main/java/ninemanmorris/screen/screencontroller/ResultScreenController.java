@@ -3,12 +3,21 @@ package ninemanmorris.screen.screencontroller;
 import java.io.IOException;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import ninemanmorris.screen.ScreenPage;
 
 /**
  * Controller class for the result screen of the game
  */
 public class ResultScreenController extends ScreenController {
+
+    @FXML
+    private Label playerWinText;
+
+    @FXML
+    private Button returnToMenuBtn;
     
     /**
      * Switch to the start screen of the game

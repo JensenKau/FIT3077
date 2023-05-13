@@ -20,7 +20,7 @@ public class FlyingMove extends Move {
     }
 
     @Override
-    public Move performMove(Position pos) {
+    public Move performMove(Position pos, Position[][] board) {
         Move output = null;
 
         if (selectedPos == null) {
@@ -36,7 +36,7 @@ public class FlyingMove extends Move {
                 output = this;
 
             } else if (pos.getToken() == null) {
-                pos.addToken(pos.removeToken());
+                pos.addToken(selectedPos.removeToken());
 
                 if (pos.getIsMill()) {
                     output = new RemoveToken(getIsRedMove(), new FlyingMove(getIsRedMove()));

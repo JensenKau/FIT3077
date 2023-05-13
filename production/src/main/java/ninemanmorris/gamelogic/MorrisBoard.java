@@ -16,13 +16,15 @@ public class MorrisBoard {
     private Position[][] board;
 
     private boolean switchTurn;
+    private Boolean winPlayer;
 
     /**
      * Constuctor for creating a MorrisBoard
      */
     public MorrisBoard() {
-        board = new Position[BOARD_LENGTH][BOARD_WIDTH];
-        switchTurn = false;
+        this.board = new Position[BOARD_LENGTH][BOARD_WIDTH];
+        this.switchTurn = false;
+        this.winPlayer = null;
 
         createPositions();
         createNeighbours();
@@ -153,11 +155,20 @@ public class MorrisBoard {
         } 
 
         position = board[row][col];
-        output = move.performMove(position);
+        output = move.performMove(position, board);
         switchTurn = move.getSwitchTurn();
+        winPlayer = move.getWinPlayer(board);
         move.resetSwitchTurn();
 
         return output;
+    }
+
+    public Move validatePlayerMove(Move move) {
+        return move.validateCurrentMove(board);
+    }
+
+    public Boolean getWinPlayer() {
+        return winPlayer;
     }
 
     /**

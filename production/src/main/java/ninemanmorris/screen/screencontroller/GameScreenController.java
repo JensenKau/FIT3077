@@ -96,7 +96,7 @@ public class GameScreenController extends ScreenController implements IMorrisGam
     private void updateMoveQuote(MoveType move) {
         String newQuote = "";
 
-        if (move == MoveType.PLACE_PHSE) {
+        if (move == MoveType.PLACE_PHASE) {
             newQuote = "Place your tokens on the board";
         } else if (move == MoveType.MOVE_PHASE) {
             newQuote = "Move your tokens to any empty adjacent spot";
