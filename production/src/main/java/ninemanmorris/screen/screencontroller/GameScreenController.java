@@ -9,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
@@ -19,7 +20,10 @@ import ninemanmorris.screen.ScreenPage;
 /**
  * Controller class for the game screen of the game
  */
-public class GameScreenController extends ScreenController implements IMorrisGameSubscriber {
+public class GameScreenController extends ScreenController implements IMorrisGameSubscriber, IInputHandler {
+
+    @FXML
+    private AnchorPane mainPane;
 
     @FXML
     private GridPane grid;
@@ -44,11 +48,13 @@ public class GameScreenController extends ScreenController implements IMorrisGam
     private Boolean[][] tokenBoard;
     private String moveQuote;
 
+    private GameScreenGrid gameGrid;
+
     /**
      * Initialise the game
      */
     public void initialize() {
-        createGridClick();
+        this.gameGrid = new GameScreenGrid(grid, mainPane, this);
     }
 
     /**
@@ -97,62 +103,62 @@ public class GameScreenController extends ScreenController implements IMorrisGam
         // grid.getChildren().remove(49, grid.getChildren().size());
 
 
-        for (Node node : grid.getChildren()) {
-            StackPane desiredStackPane = (StackPane) node;
-            desiredStackPane.getChildren().clear();
-        }
+        // for (Node node : grid.getChildren()) {
+        //     StackPane desiredStackPane = (StackPane) node;
+        //     desiredStackPane.getChildren().clear();
+        // }
         
         
-        EventHandler<MouseEvent> placingImageHandler = new EventHandler<MouseEvent>() {
+        // EventHandler<MouseEvent> placingImageHandler = new EventHandler<MouseEvent>() {
 
-            @Override
-            public void handle(MouseEvent event) {
-                Node clickedNode = event.getPickResult().getIntersectedNode().getParent();
+        //     @Override
+        //     public void handle(MouseEvent event) {
+        //         Node clickedNode = event.getPickResult().getIntersectedNode().getParent();
 
-                if (clickedNode != null) {
-                    int rowIndex = GridPane.getRowIndex(clickedNode);
-                    int colIndex = GridPane.getColumnIndex(clickedNode);
-                    System.out.println("clicked on: " + rowIndex + " " + colIndex);
-                    morrisGame.handleInput(rowIndex, colIndex);
-                }
-            }
-        };
+        //         if (clickedNode != null) {
+        //             int rowIndex = GridPane.getRowIndex(clickedNode);
+        //             int colIndex = GridPane.getColumnIndex(clickedNode);
+        //             System.out.println("clicked on: " + rowIndex + " " + colIndex);
+        //             morrisGame.handleInput(rowIndex, colIndex);
+        //         }
+        //     }
+        // };
 
-        for (int i = 0; i < tokenBoard.length; i++) {
-            for (int j = 0; j < tokenBoard[0].length; j++) {
-                if (tokenBoard[i][j] != null) {
-                    Image token = null;
-                    ImageView imageView = null;
+        // for (int i = 0; i < tokenBoard.length; i++) {
+        //     for (int j = 0; j < tokenBoard[0].length; j++) {
+        //         if (tokenBoard[i][j] != null) {
+        //             Image token = null;
+        //             ImageView imageView = null;
 
-                    if (tokenBoard[i][j]) {
-                        token = new Image(getClass().getResource(RED_TOKEN_IMG).toExternalForm());
-                    } else {
-                        token = new Image(getClass().getResource(BLUE_TOKEN_IMG).toExternalForm());
-                    }
+        //             if (tokenBoard[i][j]) {
+        //                 token = new Image(getClass().getResource(RED_TOKEN_IMG).toExternalForm());
+        //             } else {
+        //                 token = new Image(getClass().getResource(BLUE_TOKEN_IMG).toExternalForm());
+        //             }
 
-                    imageView = new ImageView(token);
-                    imageView.setFitWidth(40);
-                    imageView.setFitHeight(40);
+        //             imageView = new ImageView(token);
+        //             imageView.setFitWidth(40);
+        //             imageView.setFitHeight(40);
 
-                    // grid.add(imageView, j, i);
-                    for (Node node : grid.getChildren()) {
-                        int row = GridPane.getRowIndex(node);
-                        int column = GridPane.getColumnIndex(node);
-                        if (row == i && column == j) {
-                            StackPane desiredStackPane = (StackPane) node;
-                            imageView.addEventHandler(MouseEvent.MOUSE_CLICKED, placingImageHandler);
-                            desiredStackPane.getChildren().add(imageView);
-                        }
-                    }
-                }
-            }
-        }
+        //             // grid.add(imageView, j, i);
+        //             for (Node node : grid.getChildren()) {
+        //                 int row = GridPane.getRowIndex(node);
+        //                 int column = GridPane.getColumnIndex(node);
+        //                 if (row == i && column == j) {
+        //                     StackPane desiredStackPane = (StackPane) node;
+        //                     imageView.addEventHandler(MouseEvent.MOUSE_CLICKED, placingImageHandler);
+        //                     desiredStackPane.getChildren().add(imageView);
+        //                 }
+        //             }
+        //         }
+        //     }
+        // }
 
-        System.out.println(Arrays.deepToString(tokenBoard));
+        // System.out.println(Arrays.deepToString(tokenBoard));
         
-        updateTokenPlayer(board);
-        updatePlayerTurn();
-        updateMoveQuote();
+        // updateTokenPlayer(board);
+        // updatePlayerTurn();
+        // updateMoveQuote();
     }
 
     /**
@@ -211,32 +217,8 @@ public class GameScreenController extends ScreenController implements IMorrisGam
         }
     }
 
-    /**
-     * Initialise clickable grid for the game
-     */
-    public void createGridClick() {
-        // EventHandler<MouseEvent> placingHandler = new EventHandler<MouseEvent>() {
-
-        //     /**
-        //      * Determines what happens when the grid is clicked
-        //      * @param event - MouseEvent that triggers when a grid is clicked
-        //      */
-        //     @Override
-        //     public void handle(MouseEvent event) {
-        //         Node clickedNode = event.getPickResult().getIntersectedNode();
-
-        //         if (clickedNode != null) {
-        //             int rowIndex = GridPane.getRowIndex(clickedNode);
-        //             int colIndex = GridPane.getColumnIndex(clickedNode);
-        //             System.out.println("clicked on: " + rowIndex + " " + colIndex);
-
-        //             morrisGame.handleInput(rowIndex, colIndex);
-        //         }
-        //     }
-        // };
-
-        // grid.addEventHandler(MouseEvent.MOUSE_CLICKED, placingHandler);
-
-        new GameScreenGrid(grid);
+    @Override
+    public void handleInput(int row, int col) {
+        morrisGame.handleInput(row, col);
     }
 }
