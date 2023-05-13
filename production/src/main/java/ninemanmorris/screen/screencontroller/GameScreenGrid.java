@@ -9,8 +9,10 @@ import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
@@ -100,7 +102,7 @@ public class GameScreenGrid {
     private void createLines() {
         while (lines.size() < 20) {
             Line currentLine = new Line(0, 0, 0, 0);
-            currentLine.setStrokeWidth(15);
+            // currentLine.setStrokeWidth(15);
             currentLine.setStyle("-fx-stroke: #7aee11;");
             currentLine.setVisible(false);
 
@@ -145,12 +147,20 @@ public class GameScreenGrid {
 
         for (int i = 0; i < newMills.size(); i++) {
             int[][] currentTriplets = newMills.get(i);
-            int startX = Math.min(currentTriplets[0][0], Math.min(currentTriplets[1][0], currentTriplets[2][0]));
-            int startY = Math.min(currentTriplets[0][1], Math.min(currentTriplets[1][1], currentTriplets[2][1]));
-            int endX = Math.max(currentTriplets[0][0], Math.max(currentTriplets[1][0], currentTriplets[2][0]));
-            int endY = Math.max(currentTriplets[0][1], Math.max(currentTriplets[1][1], currentTriplets[2][1]));
+            double startX = Math.min(currentTriplets[0][1], Math.min(currentTriplets[1][1], currentTriplets[2][1]));
+            double startY = Math.min(currentTriplets[0][0], Math.min(currentTriplets[1][0], currentTriplets[2][0]));
+            double endX = Math.max(currentTriplets[0][1], Math.max(currentTriplets[1][1], currentTriplets[2][1]));
+            double endY = Math.max(currentTriplets[0][0], Math.max(currentTriplets[1][0], currentTriplets[2][0]));
+            
 
             Line currentLine = lines.get(i);
+            ColumnConstraints colCons = uiGrid.getColumnConstraints().get(0);
+            RowConstraints rowCons = uiGrid.getRowConstraints().get(0);
+
+            startX = (startX * Math.min(colCons.getPrefWidth(), uiGrid.getPrefWidth() / uiGrid.getColumnCount())) + (Math.min(colCons.getPrefWidth(), uiGrid.getPrefWidth() / uiGrid.getColumnCount()) / 2) + uiGrid.getLayoutX();
+            startY = (startY * Math.min(rowCons.getPrefHeight(), uiGrid.getPrefHeight() / uiGrid.getRowCount())) + (Math.min(rowCons.getPrefHeight(), uiGrid.getPrefHeight() / uiGrid.getRowCount()) / 2) + uiGrid.getLayoutY();
+            endX = (endX * Math.min(colCons.getPrefWidth(), uiGrid.getPrefWidth() / uiGrid.getColumnCount())) + (Math.min(colCons.getPrefWidth(), uiGrid.getPrefWidth() / uiGrid.getColumnCount()) / 2) + uiGrid.getLayoutX();
+            endY = (endY * Math.min(rowCons.getPrefHeight(), uiGrid.getPrefHeight() / uiGrid.getRowCount())) + (Math.min(rowCons.getPrefHeight(), uiGrid.getPrefHeight() / uiGrid.getRowCount()) / 2) + uiGrid.getLayoutY();
 
             currentLine.setStartX(startX);
             currentLine.setStartY(startY);
