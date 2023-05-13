@@ -38,15 +38,15 @@ public abstract class MorrisGame implements IMorrisGameInputHandler {
      */
     public void addSubscriber(IMorrisGameSubscriber subscriber) {
         subscribers.add(subscriber);
-        subscriber.update(currentPlayerTurn.getIsRed(), gameBoard.generatePlayerBoard(), currentPlayerTurn.getMove().getMoveQuote());
+        subscriber.update(currentPlayerTurn.getIsRed(), gameBoard.generatePlayerBoard(), gameBoard.generatePreviewMove(currentPlayerTurn.getMove()), gameBoard.generateMills(), currentPlayerTurn.getMoveType());
     }
 
     /**
      * Update the subscribers subscribed to this class
-     */
+     */ 
     public void udpateSubscribers() {
         for (IMorrisGameSubscriber subscriber : subscribers) {
-            subscriber.update(currentPlayerTurn.getIsRed(), gameBoard.generatePlayerBoard(), currentPlayerTurn.getMove().getMoveQuote());
+            subscriber.update(currentPlayerTurn.getIsRed(), gameBoard.generatePlayerBoard(), gameBoard.generatePreviewMove(currentPlayerTurn.getMove()), gameBoard.generateMills(), currentPlayerTurn.getMoveType());
         }
     }
 

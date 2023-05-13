@@ -1,6 +1,7 @@
-package ninemanmorris.move.movetype;
+package ninemanmorris.move;
 
 import ninemanmorris.gamelogic.Position;
+import ninemanmorris.shared.MoveType;
 
 /**
  * Represents a type of move that the player can make in the 9 men's morris game
@@ -32,7 +33,7 @@ public abstract class Move {
      * @param positions - The game board
      * @return The list of positions that can be selected for the current move
      */
-    public abstract Position[] previewMove(Position[][] positions);
+    public abstract boolean[][] previewMove(Position[][] positions);
 
     /**
      * Validate if the current move is still valid
@@ -45,7 +46,7 @@ public abstract class Move {
      * Get the quote specific for this move
      * @return A string representation of the quote for this move
      */
-    public abstract String getMoveQuote();
+    public abstract MoveType getMoveType();
 
     /**
      * Get the row and col that has been selected for this move

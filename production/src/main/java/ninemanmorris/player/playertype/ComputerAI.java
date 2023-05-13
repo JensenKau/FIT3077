@@ -2,7 +2,7 @@ package ninemanmorris.player.playertype;
 
 import java.util.Random;
 
-import ninemanmorris.move.movetype.Move;
+import ninemanmorris.move.Move;
 
 /**
  * Represents a Computer AI player

@@ -1,7 +1,8 @@
 package ninemanmorris.player.playertype;
 
-import ninemanmorris.move.movetype.Move;
-import ninemanmorris.move.movetype.PlaceToken;
+import ninemanmorris.move.Move;
+import ninemanmorris.move.PlaceToken;
+import ninemanmorris.shared.MoveType;
 
 /**
  * Represents a player 
@@ -34,6 +35,10 @@ public abstract class Player {
      */
     public Move getMove() {
         return currentMove;
+    }
+
+    public MoveType getMoveType() {
+        return currentMove.getMoveType();
     }
 
     /**

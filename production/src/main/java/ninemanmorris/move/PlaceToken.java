@@ -1,8 +1,8 @@
-package ninemanmorris.move.movetype;
+package ninemanmorris.move;
 
 import ninemanmorris.gamelogic.Position;
 import ninemanmorris.gamelogic.Token;
-import ninemanmorris.move.MoveQuote;
+import ninemanmorris.shared.MoveType;
 
 /**
  * Represents a specific type of move that the player can make in the 9 men's morris game,
@@ -47,8 +47,16 @@ public class PlaceToken extends Move {
     }
 
     @Override
-    public Position[] previewMove(Position[][] positions) {
-        return null;
+    public boolean[][] previewMove(Position[][] positions) {
+        boolean[][] output = new boolean[positions.length][positions[0].length];
+
+        for (int i = 0; i < positions.length; i++) {
+            for (int j = 0; j < positions[i].length; j++) {
+                output[i][j] = positions[i][j] != null && positions[i][j].getToken() == null;
+            }
+        }
+
+        return output;
     }
 
     @Override
@@ -57,8 +65,8 @@ public class PlaceToken extends Move {
     }
 
     @Override
-    public String getMoveQuote() {
-        return MoveQuote.PLACE_PHASE.toString();
+    public MoveType getMoveType() {
+        return MoveType.PLACE_PHSE;
     }
 
 }

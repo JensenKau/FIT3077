@@ -110,6 +110,12 @@ public class GameScreenGrid {
         this.parentPane.getChildren().addAll(0, lines);
     }
 
+    public void updateAll(Boolean[][] board, boolean[][] interactables, List<int[][]> mills) {
+        updateBoard(board);
+        updateInteractablePos(interactables);
+        updateMill(mills);
+    }
+
     public void updateBoard(Boolean[][] newState) {
         for (int i = 0; i < newState.length; i++) {
             for (int j = 0; j < newState[i].length; j++) {

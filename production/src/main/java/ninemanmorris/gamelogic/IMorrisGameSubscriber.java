@@ -1,5 +1,9 @@
 package ninemanmorris.gamelogic;
 
+import java.util.List;
+
+import ninemanmorris.shared.MoveType;
+
 /**
  * An interface for allowing the classes to be notfied about changes from morrisgame
  */
@@ -11,7 +15,7 @@ public interface IMorrisGameSubscriber {
      * @param board - the board of tokens, where true represents red, false represents blue and null represents no token
      * @param moveQuote - quote for the current move to be displayed on the GUI
      */
-    void update(boolean isRed, Boolean[][] board, String moveQuote);
+    void update(boolean isRed, Boolean[][] board, boolean[][] interactables, List<int[][]> mills, MoveType move);
 
     /**
      * This method will be called when the game ends
