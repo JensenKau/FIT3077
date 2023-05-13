@@ -55,7 +55,11 @@ public class GameScreenGrid {
 
             @Override
             public void handle(MouseEvent event) {
-                Node clickedNode = event.getPickResult().getIntersectedNode().getParent();
+                Node clickedNode = event.getPickResult().getIntersectedNode();
+
+                if (clickedNode.getParent() != uiGrid) {
+                    clickedNode = clickedNode.getParent();
+                }
 
                 if (clickedNode != null) {
                     int rowIndex = GridPane.getRowIndex(clickedNode);
