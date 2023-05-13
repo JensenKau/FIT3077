@@ -63,13 +63,19 @@ public class GameScreenController extends ScreenController implements IMorrisGam
      * @param moveQuote - determine the quote of the move to be displayed
      */
     @Override
-    public void update(boolean isRed, Boolean[][] board, boolean[][] interactables, List<int[][]> mills, MoveType move) {
+    public void update(boolean isRed, int redToken, int blueToken, Boolean[][] board, boolean[][] interactables, List<int[][]> mills, MoveType move) {
         this.isRedTurn = isRed;
 
         gameGrid.updateAll(board, interactables, mills);
 
         updatePlayerTurn();
         updateMoveQuote(move);
+        updatePlayerToken(redToken, blueToken);
+    }
+
+    private void updatePlayerToken(int redToken, int blueToken) {
+        red_token_count.setText(redToken + "");
+        blue_token_count.setText(blueToken + "");
     }
 
     /**

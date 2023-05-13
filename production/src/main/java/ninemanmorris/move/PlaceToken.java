@@ -1,5 +1,7 @@
 package ninemanmorris.move;
 
+import java.util.List;
+
 import ninemanmorris.gamelogic.Position;
 import ninemanmorris.gamelogic.Token;
 import ninemanmorris.shared.MoveType;
@@ -10,28 +12,26 @@ import ninemanmorris.shared.MoveType;
  */
 public class PlaceToken extends Move {
 
-    private int tokenCount;
+    private List<Token> tokens;
 
     /**
      * The PlaceToken constructor for creating a PlaceToken move
      * @param isRedMove - true if the move belongs to the red player, false otherwise
      */
-    public PlaceToken(boolean isRedMove) {
+    public PlaceToken(boolean isRedMove, List<Token> tokens) {
         super(isRedMove);
-        this.tokenCount = 9;
+        this.tokens = tokens;
     }
     
     @Override
     public Move performMove(Position pos) {
-        System.out.println(getIsRedMove() + " " + tokenCount);
         Move nextMove = null;
 
         if (pos.getToken() == null) {
-            pos.addToken(new Token(getIsRedMove()));
-            tokenCount -= 1;
+            pos.addToken(tokens.remove(tokens.size() - 1));
         } 
 
-        if (tokenCount > 0) {
+        if (tokens.size() > 0) {
             nextMove = this;
         } else {
             nextMove = new AdjacentMove(getIsRedMove());

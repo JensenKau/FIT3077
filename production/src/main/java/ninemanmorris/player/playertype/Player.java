@@ -1,5 +1,9 @@
 package ninemanmorris.player.playertype;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import ninemanmorris.gamelogic.Token;
 import ninemanmorris.move.Move;
 import ninemanmorris.move.PlaceToken;
 import ninemanmorris.shared.MoveType;
@@ -11,6 +15,7 @@ public abstract class Player {
     
     private Move currentMove;
     private boolean isRed;
+    private List<Token> tokens;
 
     /**
      * Player constructor for creating Player
@@ -18,7 +23,16 @@ public abstract class Player {
      */
     public Player(boolean isRed) {
         this.isRed = isRed;
-        this.currentMove = new PlaceToken(isRed);
+        this.tokens = new ArrayList<>(10);
+        this.currentMove = new PlaceToken(isRed, tokens);
+
+        while (tokens.size() < 9) {
+            tokens.add(new Token(isRed));
+        }
+    }
+
+    public int getTokenCount() {
+        return tokens.size();
     }
 
     /**
