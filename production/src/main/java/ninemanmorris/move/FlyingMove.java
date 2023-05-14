@@ -32,7 +32,8 @@ public class FlyingMove extends Move {
             }
 
         } else {
-            if (selectedPos == pos) {
+            if (pos.getToken() != null && pos.getIsRedToken() == getIsRedMove()) {
+                selectedPos = pos;
                 output = this;
 
             } else if (pos.getToken() == null) {

@@ -32,7 +32,8 @@ public class AdjacentMove extends Move {
             }
 
         } else {
-            if (pos == selectedPos) {
+            if (pos.getToken() != null && pos.getIsRedToken() == getIsRedMove()) {
+                selectedPos = pos;
                 output = this;
 
             } else if (pos.getToken() == null && (isNeighbour(selectedPos.getVerticalNeighbours(), pos) || isNeighbour(selectedPos.getHorizontalNeighbours(), pos))) {
