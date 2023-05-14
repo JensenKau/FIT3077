@@ -84,4 +84,11 @@ public class FlyingMove extends Move {
         return MoveType.FLY_PHASE;
     }
 
+    @Override
+    public int[] getSelectedPos() {
+        if (selectedPos != null) {
+            return selectedPos.getRowCol();
+        }
+        return null;
+    }
 }

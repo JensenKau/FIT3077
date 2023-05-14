@@ -9,10 +9,8 @@ import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
@@ -27,10 +25,12 @@ public class GameScreenGrid {
 
     private static final int GREEN_LIGHT_INDEX = 0;
     private static final int WHITE_LIGHT_INDEX = 1;
-    private static final int RED_INDEX = 2;
-    private static final int BLUE_INDEX = 3;
+    private static final int YELLOW_LIGHT_INDEX = 2;
+    private static final int RED_INDEX = 3;
+    private static final int BLUE_INDEX = 4;
 
     private static final int TOKEN_WIDTH_HEIGHT = 40;
+    private static final int CIRCLE_SIZE = 27;
     
     private Pane parentPane;
     private GridPane uiGrid;
@@ -81,24 +81,30 @@ public class GameScreenGrid {
             for (int j = 0; j < stackPanes[i].length; j++) {
                 ImageView red = new ImageView(redTokenImg);
                 ImageView blue = new ImageView(blueTokenImg);
-                Circle greenCircle = new Circle(27);
-                Circle whiteCircle = new Circle(27);
+                Circle greenCircle = new Circle(CIRCLE_SIZE);
+                Circle whiteCircle = new Circle(CIRCLE_SIZE);
+                Circle yellowCircle = new Circle(CIRCLE_SIZE);
                 stackPanes[i][j] = new StackPane();
 
                 greenCircle.setEffect(new GaussianBlur());
                 greenCircle.setStyle("-fx-fill: #7aee11;");
                 whiteCircle.setEffect(new GaussianBlur());
                 whiteCircle.setStyle("-fx-fill: #ffffff;");
+                yellowCircle.setEffect(new GaussianBlur());
+                yellowCircle.setStyle("-fx-fill: #e6cc00;");
 
                 red.setFitWidth(TOKEN_WIDTH_HEIGHT);
                 red.setFitHeight(TOKEN_WIDTH_HEIGHT);
                 blue.setFitWidth(TOKEN_WIDTH_HEIGHT);
                 blue.setFitHeight(TOKEN_WIDTH_HEIGHT);
 
-                stackPanes[i][j].getChildren().add(greenCircle);
-                stackPanes[i][j].getChildren().add(whiteCircle);
-                stackPanes[i][j].getChildren().add(red);
-                stackPanes[i][j].getChildren().add(blue);
+                stackPanes[i][j].getChildren().addAll(new Node[] {
+                    greenCircle,
+                    whiteCircle,
+                    yellowCircle,
+                    red,
+                    blue
+                });
 
                 for (Node node : stackPanes[i][j].getChildren()) {
                     node.setVisible(false);
@@ -121,12 +127,6 @@ public class GameScreenGrid {
         }
 
         this.parentPane.getChildren().addAll(0, lines);
-    }
-
-    public void updateAll(Boolean[][] board, boolean[][] interactables, MoveType moveType, List<int[][]> mills) {
-        updateBoard(board);
-        updateInteractablePos(interactables, moveType);
-        updateMill(mills);
     }
 
     public void updateBoard(Boolean[][] newState) {
@@ -158,6 +158,18 @@ public class GameScreenGrid {
         }
     }
 
+    public void updateSelectedPos(int[] newPos) {
+        for (int i = 0; i < stackPanes.length; i++) {
+            for (int j = 0; j < stackPanes[0].length; j++) {
+                if (newPos != null && i == newPos[0] && j == newPos[1]) {
+                    stackPanes[i][j].getChildren().get(YELLOW_LIGHT_INDEX).setVisible(true);
+                } else {
+                    stackPanes[i][j].getChildren().get(YELLOW_LIGHT_INDEX).setVisible(false);
+                }
+            }
+        }
+    }
+
     public void updateMill(List<int[][]> newMills) {
         for (Line line : lines) {
             line.setVisible(false);
@@ -170,15 +182,14 @@ public class GameScreenGrid {
             double endX = Math.max(currentTriplets[0][1], Math.max(currentTriplets[1][1], currentTriplets[2][1]));
             double endY = Math.max(currentTriplets[0][0], Math.max(currentTriplets[1][0], currentTriplets[2][0]));
             
-
             Line currentLine = lines.get(i);
-            ColumnConstraints colCons = uiGrid.getColumnConstraints().get(0);
-            RowConstraints rowCons = uiGrid.getRowConstraints().get(0);
+            double width = Math.min(uiGrid.getColumnConstraints().get(0).getPrefWidth(), uiGrid.getPrefWidth() / uiGrid.getColumnCount());
+            double height = Math.min(uiGrid.getRowConstraints().get(0).getPrefHeight(), uiGrid.getPrefHeight() / uiGrid.getRowCount());
 
-            startX = (startX * Math.min(colCons.getPrefWidth(), uiGrid.getPrefWidth() / uiGrid.getColumnCount())) + (Math.min(colCons.getPrefWidth(), uiGrid.getPrefWidth() / uiGrid.getColumnCount()) / 2) + uiGrid.getLayoutX();
-            startY = (startY * Math.min(rowCons.getPrefHeight(), uiGrid.getPrefHeight() / uiGrid.getRowCount())) + (Math.min(rowCons.getPrefHeight(), uiGrid.getPrefHeight() / uiGrid.getRowCount()) / 2) + uiGrid.getLayoutY();
-            endX = (endX * Math.min(colCons.getPrefWidth(), uiGrid.getPrefWidth() / uiGrid.getColumnCount())) + (Math.min(colCons.getPrefWidth(), uiGrid.getPrefWidth() / uiGrid.getColumnCount()) / 2) + uiGrid.getLayoutX();
-            endY = (endY * Math.min(rowCons.getPrefHeight(), uiGrid.getPrefHeight() / uiGrid.getRowCount())) + (Math.min(rowCons.getPrefHeight(), uiGrid.getPrefHeight() / uiGrid.getRowCount()) / 2) + uiGrid.getLayoutY();
+            startX = (startX * width) + (width / 2) + uiGrid.getLayoutX();
+            startY = (startY * height) + (height / 2) + uiGrid.getLayoutY();
+            endX = (endX * width) + (width / 2) + uiGrid.getLayoutX();
+            endY = (endY * height) + (height / 2) + uiGrid.getLayoutY();
 
             currentLine.setStartX(startX);
             currentLine.setStartY(startY);

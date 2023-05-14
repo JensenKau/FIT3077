@@ -197,6 +197,10 @@ public class MorrisBoard {
         this.switchTurn = false;
     }
 
+    public int[] getSelectedPos(Move move) {
+        return move.getSelectedPos();
+    }
+
     /**
      * Generate a boolean table that represents on the token placed on the board,
      * where true represents red token, false represent blue and null represent blank

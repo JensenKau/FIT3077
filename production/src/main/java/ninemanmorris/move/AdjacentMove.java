@@ -162,4 +162,12 @@ public class AdjacentMove extends Move {
             return null;
         }
     }
+
+    @Override
+    public int[] getSelectedPos() {
+        if (selectedPos != null) {
+            return selectedPos.getRowCol();
+        }
+        return null; 
+    }
 }

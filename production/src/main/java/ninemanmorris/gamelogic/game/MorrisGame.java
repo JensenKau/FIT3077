@@ -45,7 +45,8 @@ public abstract class MorrisGame implements IMorrisGameInputHandler {
             gameBoard.generatePlayerBoard(), 
             gameBoard.generatePreviewMove(currentPlayerTurn.getMove()), 
             gameBoard.generateMills(), 
-            currentPlayerTurn.getMoveType()
+            currentPlayerTurn.getMoveType(),
+            gameBoard.getSelectedPos(currentPlayerTurn.getMove())
         );
     }
 
@@ -61,7 +62,8 @@ public abstract class MorrisGame implements IMorrisGameInputHandler {
                 gameBoard.generatePlayerBoard(), 
                 gameBoard.generatePreviewMove(currentPlayerTurn.getMove()), 
                 gameBoard.generateMills(), 
-                currentPlayerTurn.getMoveType()
+                currentPlayerTurn.getMoveType(),
+                gameBoard.getSelectedPos(currentPlayerTurn.getMove())
             );
         }
     }

@@ -74,6 +74,10 @@ public abstract class Move {
         }
     }
 
+    public int[] getSelectedPos() {
+        return null;
+    }
+
     /**
      * Get the row and col that has been selected for this move
      * @return The row and col that has been selected for this move
