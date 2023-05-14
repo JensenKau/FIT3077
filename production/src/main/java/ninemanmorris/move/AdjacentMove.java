@@ -1,6 +1,7 @@
 package ninemanmorris.move;
 
 import ninemanmorris.gamelogic.Position;
+import ninemanmorris.shared.MoveType;
 
 /**
  * Represents a specific type of move that the player can make in the 9 men's morris game,
@@ -19,11 +20,11 @@ public class AdjacentMove extends Move {
     }
 
     @Override
-    public Move performMove(Position pos) {
+    public Move performMove(Position pos, Position[][] board) {
         Move output = null;
 
         if (selectedPos == null) {
-            if (pos.getToken() != null && pos.getIsRedToken() == getIsRedMove()) {
+            if (pos.getToken() != null && pos.getIsRedToken() == getIsRedMove() && checkIsMovable(pos)) {
                 selectedPos = pos;
                 output = this;
             } else {
@@ -31,7 +32,8 @@ public class AdjacentMove extends Move {
             }
 
         } else {
-            if (pos == selectedPos) {
+            if (pos.getToken() != null && pos.getIsRedToken() == getIsRedMove()) {
+                selectedPos = pos;
                 output = this;
 
             } else if (pos.getToken() == null && (isNeighbour(selectedPos.getVerticalNeighbours(), pos) || isNeighbour(selectedPos.getHorizontalNeighbours(), pos))) {
@@ -52,6 +54,22 @@ public class AdjacentMove extends Move {
         return output;
     }
 
+    private boolean checkIsMovable(Position pos) {
+        for (Position currentNeighbour : pos.getHorizontalNeighbours()) {
+            if (currentNeighbour.getToken() == null) {
+                return true;
+            }
+        }
+
+        for (Position currentNeighbour : pos.getVerticalNeighbours()) {
+            if (currentNeighbour.getToken() == null) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     /**
      * Checks if the position is in the neighbour list 
      * @param neighbours - The list of neighbours
@@ -69,8 +87,22 @@ public class AdjacentMove extends Move {
     }
 
     @Override
-    public Position[] previewMove(Position[][] positions) {
-        return null;
+    public boolean[][] previewMove(Position[][] positions) {
+        boolean[][] output = new boolean[positions.length][positions[0].length];
+
+        for (int i = 0; i < positions.length; i++) {
+            for (int j = 0; j < positions[i].length; j++) {
+                if (selectedPos == null) {
+                    output[i][j] = positions[i][j] != null && positions[i][j].getToken() != null && positions[i][j].getIsRedToken() == getIsRedMove() && checkIsMovable(positions[i][j]);
+
+                } else {
+                    boolean currentIsNeighbour = isNeighbour(selectedPos.getHorizontalNeighbours(), positions[i][j]) || isNeighbour(selectedPos.getVerticalNeighbours(), positions[i][j]);
+                    output[i][j] = positions[i][j] != null && positions[i][j].getToken() == null && currentIsNeighbour && positions[i][j] != selectedPos;
+                }
+            }
+        }
+
+        return output; 
     }
 
     @Override
@@ -79,7 +111,7 @@ public class AdjacentMove extends Move {
 
         for (int i = 0; i < positions.length; i++) {
             for (int j = 0; j < positions[i].length; j++) {
-                if (positions[i][j].getToken() != null && positions[i][j].getIsRedToken() == getIsRedMove()) {
+                if (positions[i][j] != null && positions[i][j].getToken() != null && positions[i][j].getIsRedToken() == getIsRedMove()) {
                     count += 1;
                 }
             }
@@ -92,8 +124,51 @@ public class AdjacentMove extends Move {
     }
 
     @Override
-    public String getMoveQuote() {
-        return MoveQuote.MOVE_PHASE.toString();
+    public MoveType getMoveType() {
+        if (selectedPos == null) {
+            return MoveType.SELECT_PHASE;
+        }
+        return MoveType.MOVE_PHASE;
     }
     
+    @Override
+    public Boolean getWinPlayer(Position[][] positions) {
+        boolean redMove = false;
+        boolean blueMove = false;
+
+        for (int i = 0; i < positions.length; i++) {
+            for (int j = 0; j < positions[i].length; j++) {
+                if (positions[i][j] != null && positions[i][j].getToken() != null && checkIsMovable(positions[i][j])) {
+                    if (positions[i][j].getIsRedToken()) {
+                        redMove = true;
+                    } else {
+                        blueMove = true;
+                    }
+                }
+
+                if (redMove && blueMove) {
+                    break;
+                }
+            }
+        }
+
+        if (redMove && blueMove) {
+            return super.getWinPlayer(positions);
+        } else if (redMove) {
+            return true;
+        } else if (blueMove) {
+            return false;
+        } else {
+            enableDraw();
+            return null;
+        }
+    }
+
+    @Override
+    public int[] getSelectedPos() {
+        if (selectedPos != null) {
+            return selectedPos.getRowCol();
+        }
+        return null; 
+    }
 }

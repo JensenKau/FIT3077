@@ -25,7 +25,6 @@ public class App extends Application {
      */
     @Override
     public void start(Stage stage) throws IOException {
-        
         Image icon = new Image("file:src/main/resources/img/9mm_token_blue.png");
         stage.setTitle("Nine Mens' Morris");
         stage.getIcons().add(icon);

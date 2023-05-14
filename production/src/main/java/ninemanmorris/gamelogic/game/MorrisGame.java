@@ -38,16 +38,51 @@ public abstract class MorrisGame implements IMorrisGameInputHandler {
      */
     public void addSubscriber(IMorrisGameSubscriber subscriber) {
         subscribers.add(subscriber);
-        subscriber.update(currentPlayerTurn.getIsRed(), gameBoard.generatePlayerBoard(), currentPlayerTurn.getMove().getMoveQuote());
+        subscriber.update(
+            currentPlayerTurn.getIsRed(), 
+            players[0].getTokenCount(), 
+            players[1].getTokenCount(), 
+            gameBoard.generatePlayerBoard(), 
+            gameBoard.generatePreviewMove(currentPlayerTurn.getMove()), 
+            gameBoard.generateMills(), 
+            currentPlayerTurn.getMoveType(),
+            gameBoard.getSelectedPos(currentPlayerTurn.getMove())
+        );
     }
 
     /**
      * Update the subscribers subscribed to this class
-     */
+     */ 
     public void udpateSubscribers() {
         for (IMorrisGameSubscriber subscriber : subscribers) {
-            subscriber.update(currentPlayerTurn.getIsRed(), gameBoard.generatePlayerBoard(), currentPlayerTurn.getMove().getMoveQuote());
+            subscriber.update(
+                currentPlayerTurn.getIsRed(), 
+                players[0].getTokenCount(), 
+                players[1].getTokenCount(), 
+                gameBoard.generatePlayerBoard(), 
+                gameBoard.generatePreviewMove(currentPlayerTurn.getMove()), 
+                gameBoard.generateMills(), 
+                currentPlayerTurn.getMoveType(),
+                gameBoard.getSelectedPos(currentPlayerTurn.getMove())
+            );
         }
+    }
+
+    protected void delcareWinner(boolean isRed) {
+        for (IMorrisGameSubscriber subscriber : subscribers) {
+            subscriber.updateGameEnd(isRed);
+        }
+    }
+
+    protected void declareDraw() {
+        for (IMorrisGameSubscriber subscriber : subscribers) {
+            subscriber.updateGameDraw();
+        }
+    }
+
+    protected void validatePlayerMove() {
+        players[0].setMove(gameBoard.validatePlayerMove(players[0].getMove()));
+        players[1].setMove(gameBoard.validatePlayerMove(players[1].getMove()));
     }
 
     /**
