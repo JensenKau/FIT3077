@@ -12,6 +12,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import ninemanmorris.shared.MoveType;
@@ -20,6 +22,8 @@ public class GameScreenGrid {
 
     private static final String RED_TOKEN_IMG = "/img/9mm_token_red.png";
     private static final String BLUE_TOKEN_IMG = "/img/9mm_token_blue.png";
+
+    private static final String PICKUP_AUDIO = "/audio/pickup.mp3";
 
     private static final int DEFAULT_LINE_AMT = 20;
 
@@ -37,6 +41,7 @@ public class GameScreenGrid {
     private StackPane[][] stackPanes;
     private ArrayList<Line> lines;
     private IInputHandler inputHandler;
+    private MediaPlayer mediaPlayer;
 
 
     public GameScreenGrid(GridPane uiGrid, Pane parentPane, IInputHandler inputHandler) {
@@ -45,6 +50,8 @@ public class GameScreenGrid {
         this.parentPane = parentPane;
         this.lines = new ArrayList<>(DEFAULT_LINE_AMT);
         this.inputHandler = inputHandler;
+
+        this.mediaPlayer = new MediaPlayer(new Media(getClass().getResource(PICKUP_AUDIO).toExternalForm()));
 
         createStackPanes();
         createLines();
@@ -67,6 +74,8 @@ public class GameScreenGrid {
                     int rowIndex = GridPane.getRowIndex(clickedNode);
                     int colIndex = GridPane.getColumnIndex(clickedNode);
                     System.out.println("clicked on: " + rowIndex + " " + colIndex);
+                    mediaPlayer.seek(mediaPlayer.getStartTime());
+                    mediaPlayer.play();
                     inputHandler.handleInput(rowIndex, colIndex);
                 }
             }
@@ -153,7 +162,6 @@ public class GameScreenGrid {
                     stackPanes[i][j].getChildren().get(WHITE_LIGHT_INDEX).setVisible(false);
                     stackPanes[i][j].getChildren().get(GREEN_LIGHT_INDEX).setVisible(newState[i][j]);
                 }
-                
             }
         }
     }
