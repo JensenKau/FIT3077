@@ -8,6 +8,17 @@ public class Position {
     private Position[] horizontalNeighbours;
     private Position[] verticalNeighbours;
     private Token token;
+    private int row;
+    private int col;
+
+    public Position(int row, int col) {
+        this.row = row;
+        this.col = col;
+    }
+
+    public int[] getRowCol() {
+        return new int[] {row, col};
+    }
 
     /**
      * Get the token that is placed on the current position
@@ -93,7 +104,7 @@ public class Position {
      * @param isVertical - true to check for vertical mill, false to check for horizontal mill
      * @return true if there is a mill in the specified direction
      */
-    private boolean checkMill(boolean isVertical) {
+    public boolean checkMill(boolean isVertical) {
         Position currentPosition = this;
         Position[] neighbours = (isVertical) ? verticalNeighbours : horizontalNeighbours;
 

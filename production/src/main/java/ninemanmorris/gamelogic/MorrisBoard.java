@@ -1,8 +1,9 @@
 package ninemanmorris.gamelogic;
 
 import java.util.ArrayList;
+import java.util.List;
 
-import ninemanmorris.move.movetype.Move;
+import ninemanmorris.move.Move;
 
 /**
  * Represents the 9 men's morris board
@@ -15,13 +16,16 @@ public class MorrisBoard {
     private Position[][] board;
 
     private boolean switchTurn;
+    private Boolean winPlayer;
+    private boolean isDrawGame;
 
     /**
      * Constuctor for creating a MorrisBoard
      */
     public MorrisBoard() {
-        board = new Position[BOARD_LENGTH][BOARD_WIDTH];
-        switchTurn = false;
+        this.board = new Position[BOARD_LENGTH][BOARD_WIDTH];
+        this.switchTurn = false;
+        this.winPlayer = null;
 
         createPositions();
         createNeighbours();
@@ -112,7 +116,7 @@ public class MorrisBoard {
                 col += step;
             }
 
-            board[row][col] = new Position();
+            board[row][col] = new Position(row, col);
             dist -= 1;
 
             if (dist == 0) {
@@ -152,11 +156,30 @@ public class MorrisBoard {
         } 
 
         position = board[row][col];
-        output = move.performMove(position);
+        output = move.performMove(position, board);
         switchTurn = move.getSwitchTurn();
+        winPlayer = move.getWinPlayer(board);
+        isDrawGame = move.getIsDraw();
         move.resetSwitchTurn();
 
+        if (move != output && winPlayer == null && !isDrawGame) {
+            winPlayer = output.getWinPlayer(board);
+            isDrawGame = output.getIsDraw();
+        }
+
         return output;
+    }
+
+    public Move validatePlayerMove(Move move) {
+        return move.validateCurrentMove(board);
+    }
+
+    public Boolean getWinPlayer() {
+        return winPlayer;
+    }
+
+    public boolean getIsDrawGame() {
+        return isDrawGame;
     }
 
     /**
@@ -174,6 +197,10 @@ public class MorrisBoard {
         this.switchTurn = false;
     }
 
+    public int[] getSelectedPos(Move move) {
+        return move.getSelectedPos();
+    }
+
     /**
      * Generate a boolean table that represents on the token placed on the board,
      * where true represents red token, false represent blue and null represent blank
@@ -185,10 +212,29 @@ public class MorrisBoard {
         for (int i = 0; i < output.length; i++) {
             for (int j = 0; j < output[i].length; j++) {
                 if (board[i][j] != null && board[i][j].getIsRedToken() != null) {
-                    if (board[i][j].getIsRedToken()) {
-                        output[i][j] = true;
-                    } else {
-                        output[i][j] = false;
+                    output[i][j] = board[i][j].getIsRedToken();
+                }
+            }
+        }
+
+        return output;
+    }
+
+    public boolean[][] generatePreviewMove(Move move) {
+        return move.previewMove(board);
+    }
+
+    public List<int[][]> generateMills() {
+        List<int[][]> output = new ArrayList<>();
+
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[i].length; j++) {
+                if (board[i][j] != null) {
+                    if (board[i][j].getHorizontalNeighbours().length == 2 && board[i][j].checkMill(false)) {
+                        output.add(new int[][] {board[i][j].getHorizontalNeighbours()[0].getRowCol(), board[i][j].getRowCol(), board[i][j].getHorizontalNeighbours()[1].getRowCol()});
+
+                    } if (board[i][j].getVerticalNeighbours().length == 2 && board[i][j].checkMill(true)) {
+                        output.add(new int[][] {board[i][j].getVerticalNeighbours()[0].getRowCol(), board[i][j].getRowCol(), board[i][j].getVerticalNeighbours()[1].getRowCol()});
                     }
                 }
             }

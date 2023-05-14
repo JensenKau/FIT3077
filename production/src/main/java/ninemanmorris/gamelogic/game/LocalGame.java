@@ -29,9 +29,16 @@ public class LocalGame extends MorrisGame {
                 currentPlayer.setMove(getGameBoard().executeMove(currentPlayer.getMove(), row, col));
             }
 
+            if (getGameBoard().getWinPlayer() != null) {
+                delcareWinner(getGameBoard().getWinPlayer());
+            } if (getGameBoard().getIsDrawGame()) {
+                declareDraw();
+            }
+
             if (getGameBoard().getSwitchTurn()) {
                 switchPlayerTurn();
                 getGameBoard().resetSwitchTurn();
+                validatePlayerMove();
             }
 
         } while (!getCurrentPlayerTurn().getIsRequireInput());

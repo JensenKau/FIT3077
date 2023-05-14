@@ -1,7 +1,7 @@
-package ninemanmorris.move.movetype;
+package ninemanmorris.move;
 
 import ninemanmorris.gamelogic.Position;
-import ninemanmorris.move.MoveQuote;
+import ninemanmorris.shared.MoveType;
 
 /**
  * Represents a specific type of move that the player can make in the 9 men's morris game,
@@ -20,7 +20,7 @@ public class FlyingMove extends Move {
     }
 
     @Override
-    public Move performMove(Position pos) {
+    public Move performMove(Position pos, Position[][] board) {
         Move output = null;
 
         if (selectedPos == null) {
@@ -32,11 +32,12 @@ public class FlyingMove extends Move {
             }
 
         } else {
-            if (selectedPos == pos) {
+            if (pos.getToken() != null && pos.getIsRedToken() == getIsRedMove()) {
+                selectedPos = pos;
                 output = this;
 
             } else if (pos.getToken() == null) {
-                pos.addToken(pos.removeToken());
+                pos.addToken(selectedPos.removeToken());
 
                 if (pos.getIsMill()) {
                     output = new RemoveToken(getIsRedMove(), new FlyingMove(getIsRedMove()));
@@ -54,8 +55,21 @@ public class FlyingMove extends Move {
     }
 
     @Override
-    public Position[] previewMove(Position[][] positions) {
-        return null;
+    public boolean[][] previewMove(Position[][] positions) {
+        boolean[][] output = new boolean[positions.length][positions[0].length];
+
+        for (int i = 0; i < positions.length; i++) {
+            for (int j = 0; j < positions[i].length; j++) {
+                if (selectedPos == null) {
+                    output[i][j] = positions[i][j] != null && positions[i][j].getToken() != null && positions[i][j].getIsRedToken() == getIsRedMove();
+
+                } else {
+                    output[i][j] = positions[i][j] != null && positions[i][j].getToken() == null && positions[i][j] != selectedPos;
+                }
+            }
+        }
+
+        return output; 
     }
 
     @Override
@@ -64,8 +78,18 @@ public class FlyingMove extends Move {
     }
 
     @Override
-    public String getMoveQuote() {
-        return MoveQuote.FLY_PHASE.toString();
+    public MoveType getMoveType() {
+        if (selectedPos == null) {
+            return MoveType.SELECT_PHASE;
+        }
+        return MoveType.FLY_PHASE;
     }
 
+    @Override
+    public int[] getSelectedPos() {
+        if (selectedPos != null) {
+            return selectedPos.getRowCol();
+        }
+        return null;
+    }
 }
