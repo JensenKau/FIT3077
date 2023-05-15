@@ -4,11 +4,8 @@ import java.io.IOException;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
-import ninemanmorris.gamelogic.MorrisGameFactory;
-import ninemanmorris.player.PlayerType;
 import ninemanmorris.screen.ScreenPage;
 
 /**
@@ -22,6 +19,9 @@ public class TitleScreenController extends ScreenController {
     @FXML
     private Button quitGameButton;
 
+    @FXML
+    private Button instructionButton;
+
     /**
      * Load the start screen of the game
      * @param stage - Stage to load the start screen of the game on
@@ -32,16 +32,12 @@ public class TitleScreenController extends ScreenController {
         switchScene(ScreenPage.TITLE_SCREEN.toString());
     }
 
-    /**
-     * Start a new game with two human players
-     * @param event - ActionEvent that triggers the start of a new game
-     * @throws IOException
-     */
-    public void startTwoPlayerGame(ActionEvent event) throws IOException {
-        FXMLLoader loader = switchScene(ScreenPage.GAME_SCREEN.toString());
-        GameScreenController controller = loader.getController();
+    public void selectPlayer(ActionEvent event) throws IOException {
+        switchScene(ScreenPage.SELECT_SCREEN.toString());
+    }
 
-        controller.setMorrisGame(MorrisGameFactory.createMorrisGame(PlayerType.HUMAN, PlayerType.HUMAN, controller));
+    public void displayInstruction(ActionEvent event) throws IOException {
+        switchScene(ScreenPage.INSTRUCTION_SCREEN.toString());
     }
 
     /**

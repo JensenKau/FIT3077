@@ -3,6 +3,7 @@ package ninemanmorris.screen.screencontroller;
 import java.util.List;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
@@ -121,7 +122,9 @@ public class GameScreenController extends ScreenController implements IMorrisGam
     @Override
     public void updateGameEnd(boolean isRed) {
         try {
-            switchScene(ScreenPage.RESULT_SCREEN.toString());
+            FXMLLoader loader = switchScene(ScreenPage.RESULT_SCREEN.toString());
+            ResultScreenController controller = loader.getController();
+            controller.setRedWon(isRed);
         } catch (Exception e) {
             e.getStackTrace();
         }
