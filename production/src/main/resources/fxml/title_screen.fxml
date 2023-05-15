@@ -12,7 +12,7 @@
             <Font name="Galvji" size="36.0" />
          </font>
       </Button>
-      <Button fx:id="instructionButton" minWidth="250.0" style="-fx-background-color: transparent;" text="Instructions">
+      <Button fx:id="instructionButton" minWidth="250.0" onAction="#displayInstruction" style="-fx-background-color: transparent; -fx-cursor: hand;" text="Instructions">
          <font>
             <Font name="Galvji" size="36.0" />
          </font>

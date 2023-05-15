@@ -22,6 +22,9 @@ public class TitleScreenController extends ScreenController {
     @FXML
     private Button quitGameButton;
 
+    @FXML
+    private Button instructionButton;
+
     /**
      * Load the start screen of the game
      * @param stage - Stage to load the start screen of the game on
@@ -42,6 +45,10 @@ public class TitleScreenController extends ScreenController {
         GameScreenController controller = loader.getController();
 
         controller.setMorrisGame(MorrisGameFactory.createMorrisGame(PlayerType.HUMAN, PlayerType.HUMAN, controller));
+    }
+
+    public void displayInstruction(ActionEvent event) throws IOException {
+        switchScene(ScreenPage.INSTRUCTION_SCREEN.toString());
     }
 
     /**
