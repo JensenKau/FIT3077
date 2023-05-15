@@ -7,7 +7,8 @@ public enum ScreenPage {
     TITLE_SCREEN("/fxml/title_screen.fxml"),
     GAME_SCREEN("/fxml/game_screen.fxml"),
     INSTRUCTION_SCREEN("/fxml/instruction_screen.fxml"),
-    RESULT_SCREEN("/fxml/result_screen.fxml");
+    RESULT_SCREEN("/fxml/result_screen.fxml"),
+    SELECT_SCREEN("/fxml/select_screen.fxml");
 
     private final String TEXT;
 
