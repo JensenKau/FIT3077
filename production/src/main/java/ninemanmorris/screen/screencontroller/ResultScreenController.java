@@ -4,21 +4,22 @@ import java.io.IOException;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import ninemanmorris.screen.ScreenPage;
+import javafx.scene.text.Text;
 
 /**
  * Controller class for the result screen of the game
  */
 public class ResultScreenController extends ScreenController {
-
-    @FXML
-    private Label playerWinText;
-
-    @FXML
-    private Button returnToMenuBtn;
     
+    private boolean redWon;
+
+    @FXML
+    private Text playerWonTxt;
+
+    @FXML
+    private Text counterTxt;
+
     /**
      * Switch to the start screen of the game
      * @param event - ActionEvent that triggers the start of a new game
@@ -26,5 +27,24 @@ public class ResultScreenController extends ScreenController {
      */
     public void switchTitleScreen(ActionEvent event) throws IOException {
         switchScene(ScreenPage.TITLE_SCREEN.toString());
+    }
+
+    public void rematch(ActionEvent event) throws IOException {
+        switchScene(ScreenPage.GAME_SCREEN.toString());
+    }
+
+    public void setRedWon(boolean redWon) {
+        this.redWon = redWon;
+        setPlayerWonTxt();
+    }
+
+    public void setPlayerWonTxt() {
+        if (redWon) {
+            playerWonTxt.setText("Player 1 Won!");
+            counterTxt.setText("1 - 0");
+        } else {
+            playerWonTxt.setText("Player 2 Won!");
+            counterTxt.setText("0 - 1");
+        }
     }
 }
