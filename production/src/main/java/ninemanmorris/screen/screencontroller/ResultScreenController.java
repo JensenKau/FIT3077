@@ -6,6 +6,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import ninemanmorris.screen.ScreenPage;
 import javafx.scene.text.Text;
+import ninemanmorris.gamelogic.MorrisGameFactory;
+import ninemanmorris.player.PlayerType;
+import javafx.fxml.FXMLLoader;
 
 /**
  * Controller class for the result screen of the game
@@ -30,7 +33,10 @@ public class ResultScreenController extends ScreenController {
     }
 
     public void rematch(ActionEvent event) throws IOException {
-        switchScene(ScreenPage.GAME_SCREEN.toString());
+        FXMLLoader loader = switchScene(ScreenPage.GAME_SCREEN.toString());
+        GameScreenController controller = loader.getController();
+
+        controller.setMorrisGame(MorrisGameFactory.createMorrisGame(PlayerType.HUMAN, PlayerType.HUMAN, controller));
     }
 
     public void setRedWon(boolean redWon) {
