@@ -35,7 +35,7 @@ public class App extends Application {
     public void start(Stage stage) throws IOException {
         sound = new Media(getClass().getResource("/audio/bgmusic_short.mp3").toExternalForm());
         mediaPlayer = new MediaPlayer(sound);
-        mediaPlayer.setVolume(0.5);
+        mediaPlayer.setVolume(0.2);
         mediaPlayer.setOnEndOfMedia(new Runnable() {
             public void run() {
               mediaPlayer.seek(Duration.ZERO);

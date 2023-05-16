@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.List;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
@@ -49,10 +48,15 @@ public class GameScreenController extends ScreenController implements IMorrisGam
     private Text playerWonTxt;
 
     @FXML
+    private Text counterTxt;
+
+    @FXML
     private VBox resultScreen;
 
     private IMorrisGameInputHandler morrisGame;
     private boolean isRedTurn;
+    private static int redWins = 0;
+    private static int blueWins = 0; 
 
     private GameScreenGrid gameGrid;
 
@@ -141,12 +145,13 @@ public class GameScreenController extends ScreenController implements IMorrisGam
     public void updateGameEnd(boolean isRed) {
         switchNodeVisibility(resultScreen, true);
         if (isRed) {
+            redWins++;
             playerWonTxt.setText("Player 1 Won!");
-            // counterTxt.setText("1 - 0");
         } else {
+            blueWins++;
             playerWonTxt.setText("Player 2 Won!");
-            // counterTxt.setText("0 - 1");
         }
+        counterTxt.setText(redWins + " - " + blueWins);
     }
 
     @Override
@@ -169,6 +174,8 @@ public class GameScreenController extends ScreenController implements IMorrisGam
     }
 
     public void backToMenu(ActionEvent event) throws IOException {
+        redWins = 0;
+        blueWins = 0;
         switchScene(ScreenPage.TITLE_SCREEN.toString());
     }
 }
