@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import ninemanmorris.screen.ScreenPage;
+import javafx.scene.layout.VBox;
 
 /**
  * Controller for the title screen of the game
@@ -22,6 +23,17 @@ public class TitleScreenController extends ScreenController {
     @FXML
     private Button instructionButton;
 
+    @FXML
+    private VBox instructionScreen;
+
+    @FXML
+    private VBox selectScreen;
+
+    public void initialize() {
+        switchNodeVisibility(instructionScreen, false);
+        switchNodeVisibility(selectScreen, false);
+    }   
+
     /**
      * Load the start screen of the game
      * @param stage - Stage to load the start screen of the game on
@@ -33,11 +45,11 @@ public class TitleScreenController extends ScreenController {
     }
 
     public void selectPlayer(ActionEvent event) throws IOException {
-        switchScene(ScreenPage.SELECT_SCREEN.toString());
+        switchNodeVisibility(selectScreen, true);
     }
 
     public void displayInstruction(ActionEvent event) throws IOException {
-        switchScene(ScreenPage.INSTRUCTION_SCREEN.toString());
+        switchNodeVisibility(instructionScreen, true);
     }
 
     /**
@@ -49,7 +61,11 @@ public class TitleScreenController extends ScreenController {
         stage.close();
     }
 
-    // initialise a show pop up listener for instruction button
+    public void closeInstructionScreen(ActionEvent event) throws IOException {
+        switchNodeVisibility(instructionScreen, false);
+    }
 
-    // initialise a close game listener for quit game button
+    public void closeSelectScreen(ActionEvent event) throws IOException {
+        switchNodeVisibility(selectScreen, false);
+    }
 }

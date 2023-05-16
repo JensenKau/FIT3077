@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import ninemanmorris.gamelogic.IMorrisGameInputHandler;
 import ninemanmorris.gamelogic.IMorrisGameSubscriber;
@@ -18,7 +19,7 @@ import ninemanmorris.shared.MoveType;
 /**
  * Controller class for the game screen of the game
  */
-public class GameScreenController extends RestartScreenController implements IMorrisGameSubscriber, IInputHandler {
+public class GameScreenController extends ScreenController implements IMorrisGameSubscriber, IInputHandler {
 
     @FXML
     private AnchorPane mainPane;
@@ -44,19 +45,24 @@ public class GameScreenController extends RestartScreenController implements IMo
     @FXML
     private AnchorPane pausePane;
 
+    @FXML
+    private Text playerWonTxt;
+
+    @FXML
+    private VBox resultScreen;
+
     private IMorrisGameInputHandler morrisGame;
     private boolean isRedTurn;
 
     private GameScreenGrid gameGrid;
 
+
     /**
      * Initialise the game
      */
     public void initialize() {
-        pausePane.setVisible(false);
-        for (javafx.scene.Node node : pausePane.getChildren()) {
-            node.setVisible(false);
-        }
+        switchNodeVisibility(pausePane, false);
+        switchNodeVisibility(resultScreen, false);
         this.gameGrid = new GameScreenGrid(grid, mainPane, this);
     }
 
@@ -133,12 +139,13 @@ public class GameScreenController extends RestartScreenController implements IMo
      */
     @Override
     public void updateGameEnd(boolean isRed) {
-        try {
-            FXMLLoader loader = switchScene(ScreenPage.RESULT_SCREEN.toString());
-            ResultScreenController controller = loader.getController();
-            controller.setRedWon(isRed);
-        } catch (Exception e) {
-            e.getStackTrace();
+        switchNodeVisibility(resultScreen, true);
+        if (isRed) {
+            playerWonTxt.setText("Player 1 Won!");
+            // counterTxt.setText("1 - 0");
+        } else {
+            playerWonTxt.setText("Player 2 Won!");
+            // counterTxt.setText("0 - 1");
         }
     }
 
@@ -149,25 +156,16 @@ public class GameScreenController extends RestartScreenController implements IMo
 
     @Override
     public void updateGameDraw() {
-        try {
-            switchScene(ScreenPage.RESULT_SCREEN.toString());
-        } catch (Exception e) {
-            e.getStackTrace();
-        }
+        switchNodeVisibility(resultScreen, true);
+        playerWonTxt.setText("Draw!");
     }
 
     public void pauseGame(ActionEvent event) throws IOException {
-        pausePane.setVisible(true);
-        for (javafx.scene.Node node : pausePane.getChildren()) {
-            node.setVisible(true);
-        }
+        switchNodeVisibility(pausePane, true);
     }
 
     public void resumeGame(ActionEvent event) throws IOException {
-        pausePane.setVisible(false);
-        for (javafx.scene.Node node : pausePane.getChildren()) {
-            node.setVisible(false);
-        }
+        switchNodeVisibility(pausePane, false);
     }
 
     public void backToMenu(ActionEvent event) throws IOException {
