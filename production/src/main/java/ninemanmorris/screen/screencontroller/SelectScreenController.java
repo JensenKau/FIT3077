@@ -17,6 +17,18 @@ public class SelectScreenController extends ScreenController {
   @FXML
   private Button AI;
 
+  @FXML
+    private Button cancelButton;
+
+  /**
+     * Switch to the start screen of the game
+     * @param event - ActionEvent that triggers the start of a new game
+     * @throws IOException
+     */
+    public void switchTitleScreen(ActionEvent event) throws IOException {
+      switchScene(ScreenPage.TITLE_SCREEN.toString());
+  }  
+
   /**
    * Start a new game with two human players
    * 
