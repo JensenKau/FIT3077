@@ -96,9 +96,9 @@ public class GameScreenGrid {
                 stackPanes[i][j] = new StackPane();
 
                 greenCircle.setEffect(new GaussianBlur());
-                greenCircle.setStyle("-fx-fill: #7aee11;");
+                greenCircle.setStyle("-fx-fill: #7aee11; -fx-cursor: hand;");
                 whiteCircle.setEffect(new GaussianBlur());
-                whiteCircle.setStyle("-fx-fill: #ffffff;");
+                whiteCircle.setStyle("-fx-fill: #ffffff; -fx-cursor: hand;");
                 yellowCircle.setEffect(new GaussianBlur());
                 yellowCircle.setStyle("-fx-fill: #e6cc00;");
 

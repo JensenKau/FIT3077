@@ -1,9 +1,11 @@
 package ninemanmorris.screen.screencontroller;
 
+import java.io.IOException;
 import java.util.List;
-
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
@@ -16,7 +18,7 @@ import ninemanmorris.shared.MoveType;
 /**
  * Controller class for the game screen of the game
  */
-public class GameScreenController extends ScreenController implements IMorrisGameSubscriber, IInputHandler {
+public class GameScreenController extends RestartScreenController implements IMorrisGameSubscriber, IInputHandler {
 
     @FXML
     private AnchorPane mainPane;
@@ -36,6 +38,12 @@ public class GameScreenController extends ScreenController implements IMorrisGam
     @FXML
     private Text move_quote;
 
+    @FXML
+    private Button pauseBtn;
+
+    @FXML
+    private AnchorPane pausePane;
+
     private IMorrisGameInputHandler morrisGame;
     private boolean isRedTurn;
 
@@ -45,6 +53,10 @@ public class GameScreenController extends ScreenController implements IMorrisGam
      * Initialise the game
      */
     public void initialize() {
+        pausePane.setVisible(false);
+        for (javafx.scene.Node node : pausePane.getChildren()) {
+            node.setVisible(false);
+        }
         this.gameGrid = new GameScreenGrid(grid, mainPane, this);
     }
 
@@ -142,5 +154,23 @@ public class GameScreenController extends ScreenController implements IMorrisGam
         } catch (Exception e) {
             e.getStackTrace();
         }
+    }
+
+    public void pauseGame(ActionEvent event) throws IOException {
+        pausePane.setVisible(true);
+        for (javafx.scene.Node node : pausePane.getChildren()) {
+            node.setVisible(true);
+        }
+    }
+
+    public void resumeGame(ActionEvent event) throws IOException {
+        pausePane.setVisible(false);
+        for (javafx.scene.Node node : pausePane.getChildren()) {
+            node.setVisible(false);
+        }
+    }
+
+    public void backToMenu(ActionEvent event) throws IOException {
+        switchScene(ScreenPage.TITLE_SCREEN.toString());
     }
 }
