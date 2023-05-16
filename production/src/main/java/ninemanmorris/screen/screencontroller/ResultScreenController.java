@@ -47,10 +47,10 @@ public class ResultScreenController extends ScreenController {
     public void setPlayerWonTxt() {
         if (redWon) {
             playerWonTxt.setText("Player 1 Won!");
-            counterTxt.setText("1 - 0");
+            // counterTxt.setText("1 - 0");
         } else {
             playerWonTxt.setText("Player 2 Won!");
-            counterTxt.setText("0 - 1");
+            // counterTxt.setText("0 - 1");
         }
     }
 }
