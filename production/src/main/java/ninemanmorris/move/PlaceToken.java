@@ -26,11 +26,12 @@ public class PlaceToken extends Move {
     @Override
     public Move performMove(Position pos, Position[][] board) {
         Move nextMove = null;
-        boolean posHasToken = pos.getToken() != null;
 
         if (pos.getToken() == null) {
             pos.addToken(tokens.remove(tokens.size() - 1));
-        } 
+        } else {
+            return this;
+        }
 
         if (tokens.size() > 0) {
             nextMove = this;
@@ -40,7 +41,7 @@ public class PlaceToken extends Move {
 
         if (pos.getIsMill()) {
             nextMove = new RemoveToken(getIsRedMove(), nextMove);
-        } else if (!posHasToken) {
+        } else {
             enableSwitchTurn();
         }
 
