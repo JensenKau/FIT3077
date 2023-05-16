@@ -67,7 +67,7 @@ public abstract class Move {
 
         if (redCount >= 3 && blueCount >= 3) {
             return null;
-        } else if (redCount < 3) {
+        } else if (blueCount < 3) {
             return true;
         } else {
             return false;
