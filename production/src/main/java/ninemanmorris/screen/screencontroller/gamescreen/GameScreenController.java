@@ -58,8 +58,8 @@ public class GameScreenController extends ScreenController implements IMorrisGam
     private VBox resultScreen;
 
     private IMorrisGameInputHandler morrisGame;
-    private int redWins = 0;
-    private int blueWins = 0; 
+    private static int redWins = 0;
+    private static int blueWins = 0; 
 
     private GameScreenGrid gameGrid;
 
