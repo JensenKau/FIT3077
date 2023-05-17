@@ -1,4 +1,4 @@
-package ninemanmorris.screen.screencontroller;
+package ninemanmorris.screen.screencontroller.gamescreen;
 
 public interface IInputHandler {
 

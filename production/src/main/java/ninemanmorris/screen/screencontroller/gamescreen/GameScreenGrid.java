@@ -1,4 +1,4 @@
-package ninemanmorris.screen.screencontroller;
+package ninemanmorris.screen.screencontroller.gamescreen;
 
 import java.util.ArrayList;
 import java.util.List;

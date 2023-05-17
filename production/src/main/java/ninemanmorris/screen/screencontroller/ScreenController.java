@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 import ninemanmorris.gamelogic.MorrisGameFactory;
 import ninemanmorris.player.PlayerType;
 import ninemanmorris.screen.ScreenPage;
+import ninemanmorris.screen.screencontroller.gamescreen.GameScreenController;
 
 /**
  * Abstract class for screen controllers

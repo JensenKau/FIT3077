@@ -1,4 +1,4 @@
-package ninemanmorris.screen.screencontroller;
+package ninemanmorris.screen.screencontroller.gamescreen;
 
 import java.io.IOException;
 import java.util.List;
@@ -13,6 +13,7 @@ import javafx.scene.text.Text;
 import ninemanmorris.gamelogic.IMorrisGameInputHandler;
 import ninemanmorris.gamelogic.IMorrisGameSubscriber;
 import ninemanmorris.screen.ScreenPage;
+import ninemanmorris.screen.screencontroller.ScreenController;
 import ninemanmorris.shared.MoveType;
 
 /**
