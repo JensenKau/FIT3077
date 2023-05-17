@@ -12,7 +12,10 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import ninemanmorris.gamelogic.IMorrisGameInputHandler;
 import ninemanmorris.gamelogic.IMorrisGameSubscriber;
+import ninemanmorris.gamelogic.MorrisGameFactory;
+import ninemanmorris.player.PlayerType;
 import ninemanmorris.screen.ScreenPage;
+import ninemanmorris.screen.screencontroller.Intent;
 import ninemanmorris.screen.screencontroller.ScreenController;
 import ninemanmorris.shared.MoveType;
 
@@ -55,9 +58,8 @@ public class GameScreenController extends ScreenController implements IMorrisGam
     private VBox resultScreen;
 
     private IMorrisGameInputHandler morrisGame;
-    private boolean isRedTurn;
-    private static int redWins = 0;
-    private static int blueWins = 0; 
+    private int redWins = 0;
+    private int blueWins = 0; 
 
     private GameScreenGrid gameGrid;
 
@@ -69,6 +71,13 @@ public class GameScreenController extends ScreenController implements IMorrisGam
         switchNodeVisibility(pausePane, false);
         switchNodeVisibility(resultScreen, false);
         this.gameGrid = new GameScreenGrid(grid, mainPane, this);
+    }
+
+    @Override
+    public void retrieveIntent(Intent intent) {
+        if (intent.getItem("Game Mode") == GameMode.TWO_PLAYER_MODE) {
+            this.morrisGame = MorrisGameFactory.createMorrisGame(PlayerType.HUMAN, PlayerType.HUMAN, this);
+        }
     }
 
     /**
@@ -88,14 +97,12 @@ public class GameScreenController extends ScreenController implements IMorrisGam
      */
     @Override
     public void update(boolean isRed, int redToken, int blueToken, Boolean[][] board, boolean[][] interactables, List<int[][]> mills, MoveType move, int[] selectedPos) {
-        this.isRedTurn = isRed;
-
         gameGrid.updateBoard(board);
         gameGrid.updateInteractablePos(interactables, move);
         gameGrid.updateMill(mills);
         gameGrid.updateSelectedPos(selectedPos);
 
-        updatePlayerTurn();
+        updatePlayerTurn(isRed);
         updateMoveQuote(move);
         updatePlayerToken(redToken, blueToken);
     }
@@ -108,7 +115,7 @@ public class GameScreenController extends ScreenController implements IMorrisGam
     /**
      * Updates which player's turn it is
      */
-    private void updatePlayerTurn() {
+    private void updatePlayerTurn(boolean isRedTurn) {
         if (isRedTurn) {
             turn.setText("Red's Turn");
         } else {
@@ -178,5 +185,12 @@ public class GameScreenController extends ScreenController implements IMorrisGam
         redWins = 0;
         blueWins = 0;
         switchScene(ScreenPage.TITLE_SCREEN.toString());
+    }
+
+    public void startTwoPlayerGame(ActionEvent event) throws IOException {
+        Intent intent = new Intent();
+        intent.addItems("Game Mode", GameMode.TWO_PLAYER_MODE);
+
+        switchScene(ScreenPage.GAME_SCREEN.toString(), intent);
     }
 }
