@@ -82,17 +82,6 @@ public class GameScreenController extends ScreenController implements IMorrisGam
         }
     }
 
-    /**
-     * Set a new game instance for the GameScreenController to keep 
-     * track of actions and results before starting the game
-     * @param morrisGame - The new game instance to set 
-     * GameScreenController with
-     */
-    public void setMorrisGame(IMorrisGameInputHandler morrisGame) {
-        this.morrisGame = morrisGame;
-    }
-
-
     @Override
     public void update(boolean isRed, int redToken, int blueToken, 
                         Boolean[][] board, boolean[][] interactables, 
