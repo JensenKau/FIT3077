@@ -4,7 +4,8 @@ import ninemanmorris.gamelogic.Position;
 import ninemanmorris.shared.MoveType;
 
 /**
- * Represents a type of move that the player can make in the 9 men's morris game
+ * Represents a type of move that the player can make in the 9 men's 
+ * morris game
  */
 public abstract class Move {
 
@@ -16,43 +17,56 @@ public abstract class Move {
 
     /**
      * The move constructor to instantiate a Move object
-     * @param isRedMove - true if this move belongs to the red player, false otherwise
+     * @param isRedMove - true if this move belongs to the red player, 
+     * false otherwise
      */
     public Move(boolean isRedMove) {
         this.isRedMove = isRedMove;
     }
     
     /**
-     * Perform the current move and returns the next move that the player can make
-     * @param pos - The position that the player has selected
-     * @return The next move that the player can make
+     * Perform the current move and returns the next move that the 
+     * player can make
+     * @param pos - the position that the player has selected
+     * @return the next move that the player can make
      */
     public abstract Move performMove(Position pos, Position[][] board);
 
     /**
-     * Get a list of positions that can be selected for the current move
-     * @param positions - The game board
-     * @return The list of positions that can be selected for the current move
+     * Get a list of positions that can be selected for the current 
+     * move
+     * @param positions - the game board
+     * @return the list of positions that can be selected for the 
+     * current move
      */
     public abstract boolean[][] previewMove(Position[][] positions);
 
     /**
      * Validate if the current move is still valid
-     * @param positions - The game board
-     * @return Returns itself if the move is still valid, return a new move otherwise
+     * @param positions - the game board
+     * @return returns itself if the move is still valid, return a new 
+     * move otherwise
      */
     public abstract Move validateCurrentMove(Position[][] positions);
 
     /**
      * Get the quote specific for this move
-     * @return A string representation of the quote for this move
+     * @return a string representation of the quote for this move
      */
     public abstract MoveType getMoveType();
 
+    /**
+     * Get the winner of the game  
+     * @param positions - position table containing all positions of 
+     * the board
+     * @return true if red token (player 1) wins and false if blue 
+     * token (player 2) wins
+     */
     public Boolean getWinPlayer(Position[][] positions) {
         int redCount = 0;
         int blueCount = 0;
 
+        // count the number of red and blue tokens on the board
         for (int i = 0; i < positions.length; i++) {
             for (int j = 0; j < positions[i].length; j++) {
                 if (positions[i][j] != null && positions[i][j].getToken() != null) {
@@ -65,7 +79,11 @@ public abstract class Move {
             }
         }
 
+        // check winning condition which is when one player has 
+        // less than three tokens so the other player wins
         if (redCount >= 3 && blueCount >= 3) {
+            // if there both players have at least 3 tokens, continue
+            // game
             return null;
         } else if (blueCount < 3) {
             return true;
@@ -74,6 +92,10 @@ public abstract class Move {
         }
     }
 
+    /**
+     * Get selected positions within a move
+     * @return an integer array of positions selected
+     */
     public int[] getSelectedPos() {
         return null;
     }
@@ -88,8 +110,8 @@ public abstract class Move {
 
     /**
      * Pre-select the row and col for this move
-     * @param row - The row on the board
-     * @param col - The col on the board
+     * @param row - the row on the board
+     * @param col - the col on the board
      */
     public void setMovePosition(int row, int col) {
         this.row = row;
@@ -120,16 +142,24 @@ public abstract class Move {
 
     /**
      * Get if the current move is a red move
-     * @return true if the current move belonngs to red player, false otherwise
+     * @return true if the current move belonngs to red player, 
+     * false otherwise
      */
     protected boolean getIsRedMove() {
         return this.isRedMove;
     }
 
+    /**
+     * Get if the game has come to a draw
+     * @return true if the game has reached a draw, false otherwise
+     */
     public boolean getIsDraw() {
         return isDraw;
     }
 
+    /**
+     * Set that the game has come to a draw
+     */
     protected void enableDraw() {
         isDraw = true;
     }
