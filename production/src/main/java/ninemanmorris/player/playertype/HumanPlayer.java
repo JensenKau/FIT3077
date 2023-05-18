@@ -9,7 +9,8 @@ public class HumanPlayer extends Player {
 
     /**
      * Constructor for HumanPlayer
-     * @param isRed - true if the current player is red player, false otherwise
+     * @param isRed - true if the current player is red player, false 
+     * otherwise
      */
     public HumanPlayer(boolean isRed) {
         super(isRed);

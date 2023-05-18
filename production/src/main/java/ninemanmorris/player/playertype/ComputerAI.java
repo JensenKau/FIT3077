@@ -24,7 +24,8 @@ public class ComputerAI extends Player {
 
     /**
      * Constructor for ComputerAI
-     * @param isRed - true if the current player is a red player, false otherwise
+     * @param isRed - true if the current player is a red player, 
+     * false otherwise
      */
     public ComputerAI(boolean isRed) {
         super(isRed);

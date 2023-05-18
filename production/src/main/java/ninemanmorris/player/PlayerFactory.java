@@ -17,7 +17,8 @@ public class PlayerFactory {
     /**
      * Creates a player based on the type of player specified
      * @param playerType - The type of player
-     * @param isRed - true if the player is a red player, false otherwise
+     * @param isRed - true if the player is a red player, false 
+     * otherwise
      * @return The newly created player based on the type specified
      */
     public static Player createPlayer(PlayerType playerType, boolean isRed) {

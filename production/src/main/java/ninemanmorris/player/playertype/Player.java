@@ -19,7 +19,8 @@ public abstract class Player {
 
     /**
      * Player constructor for creating Player
-     * @param isRed - true if the player is a red player, false otherwise
+     * @param isRed - true if the player is a red player, false 
+     * otherwise
      */
     public Player(boolean isRed) {
         this.isRed = isRed;
@@ -31,6 +32,10 @@ public abstract class Player {
         }
     }
 
+    /**
+     * Get the player's token count
+     * @return the number of tokens player has left
+     */
     public int getTokenCount() {
         return tokens.size();
     }
@@ -45,12 +50,16 @@ public abstract class Player {
 
     /**
      * Get the move that the player can make currently
-     * @return The move that the player can make currently
+     * @return the move that the player can make currently
      */
     public Move getMove() {
         return currentMove;
     }
 
+    /**
+     * Get the type of move the player can make
+     * @return an enum representing the move type
+     */
     public MoveType getMoveType() {
         return currentMove.getMoveType();
     }
@@ -63,7 +72,7 @@ public abstract class Player {
 
     /**
      * Set the new move that the player can make
-     * @param move - The new move that the player can make
+     * @param move - the new move that the player can make
      */
     public void setMove(Move move) {
         this.currentMove = move;
