@@ -9,7 +9,8 @@ public class Token {
 
     /**
      * Constructor for creating a Token
-     * @param isRedPlayer - true if the token belongs to a red player, false otherwise
+     * @param isRedPlayer - true if the token belongs to a red player, 
+     * false otherwise
      */
     public Token(boolean isRedPlayer) {
         this.isRedPlayer = isRedPlayer;
@@ -17,7 +18,8 @@ public class Token {
 
     /**
      * Get if the token belongs to a red player
-     * @return true if the token belongs to a red player, false otherwise
+     * @return true if the token belongs to a red player, false 
+     * otherwise
      */
     public boolean getIsRedPlayer() {
         return this.isRedPlayer;

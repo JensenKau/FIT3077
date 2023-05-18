@@ -21,7 +21,8 @@ public abstract class MorrisGame implements IMorrisGameInputHandler {
      * Constructor to create a MorrisGame
      * @param p1 - Player 1 (red player)
      * @param p2 - Player 2 (blue player)
-     * @param subscriber - The subscriber who will be observing this class
+     * @param subscriber - The subscriber who will be observing this 
+     * class
      */
     public MorrisGame(Player p1, Player p2, IMorrisGameSubscriber subscriber) {
         subscribers = new ArrayList<>();
@@ -33,7 +34,9 @@ public abstract class MorrisGame implements IMorrisGameInputHandler {
     }
 
     /**
-     * Add a subscriber to this class
+     * Add a subscriber to this class and update the subscriber with 
+     * the state 
+     * of the board
      * @param subscriber - The new subscriber
      */
     public void addSubscriber(IMorrisGameSubscriber subscriber) {
@@ -51,7 +54,8 @@ public abstract class MorrisGame implements IMorrisGameInputHandler {
     }
 
     /**
-     * Update the subscribers subscribed to this class
+     * Update all of the subscribers subscribed to this class with the 
+     * new state of the board
      */ 
     public void udpateSubscribers() {
         for (IMorrisGameSubscriber subscriber : subscribers) {
@@ -68,18 +72,32 @@ public abstract class MorrisGame implements IMorrisGameInputHandler {
         }
     }
 
+    /**
+     * Declare whether the winner of the game is the red token 
+     * (player 1) or blue token (player 2) for all subscribers 
+     * subscribed to this class
+     * @param isRed - true if the winner is the red token (player 1)
+     * and false if it is not
+     */
     protected void delcareWinner(boolean isRed) {
         for (IMorrisGameSubscriber subscriber : subscribers) {
             subscriber.updateGameEnd(isRed);
         }
     }
 
+    /**
+     * Declare that the game has come to a draw for all subscribers 
+     * subscribed to this class
+     */
     protected void declareDraw() {
         for (IMorrisGameSubscriber subscriber : subscribers) {
             subscriber.updateGameDraw();
         }
     }
 
+    /**
+     * Validate and set the moves for both players
+     */
     protected void validatePlayerMove() {
         players[0].setMove(gameBoard.validatePlayerMove(players[0].getMove()));
         players[1].setMove(gameBoard.validatePlayerMove(players[1].getMove()));
