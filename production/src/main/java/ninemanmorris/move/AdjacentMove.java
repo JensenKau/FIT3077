@@ -38,8 +38,8 @@ public class AdjacentMove extends Move {
 
         } else {
             // validity check to figure out future move if there is any
-            
-            // no moving token to position that is occupied
+
+            // move token that is selected
             if (pos.getToken() != null && pos.getIsRedToken() == getIsRedMove()) {
                 selectedPos = pos;
                 output = this;
