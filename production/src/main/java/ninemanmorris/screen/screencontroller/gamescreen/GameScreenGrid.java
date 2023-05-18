@@ -73,10 +73,10 @@ public class GameScreenGrid {
                 if (clickedNode != null) {
                     int rowIndex = GridPane.getRowIndex(clickedNode);
                     int colIndex = GridPane.getColumnIndex(clickedNode);
-                    System.out.println("clicked on: " + rowIndex + " " + colIndex);
+                    inputHandler.handleInput(rowIndex, colIndex);
+
                     mediaPlayer.seek(mediaPlayer.getStartTime());
                     mediaPlayer.play();
-                    inputHandler.handleInput(rowIndex, colIndex);
                 }
             }
         };

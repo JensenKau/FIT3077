@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import ninemanmorris.screen.ScreenPage;
+import ninemanmorris.screen.screencontroller.gamescreen.GameMode;
 import javafx.scene.layout.VBox;
 
 /**
@@ -42,6 +43,13 @@ public class TitleScreenController extends ScreenController {
     public void loadStartScreen(Stage stage) throws IOException {
         setStage(stage);
         switchScene(ScreenPage.TITLE_SCREEN.toString());
+    }
+
+    public void startTwoPlayerGame(ActionEvent event) throws IOException {
+        Intent intent = new Intent();
+        intent.addItems("Game Mode", GameMode.TWO_PLAYER_MODE);
+
+        switchScene(ScreenPage.GAME_SCREEN.toString(), intent);
     }
 
     public void selectPlayer(ActionEvent event) throws IOException {

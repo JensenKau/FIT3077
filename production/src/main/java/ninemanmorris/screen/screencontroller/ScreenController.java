@@ -2,18 +2,12 @@ package ninemanmorris.screen.screencontroller;
 
 import java.io.IOException;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import ninemanmorris.gamelogic.MorrisGameFactory;
-import ninemanmorris.player.PlayerType;
-import ninemanmorris.screen.ScreenPage;
-import ninemanmorris.screen.screencontroller.gamescreen.GameScreenController;
-
 /**
  * Abstract class for screen controllers
  */
@@ -38,11 +32,13 @@ public abstract class ScreenController {
      * @return FXMLLoader instance 
      * @throws IOException
      */
-    public FXMLLoader switchScene(String name) throws IOException {
+    public FXMLLoader switchScene(String name, Intent intent) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(name));
         Parent root = loader.load();
         Scene scene = new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT);
         ScreenController controller = loader.getController();
+
+        controller.retrieveIntent(intent);
 
         controller.setStage(stage);
         stage.setScene(scene);
@@ -50,12 +46,13 @@ public abstract class ScreenController {
 
         return loader;
     }
-    
-    public void startTwoPlayerGame(ActionEvent event) throws IOException {
-        FXMLLoader loader = switchScene(ScreenPage.GAME_SCREEN.toString());
-        GameScreenController controller = loader.getController();
 
-        controller.setMorrisGame(MorrisGameFactory.createMorrisGame(PlayerType.HUMAN, PlayerType.HUMAN, controller));
+    public FXMLLoader switchScene(String name) throws IOException {
+        return switchScene(name, new Intent());
+    }
+
+    public void retrieveIntent(Intent intent) {
+
     }
 
     public void switchNodeVisibility(Pane node, boolean visible) {
