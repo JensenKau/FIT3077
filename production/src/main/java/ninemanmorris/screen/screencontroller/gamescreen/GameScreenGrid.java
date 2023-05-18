@@ -30,8 +30,9 @@ public class GameScreenGrid {
     private static final int GREEN_LIGHT_INDEX = 0;
     private static final int WHITE_LIGHT_INDEX = 1;
     private static final int YELLOW_LIGHT_INDEX = 2;
-    private static final int RED_INDEX = 3;
-    private static final int BLUE_INDEX = 4;
+    private static final int RED_LIGHT_INDEX = 3;
+    private static final int RED_INDEX = 4;
+    private static final int BLUE_INDEX = 5;
 
     private static final int TOKEN_WIDTH_HEIGHT = 40;
     private static final int CIRCLE_SIZE = 27;
@@ -44,32 +45,52 @@ public class GameScreenGrid {
     private MediaPlayer mediaPlayer;
 
 
-    public GameScreenGrid(GridPane uiGrid, Pane parentPane, IInputHandler inputHandler) {
+    /**
+     * GameScreenGrid constructor to create a GameScreenGrid object
+     * @param uiGrid - the grid of the dame board 
+     * @param parentPane - the parent pane of the fxml file
+     * @param inputHandler
+     */
+    public GameScreenGrid(GridPane uiGrid, Pane parentPane, 
+                        IInputHandler inputHandler) {
         this.uiGrid = uiGrid;
         this.stackPanes = new StackPane[7][7];
         this.parentPane = parentPane;
         this.lines = new ArrayList<>(DEFAULT_LINE_AMT);
         this.inputHandler = inputHandler;
 
-        this.mediaPlayer = new MediaPlayer(new Media(getClass().getResource(PICKUP_AUDIO).toExternalForm()));
+        this.mediaPlayer = new MediaPlayer(new Media(getClass()
+                                                    .getResource(PICKUP_AUDIO)
+                                                    .toExternalForm()));
 
         createStackPanes();
         createLines();
 
-        this.uiGrid.addEventHandler(MouseEvent.MOUSE_CLICKED, createGridClickHandler());
+        this.uiGrid.addEventHandler(MouseEvent.MOUSE_CLICKED, 
+                                    createGridClickHandler());
     }
 
+    /**
+     * Create event handler to handle when player clicks the grid
+     * @return event handler to handle grid clicks
+     */
     private EventHandler<MouseEvent> createGridClickHandler() {
         return new EventHandler<MouseEvent>() {
 
+            /**
+             * Callback method for event handler to handle a MouseEvent
+             * or a click
+             */
             @Override
             public void handle(MouseEvent event) {
                 Node clickedNode = event.getPickResult().getIntersectedNode();
 
+                // only handle clicks within the ui grid
                 if (clickedNode.getParent() != uiGrid) {
                     clickedNode = clickedNode.getParent();
                 }
 
+                // handle input if player clicks within the grid
                 if (clickedNode != null) {
                     int rowIndex = GridPane.getRowIndex(clickedNode);
                     int colIndex = GridPane.getColumnIndex(clickedNode);
@@ -82,10 +103,19 @@ public class GameScreenGrid {
         };
     }
 
+    /**
+     * Create stack panes within the grid together with relevant UI
+     * elements
+     */
     private void createStackPanes() {
-        Image redTokenImg = new Image(getClass().getResource(RED_TOKEN_IMG).toExternalForm());
-        Image blueTokenImg = new Image(getClass().getResource(BLUE_TOKEN_IMG).toExternalForm());
+        // get images
+        Image redTokenImg = new Image(getClass().getResource(RED_TOKEN_IMG)
+                                        .toExternalForm()); 
+        Image blueTokenImg = new Image(getClass().getResource(BLUE_TOKEN_IMG)
+                                        .toExternalForm());
 
+        // for each stack pane place all possible ui elements in them 
+        // which will be be display based on the display logic                                
         for (int i = 0; i < stackPanes.length; i++) {
             for (int j = 0; j < stackPanes[i].length; j++) {
                 ImageView red = new ImageView(redTokenImg);
@@ -93,6 +123,7 @@ public class GameScreenGrid {
                 Circle greenCircle = new Circle(CIRCLE_SIZE);
                 Circle whiteCircle = new Circle(CIRCLE_SIZE);
                 Circle yellowCircle = new Circle(CIRCLE_SIZE);
+                Circle redCircle = new Circle(CIRCLE_SIZE);
                 stackPanes[i][j] = new StackPane();
 
                 greenCircle.setEffect(new GaussianBlur());
@@ -101,6 +132,8 @@ public class GameScreenGrid {
                 whiteCircle.setStyle("-fx-fill: #ffffff; -fx-cursor: hand;");
                 yellowCircle.setEffect(new GaussianBlur());
                 yellowCircle.setStyle("-fx-fill: #e6cc00;");
+                redCircle.setEffect(new GaussianBlur());
+                redCircle.setStyle("-fx-fill: #D64141;");
 
                 red.setFitWidth(TOKEN_WIDTH_HEIGHT);
                 red.setFitHeight(TOKEN_WIDTH_HEIGHT);
@@ -111,6 +144,7 @@ public class GameScreenGrid {
                     greenCircle,
                     whiteCircle,
                     yellowCircle,
+                    redCircle,
                     red,
                     blue
                 });
@@ -124,6 +158,10 @@ public class GameScreenGrid {
         }
     }
 
+    /**
+     * Create all possible lines on the UI grid to represent mills,
+     * display of mills will be handled by display logic
+     */
     private void createLines() {
         while (lines.size() < 20) {
             Line currentLine = new Line(0, 0, 0, 0);
@@ -138,61 +176,117 @@ public class GameScreenGrid {
         this.parentPane.getChildren().addAll(0, lines);
     }
 
+    /**
+     * Update the token positions on the board
+     * @param newState - boolean array representing the position of
+     * tokens on the board
+     */
     public void updateBoard(Boolean[][] newState) {
         for (int i = 0; i < newState.length; i++) {
             for (int j = 0; j < newState[i].length; j++) {
                 if (newState[i][j] == null) {
-                    stackPanes[i][j].getChildren().get(RED_INDEX).setVisible(false);
-                    stackPanes[i][j].getChildren().get(BLUE_INDEX).setVisible(false);
+                    stackPanes[i][j].getChildren().get(RED_INDEX)
+                    .setVisible(false);
+                    stackPanes[i][j].getChildren().get(BLUE_INDEX)
+                    .setVisible(false);
                 } else {
-                    stackPanes[i][j].getChildren().get(RED_INDEX).setVisible(newState[i][j]);
-                    stackPanes[i][j].getChildren().get(BLUE_INDEX).setVisible(!newState[i][j]);
+                    stackPanes[i][j].getChildren().get(RED_INDEX)
+                    .setVisible(newState[i][j]);
+                    stackPanes[i][j].getChildren().get(BLUE_INDEX)
+                    .setVisible(!newState[i][j]);
                 }
             }
         }
     }
 
+    /**
+     * Update the lighting on the boar based on the move 
+     * @param newState - boolean array representing the positions to be
+     * lit up
+     * @param movetype - type of move during that turn of the game
+     */
     public void updateInteractablePos(boolean[][] newState, MoveType movetype) {
         for (int i = 0; i < newState.length; i++) {
             for (int j = 0; j < newState[i].length; j++) {
                 if (movetype == MoveType.SELECT_PHASE) {
-                    stackPanes[i][j].getChildren().get(WHITE_LIGHT_INDEX).setVisible(newState[i][j]);
-                    stackPanes[i][j].getChildren().get(GREEN_LIGHT_INDEX).setVisible(false);
+                    stackPanes[i][j].getChildren().get(WHITE_LIGHT_INDEX)
+                    .setVisible(newState[i][j]);
+                    stackPanes[i][j].getChildren().get(GREEN_LIGHT_INDEX)
+                    .setVisible(false);
+                    stackPanes[i][j].getChildren().get(RED_LIGHT_INDEX)
+                    .setVisible(false);
+                } else if (movetype == MoveType.REMOVE_PHASE) {
+                    stackPanes[i][j].getChildren().get(WHITE_LIGHT_INDEX)
+                    .setVisible(false);
+                    stackPanes[i][j].getChildren().get(GREEN_LIGHT_INDEX)
+                    .setVisible(false);
+                    stackPanes[i][j].getChildren().get(RED_LIGHT_INDEX)
+                    .setVisible(newState[i][j]);
                 } else {
-                    stackPanes[i][j].getChildren().get(WHITE_LIGHT_INDEX).setVisible(false);
-                    stackPanes[i][j].getChildren().get(GREEN_LIGHT_INDEX).setVisible(newState[i][j]);
+                    stackPanes[i][j].getChildren().get(WHITE_LIGHT_INDEX)
+                    .setVisible(false);
+                    stackPanes[i][j].getChildren().get(GREEN_LIGHT_INDEX)
+                    .setVisible(newState[i][j]);
+                    stackPanes[i][j].getChildren().get(RED_LIGHT_INDEX)
+                    .setVisible(false);
                 }
             }
         }
     }
 
+    /**
+     * Update the lighting when a token has been selected
+     * @param newPos - position of token which has been selected
+     */
     public void updateSelectedPos(int[] newPos) {
+        // for every selected position, light up the yellor circle
+        // at that position
         for (int i = 0; i < stackPanes.length; i++) {
             for (int j = 0; j < stackPanes[0].length; j++) {
                 if (newPos != null && i == newPos[0] && j == newPos[1]) {
-                    stackPanes[i][j].getChildren().get(YELLOW_LIGHT_INDEX).setVisible(true);
+                    stackPanes[i][j].getChildren().get(YELLOW_LIGHT_INDEX)
+                    .setVisible(true);
                 } else {
-                    stackPanes[i][j].getChildren().get(YELLOW_LIGHT_INDEX).setVisible(false);
+                    stackPanes[i][j].getChildren().get(YELLOW_LIGHT_INDEX)
+                    .setVisible(false);
                 }
             }
         }
     }
 
+    /**
+     * Update the mill lighting on the board
+     * @param newMills integer list of mills on the board
+     */
     public void updateMill(List<int[][]> newMills) {
         for (Line line : lines) {
             line.setVisible(false);
         }
 
+        // for every mill calculate position of mill and add the mill 
+        // line
         for (int i = 0; i < newMills.size(); i++) {
             int[][] currentTriplets = newMills.get(i);
-            double startX = Math.min(currentTriplets[0][1], Math.min(currentTriplets[1][1], currentTriplets[2][1]));
-            double startY = Math.min(currentTriplets[0][0], Math.min(currentTriplets[1][0], currentTriplets[2][0]));
-            double endX = Math.max(currentTriplets[0][1], Math.max(currentTriplets[1][1], currentTriplets[2][1]));
-            double endY = Math.max(currentTriplets[0][0], Math.max(currentTriplets[1][0], currentTriplets[2][0]));
+            double startX = Math.min(currentTriplets[0][1], 
+                                    Math.min(currentTriplets[1][1], 
+                                            currentTriplets[2][1]));
+            double startY = Math.min(currentTriplets[0][0], 
+                                    Math.min(currentTriplets[1][0], 
+                                            currentTriplets[2][0]));
+            double endX = Math.max(currentTriplets[0][1], 
+                                    Math.max(currentTriplets[1][1], 
+                                            currentTriplets[2][1]));
+            double endY = Math.max(currentTriplets[0][0], 
+                                    Math.max(currentTriplets[1][0], 
+                                            currentTriplets[2][0]));
             
             Line currentLine = lines.get(i);
-            double width = Math.min(uiGrid.getColumnConstraints().get(0).getPrefWidth(), uiGrid.getPrefWidth() / uiGrid.getColumnCount());
-            double height = Math.min(uiGrid.getRowConstraints().get(0).getPrefHeight(), uiGrid.getPrefHeight() / uiGrid.getRowCount());
+            double width = Math.min(uiGrid.getColumnConstraints().get(0)
+                                    .getPrefWidth(), 
+                                    uiGrid.getPrefWidth() / uiGrid.getColumnCount());
+            double height = Math.min(uiGrid.getRowConstraints().get(0)
+                                    .getPrefHeight(), 
+                                    uiGrid.getPrefHeight() / uiGrid.getRowCount());
 
             startX = (startX * width) + (width / 2) + uiGrid.getLayoutX();
             startY = (startY * height) + (height / 2) + uiGrid.getLayoutY();

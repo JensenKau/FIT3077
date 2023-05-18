@@ -29,11 +29,15 @@ public class App extends Application {
     
     /**
      * Callback method invoked when the game has launched
-     * @param stage - A Stage instance for the game GUI
+     * @param stage - a Stage instance for the game GUI
      */
     @Override
     public void start(Stage stage) throws IOException {
-        sound = new Media(getClass().getResource("/audio/bgmusic_short.mp3").toExternalForm());
+
+        // add looping background music
+        sound = new Media(getClass()
+                        .getResource("/audio/bgmusic_short.mp3")
+                        .toExternalForm());
         mediaPlayer = new MediaPlayer(sound);
         mediaPlayer.setVolume(0.2);
         mediaPlayer.setOnEndOfMedia(new Runnable() {
@@ -43,11 +47,13 @@ public class App extends Application {
         });
         mediaPlayer.play();
 
+        // style the stage
         Image icon = new Image("file:src/main/resources/img/9mm_token_blue.png");
         stage.setTitle("Nine Mens' Morris");
         stage.getIcons().add(icon);
         stage.setResizable(false);
 
+        // load title screen
         TitleScreenController controller = new TitleScreenController();
         controller.loadStartScreen(stage);
     }

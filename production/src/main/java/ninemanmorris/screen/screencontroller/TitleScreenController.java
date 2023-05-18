@@ -30,6 +30,9 @@ public class TitleScreenController extends ScreenController {
     @FXML
     private VBox selectScreen;
 
+    /**
+     * Initialise the game and hide the instructions and select screen
+     */
     public void initialize() {
         switchNodeVisibility(instructionScreen, false);
         switchNodeVisibility(selectScreen, false);
@@ -45,6 +48,12 @@ public class TitleScreenController extends ScreenController {
         switchScene(ScreenPage.TITLE_SCREEN.toString());
     }
 
+    /**
+     * Start a two human-player game
+     * @param event - ActionEvent to detect when to start a two-player 
+     * game
+     * @throws IOException
+     */
     public void startTwoPlayerGame(ActionEvent event) throws IOException {
         Intent intent = new Intent();
         intent.addItems("Game Mode", GameMode.TWO_PLAYER_MODE);
@@ -52,12 +61,45 @@ public class TitleScreenController extends ScreenController {
         switchScene(ScreenPage.GAME_SCREEN.toString(), intent);
     }
 
+    /**
+     * Select whether the other player is a human or a computer
+     * @param event - ActionEvent to detect when to start a two-player 
+     * game with a human or computer
+     * @throws IOException
+     */
     public void selectPlayer(ActionEvent event) throws IOException {
         switchNodeVisibility(selectScreen, true);
     }
 
+
+    /**
+     * Method to hide the select screen of the game
+     * @param event - ActionEvent to detect when to close the select 
+     * screen of the game
+     * @throws IOException
+     */
+    public void closeSelectScreen(ActionEvent event) throws IOException {
+        switchNodeVisibility(selectScreen, false);
+    }
+
+    /**
+     * Method to display the instructions of the game
+     * @param event - ActionEvent to detect when to display the 
+     * instructions of the game
+     * @throws IOException
+     */
     public void displayInstruction(ActionEvent event) throws IOException {
         switchNodeVisibility(instructionScreen, true);
+    }
+
+    /**
+     * Method to hide the select screen of the game
+     * @param event - ActionEvent to detect when to close the 
+     * instructions screen of the game
+     * @throws IOException
+     */
+    public void closeInstructionScreen(ActionEvent event) throws IOException {
+        switchNodeVisibility(instructionScreen, false);
     }
 
     /**
@@ -67,13 +109,5 @@ public class TitleScreenController extends ScreenController {
     public void quitGame(ActionEvent event) {
         Stage stage = (Stage) quitGameButton.getScene().getWindow();
         stage.close();
-    }
-
-    public void closeInstructionScreen(ActionEvent event) throws IOException {
-        switchNodeVisibility(instructionScreen, false);
-    }
-
-    public void closeSelectScreen(ActionEvent event) throws IOException {
-        switchNodeVisibility(selectScreen, false);
     }
 }
