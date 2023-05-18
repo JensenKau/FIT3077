@@ -7,8 +7,8 @@ public interface IMorrisGameInputHandler {
     
     /**
      * Insert input from user into morris game
-     * @param row - The row that the player selected
-     * @param col - The col that the player selected
+     * @param row - the row that the player selected
+     * @param col - the col that the player selected
      */
     void handleInput(int row, int col);
 }

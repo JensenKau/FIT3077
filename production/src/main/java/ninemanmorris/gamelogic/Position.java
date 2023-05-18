@@ -13,8 +13,8 @@ public class Position {
 
     /**
      * Construction for creating a Position
-     * @param row - Row of the position
-     * @param col - Column of the position
+     * @param row - row of the position
+     * @param col - column of the position
      */
     public Position(int row, int col) {
         this.row = row;
@@ -31,7 +31,7 @@ public class Position {
 
     /**
      * Get the token that is placed on the current position
-     * @return The token that is placed on the current position
+     * @return the token that is placed on the current position
      */
     public Token getToken() {
         return token;
@@ -39,7 +39,7 @@ public class Position {
 
     /**
      * Add a token to the current position
-     * @param token - The token to be added
+     * @param token - the token to be added
      */
     public void addToken(Token token) {
         this.token = token;
@@ -47,7 +47,7 @@ public class Position {
 
     /**
      * Remove the token placed on the current position
-     * @return The token to be removed
+     * @return the token to be removed
      */
     public Token removeToken() {
         Token currToken = token;
@@ -59,7 +59,7 @@ public class Position {
 
     /**
      * Get the vertical neighbours of this position
-     * @return The vertical neighbours of this position
+     * @return the vertical neighbours of this position
      */
     public Position[] getVerticalNeighbours() {
         return this.verticalNeighbours;
@@ -67,7 +67,7 @@ public class Position {
 
     /**
      * Set the vertical neighbours of this position 
-     * @param positions The vertical neighbours of this position
+     * @param positions the vertical neighbours of this position
      */
     public void setVerticalNeighbours(Position[] positions) {
         this.verticalNeighbours = positions;
@@ -75,7 +75,7 @@ public class Position {
 
     /**
      * Get the horizontal neighbours of this position
-     * @return The horizontal neighbours of this position
+     * @return the horizontal neighbours of this position
      */
     public Position[] getHorizontalNeighbours() {
         return this.horizontalNeighbours;
@@ -83,7 +83,7 @@ public class Position {
 
     /**
      * Set the horizontal neighbours of this position
-     * @param positions The horizontal neighbours of this position
+     * @param positions the horizontal neighbours of this position
      */
     public void setHorizontalNeighbours(Position[] positions) {
         this.horizontalNeighbours = positions;

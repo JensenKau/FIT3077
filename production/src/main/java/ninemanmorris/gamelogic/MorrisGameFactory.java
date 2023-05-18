@@ -23,7 +23,7 @@ public class MorrisGameFactory {
      * @param p2 - the player type of player 2 (blue player)
      * @param subscriber - the subscriber that wants to subscribe to 
      * the morris game
-     * @return The newly created MorrisGame based on the specified 
+     * @return the newly created MorrisGame based on the specified 
      * parameters
      */
     public static MorrisGame createMorrisGame(PlayerType p1, PlayerType p2, 

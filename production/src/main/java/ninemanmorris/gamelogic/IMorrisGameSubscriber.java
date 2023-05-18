@@ -12,10 +12,10 @@ public interface IMorrisGameSubscriber {
 
     /**
      * This method will be called whenever a board is in a new state
-     * @param isRed - The current player turn
-     * @param board - The board of tokens, where true represents red, 
+     * @param isRed - the current player turn
+     * @param board - the board of tokens, where true represents red, 
      * false represents blue and null represents no token
-     * @param moveQuote - Quote for the current move to be displayed 
+     * @param moveQuote - quote for the current move to be displayed 
      * on the GUI
      */
     void update(boolean isRed, int redToken, int blueToken, Boolean[][] board, 
@@ -24,7 +24,7 @@ public interface IMorrisGameSubscriber {
 
     /**
      * This method will be called when the game ends
-     * @param isRed - The player that won
+     * @param isRed - the player that won
      */
     void updateGameEnd(boolean isRed);
 

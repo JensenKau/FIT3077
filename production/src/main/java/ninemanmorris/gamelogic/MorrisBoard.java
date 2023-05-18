@@ -50,11 +50,11 @@ public class MorrisBoard {
     /**
      * Helper method to identify the vertical or horizontal neighbour 
      * of the current position
-     * @param row - The row to identify
-     * @param col - The col to identify
+     * @param row - the row to identify
+     * @param col - the col to identify
      * @param isRow - true to identify vertical, false to identify 
      * horizontal
-     * @return The array of neighbour position for the current 
+     * @return the array of neighbour position for the current 
      * position
      */
     private Position[] identifyNeighbour(int row, int col, boolean isRow) {
@@ -109,9 +109,9 @@ public class MorrisBoard {
 
     /**
      * Helper method to create position in a circular manner
-     * @param row - The row to start
-     * @param col - The col to start
-     * @param step - The amount of steps to take 
+     * @param row - the row to start
+     * @param col - the col to start
+     * @param step - the amount of steps to take 
      */
     private void circularCreatePositions(int row, int col, int step) {
         int progress = 1;
@@ -141,8 +141,8 @@ public class MorrisBoard {
 
     /**
      * Execute the given move (without row and col)
-     * @param move - The move to execute
-     * @return The next move that can be executed
+     * @param move - the move to execute
+     * @return the next move that can be executed
      */
     public Move executeMove(Move move) {
         int[] coordinates = move.getMovePosition();
@@ -151,10 +151,10 @@ public class MorrisBoard {
 
     /**
      * Execute the given move (with row and col)
-     * @param move - The move to execute
-     * @param row - The row of the position
-     * @param col - The col of the position
-     * @return The next move that can be executed
+     * @param move - the move to execute
+     * @param row - the row of the position
+     * @param col - the col of the position
+     * @return the next move that can be executed
      */
     public Move executeMove(Move move, int row, int col) {
         Position position = null;
@@ -181,8 +181,8 @@ public class MorrisBoard {
 
     /**
      * Validates the move of the current player before execution
-     * @param move - Move to be validated
-     * @return The move that has been validated to be executed
+     * @param move - move to be validated
+     * @return the move that has been validated to be executed
      */
     public Move validatePlayerMove(Move move) {
         return move.validateCurrentMove(board);
@@ -221,7 +221,7 @@ public class MorrisBoard {
 
     /**
      * Get the selected position in a move
-     * @param move - Move to get the selected position from
+     * @param move - move to get the selected position from
      * @return an array of integers representing positions that
      * have been selected during a move
      */
@@ -233,7 +233,7 @@ public class MorrisBoard {
      * Generate a boolean table that represents on the token placed on 
      * the board, where true represents red token, false represent 
      * blue and null represent blank
-     * @return A table of tokens
+     * @return a table of tokens
      */
     public Boolean[][] generatePlayerBoard() {
         Boolean[][] output = new Boolean[BOARD_LENGTH][BOARD_WIDTH];
@@ -251,8 +251,8 @@ public class MorrisBoard {
 
     /**
      * Preview the possible moves by the player for a current move
-     * @param move - Move to be previewed
-     * @return Boolean table of positions to be lit up in the move 
+     * @param move - move to be previewed
+     * @return boolean table of positions to be lit up in the move 
      * preview
      */
     public boolean[][] generatePreviewMove(Move move) {

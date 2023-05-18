@@ -10,8 +10,8 @@ public class LocalGame extends MorrisGame {
 
     /**
      * LocalGame constructor
-     * @param p1 - The first player (red player)
-     * @param p2 - The second player (blue player)
+     * @param p1 - the first player (red player)
+     * @param p2 - the second player (blue player)
      * @param subscriber - the subscribers that will be listening to 
      * this game
      */
