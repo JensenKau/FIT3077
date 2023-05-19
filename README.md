@@ -9,10 +9,10 @@ Wong Yi Zhen Nicholas (325577869) ywon0083@student.monash.edu
 Nine men morris game with amazing graphics.
 
 # Design Rationale
-Please see the FIT3077_Software_Engineering_Architecture_Design_Sprint_Two.pdf for the Design Rationale.
+Please see the docs/sprint 3/FIT3077_Software_Engineering_Architecture_Design_Sprint_Three.pdf  for the Design Rationale.
 
 # UML
-Please see the UML class diagram in the FIT3077 - UML Class Diagram .pdf or the LucidChart link which can be found in the FIT3077_Software_Engineering_Architecture_Design_Sprint_Two.pdf.
+Please see the UML class diagram in docs/sprint 3/FIT3077 - UML Class Diagram.pdf 
 
 # Tools and Frameworks
 The Framework used is JavaFX with FXML.
@@ -41,4 +41,5 @@ mvn clean javafx:run
 ```
 
 # Jar File
-https://drive.google.com/file/d/1eFaSePKTnXjoMYdz_kXGqOWBNpZWIQrW/view?usp=sharing
+The jar file can be downloaded from docs/sprint 3/MA_Friday2pm_Team8_Sprint3.jar or can be downloaded via this Google Drive link:  
+https://lucid.app/lucidchart/9f4bf3c8-2291-4f16-8f1d-70480754e238/edit?invitationId=inv_2eb4ebb1-6503-449d-8423-729d79696dae&page=E7lZqSM-jlM~#
