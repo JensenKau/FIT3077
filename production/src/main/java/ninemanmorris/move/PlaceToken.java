@@ -31,6 +31,8 @@ public class PlaceToken extends Move {
         // place token on the board
         if (pos.getToken() == null) {
             pos.addToken(tokens.remove(tokens.size() - 1));
+        
+        // do nothing if invalid move
         } else {
             return this;
         }

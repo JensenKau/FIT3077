@@ -15,8 +15,8 @@ import java.io.IOException;
  */
 public class App extends Application {
 
+    // media player for background music
     private static Media sound;
-
     private static MediaPlayer mediaPlayer;
 
     /**

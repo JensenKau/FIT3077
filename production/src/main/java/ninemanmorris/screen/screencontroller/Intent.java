@@ -8,6 +8,7 @@ import java.util.HashMap;
  */
 public class Intent {
     
+    // Item Storage
     private HashMap<String, Object> items;
 
     /**
@@ -28,7 +29,7 @@ public class Intent {
 
     /**
      * Get item value from an intent object with a particular key
-     * @param <T>
+     * @param <T> - The type of the item
      * @param key - string which represents key in intent
      * @return value mapped to the key in the intent object
      */

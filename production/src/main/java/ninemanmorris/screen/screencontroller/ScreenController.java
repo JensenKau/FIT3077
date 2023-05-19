@@ -13,9 +13,11 @@ import javafx.stage.Stage;
  */
 public abstract class ScreenController {
 
+    // Default window width and height of the game
     private final static int WINDOW_WIDTH = 860;
     private final static int WINDOW_HEIGHT = 720;
 
+    // The stage that the game is using
     private Stage stage;
 
     /**

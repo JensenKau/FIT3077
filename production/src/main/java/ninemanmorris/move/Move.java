@@ -50,8 +50,8 @@ public abstract class Move {
     public abstract Move validateCurrentMove(Position[][] positions);
 
     /**
-     * Get the quote specific for this move
-     * @return a string representation of the quote for this move
+     * Get the move type specific for this move
+     * @return the move type of this move
      */
     public abstract MoveType getMoveType();
 

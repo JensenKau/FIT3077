@@ -13,6 +13,7 @@ import ninemanmorris.shared.MoveType;
  */
 public abstract class Player {
     
+    // Attributes
     private Move currentMove;
     private boolean isRed;
     private List<Token> tokens;

@@ -54,6 +54,7 @@ public class LocalGame extends MorrisGame {
 
         } while (!getCurrentPlayerTurn().getIsRequireInput());
 
+        // update new state to subscribers
         udpateSubscribers();
     }
 }

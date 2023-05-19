@@ -18,15 +18,22 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import ninemanmorris.shared.MoveType;
 
+/**
+ * A class that handles the game grid in the game scene
+ */
 public class GameScreenGrid {
 
+    // Images path
     private static final String RED_TOKEN_IMG = "/img/9mm_token_red.png";
     private static final String BLUE_TOKEN_IMG = "/img/9mm_token_blue.png";
 
+    // Audio path
     private static final String PICKUP_AUDIO = "/audio/pickup.mp3";
 
+    // The number of lines to create as cache
     private static final int DEFAULT_LINE_AMT = 20;
 
+    // The index of the item when getting stack pane children
     private static final int GREEN_LIGHT_INDEX = 0;
     private static final int WHITE_LIGHT_INDEX = 1;
     private static final int YELLOW_LIGHT_INDEX = 2;
@@ -34,9 +41,11 @@ public class GameScreenGrid {
     private static final int RED_INDEX = 4;
     private static final int BLUE_INDEX = 5;
 
+    // Sizes for token and shape
     private static final int TOKEN_WIDTH_HEIGHT = 40;
     private static final int CIRCLE_SIZE = 27;
     
+    // Attributes
     private Pane parentPane;
     private GridPane uiGrid;
     private StackPane[][] stackPanes;
@@ -126,6 +135,7 @@ public class GameScreenGrid {
                 Circle redCircle = new Circle(CIRCLE_SIZE);
                 stackPanes[i][j] = new StackPane();
 
+                // Circle indicator settings
                 greenCircle.setEffect(new GaussianBlur());
                 greenCircle.setStyle("-fx-fill: #7aee11; -fx-cursor: hand;");
                 whiteCircle.setEffect(new GaussianBlur());
@@ -135,11 +145,13 @@ public class GameScreenGrid {
                 redCircle.setEffect(new GaussianBlur());
                 redCircle.setStyle("-fx-fill: #D64141;");
 
+                // Token settings
                 red.setFitWidth(TOKEN_WIDTH_HEIGHT);
                 red.setFitHeight(TOKEN_WIDTH_HEIGHT);
                 blue.setFitWidth(TOKEN_WIDTH_HEIGHT);
                 blue.setFitHeight(TOKEN_WIDTH_HEIGHT);
 
+                // Add to stackpane
                 stackPanes[i][j].getChildren().addAll(new Node[] {
                     greenCircle,
                     whiteCircle,
@@ -149,21 +161,23 @@ public class GameScreenGrid {
                     blue
                 });
 
+                // set all visibility to false
                 for (Node node : stackPanes[i][j].getChildren()) {
                     node.setVisible(false);
                 }
-
+                
+                // add stack pane to grid
                 uiGrid.add(stackPanes[i][j], j, i);
             }
         }
     }
 
     /**
-     * Create all possible lines on the UI grid to represent mills,
+     * Create lines as cache that represent the mill later in the game,
      * display of mills will be handled by display logic
      */
     private void createLines() {
-        while (lines.size() < 20) {
+        while (lines.size() < DEFAULT_LINE_AMT) {
             Line currentLine = new Line(0, 0, 0, 0);
             currentLine.setStrokeWidth(20);
             currentLine.setEffect(new GaussianBlur());

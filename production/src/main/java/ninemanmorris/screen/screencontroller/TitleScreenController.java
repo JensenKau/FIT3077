@@ -34,7 +34,10 @@ public class TitleScreenController extends ScreenController {
      * Initialise the game and hide the instructions and select screen
      */
     public void initialize() {
+        // hide instruction 
         switchNodeVisibility(instructionScreen, false);
+
+        // hide game selection
         switchNodeVisibility(selectScreen, false);
     }   
 
@@ -55,6 +58,7 @@ public class TitleScreenController extends ScreenController {
      * @throws IOException
      */
     public void startTwoPlayerGame(ActionEvent event) throws IOException {
+        // Put all required param in an intent
         Intent intent = new Intent();
         intent.addItems("Game Mode", GameMode.TWO_PLAYER_MODE);
 
@@ -62,7 +66,8 @@ public class TitleScreenController extends ScreenController {
     }
 
     /**
-     * Select whether the other player is a human or a computer
+     * Enable selection screen to allow player to choose to play one 
+     * or two player game
      * @param event - ActionEvent to detect when to start a two-player 
      * game with a human or computer
      * @throws IOException
@@ -93,7 +98,7 @@ public class TitleScreenController extends ScreenController {
     }
 
     /**
-     * Method to hide the select screen of the game
+     * Method to hide the instruction screen of the game
      * @param event - ActionEvent to detect when to close the 
      * instructions screen of the game
      * @throws IOException

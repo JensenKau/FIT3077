@@ -10,9 +10,11 @@ import ninemanmorris.move.Move;
  */
 public class MorrisBoard {
     
+    // Board size
     private static final int BOARD_LENGTH = 7;
     private static final int BOARD_WIDTH = 7;
 
+    // Attributes
     private Position[][] board;
 
     private boolean switchTurn;
@@ -66,7 +68,7 @@ public class MorrisBoard {
         int currentRow = (isRow) ? row - 1 : row;
         int currentCol = (!isRow) ? col - 1 : col;
 
-        // append left and bottom neighbours to array if they exist
+        // append left and top neighbours to array if they exist
         while (currentRow >= 0 && currentCol >= 0) {
             if (board[currentRow][currentCol] != null) {
                 neighbours.add(board[currentRow][currentCol]);
@@ -82,7 +84,7 @@ public class MorrisBoard {
         currentRow = (isRow) ? row + 1 : row;
         currentCol = (!isRow) ? col + 1 : col;
 
-        // append right and top neighbours to array if they exist
+        // append right and bottom neighbours to array if they exist
         while (currentRow < BOARD_LENGTH && currentCol < BOARD_WIDTH) {
             if (board[currentRow][currentCol] != null) {
                 neighbours.add(board[currentRow][currentCol]);
@@ -160,17 +162,22 @@ public class MorrisBoard {
         Position position = null;
         Move output = null;
 
+        // Do nothing if invalid move
         if (board[row][col] == null) {
             return move;
         } 
 
+        // Execute move
         position = board[row][col];
         output = move.performMove(position, board);
+
+        // Get post move information
         switchTurn = move.getSwitchTurn();
         winPlayer = move.getWinPlayer(board);
         isDrawGame = move.getIsDraw();
         move.resetSwitchTurn();
 
+        // Check the winner using hte new move
         if (move != output && winPlayer == null && !isDrawGame) {
             winPlayer = output.getWinPlayer(board);
             isDrawGame = output.getIsDraw();

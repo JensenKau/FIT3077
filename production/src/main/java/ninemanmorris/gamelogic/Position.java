@@ -23,7 +23,7 @@ public class Position {
 
     /**
      * Get the row and column of the position
-     * @return an integer array of the position instance
+     * @return the row and col of this position
      */
     public int[] getRowCol() {
         return new int[] {row, col};

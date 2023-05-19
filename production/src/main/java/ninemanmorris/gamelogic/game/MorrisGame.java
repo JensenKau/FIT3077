@@ -35,8 +35,7 @@ public abstract class MorrisGame implements IMorrisGameInputHandler {
 
     /**
      * Add a subscriber to this class and update the subscriber with 
-     * the state 
-     * of the board
+     * the state of the board
      * @param subscriber - the new subscriber
      */
     public void addSubscriber(IMorrisGameSubscriber subscriber) {

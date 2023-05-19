@@ -75,6 +75,7 @@ public class GameScreenController extends ScreenController implements IMorrisGam
 
     @Override
     public void retrieveIntent(Intent intent) {
+        // Create a game based on the game mode given
         if (intent.getItem("Game Mode") == GameMode.TWO_PLAYER_MODE) {
             this.morrisGame = MorrisGameFactory.createMorrisGame(PlayerType.HUMAN, 
                                                                 PlayerType.HUMAN, 
@@ -93,7 +94,7 @@ public class GameScreenController extends ScreenController implements IMorrisGam
         gameGrid.updateMill(mills);
         gameGrid.updateSelectedPos(selectedPos);
 
-        // update the annotations on the board
+        // update the annotations around the board
         updatePlayerTurn(isRed);
         updateMoveQuote(move);
         updatePlayerToken(redToken, blueToken);
@@ -111,6 +112,7 @@ public class GameScreenController extends ScreenController implements IMorrisGam
 
     /**
      * Updates which player's turn it is
+     * @param isRedTurn - boolean is to indicate is red turn
      */
     private void updatePlayerTurn(boolean isRedTurn) {
         if (isRedTurn) {
@@ -215,9 +217,11 @@ public class GameScreenController extends ScreenController implements IMorrisGam
      * @throws IOException
      */
     public void startTwoPlayerGame(ActionEvent event) throws IOException {
+        // Place param into an intent
         Intent intent = new Intent();
         intent.addItems("Game Mode", GameMode.TWO_PLAYER_MODE);
 
+        // Pass param to new scene
         switchScene(ScreenPage.GAME_SCREEN.toString(), intent);
     }
 }
