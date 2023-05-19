@@ -42,4 +42,4 @@ mvn clean javafx:run
 
 # Jar File
 The jar file can be downloaded from docs/sprint 3/MA_Friday2pm_Team8_Sprint3.jar or can be downloaded via this Google Drive link:  
-https://lucid.app/lucidchart/9f4bf3c8-2291-4f16-8f1d-70480754e238/edit?invitationId=inv_2eb4ebb1-6503-449d-8423-729d79696dae&page=E7lZqSM-jlM~#
+https://drive.google.com/file/d/1Kzn6a7dm6SovWwBDy5ZfXdFMJPB_8PfG/view?usp=sharing
