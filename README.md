@@ -5,7 +5,7 @@ Christine Chiong (31985270) cchi0067@student.monash.edu
 Jensen Kau (33053332) jkau0039@student.monash.edu  
 Wong Yi Zhen Nicholas (325577869) ywon0083@student.monash.edu  
 
-# Descripton
+# Description
 Nine men morris game with amazing graphics.
 
 # Design Rationale
