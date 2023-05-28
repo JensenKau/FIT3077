@@ -60,6 +60,7 @@ public class GameScreenController extends ScreenController implements IMorrisGam
     private IMorrisGameInputHandler morrisGame;
     private static int redWins = 0;
     private static int blueWins = 0; 
+    private GameMode gameMode;
 
     private GameScreenGrid gameGrid;
 
@@ -75,7 +76,7 @@ public class GameScreenController extends ScreenController implements IMorrisGam
 
     @Override
     public void retrieveIntent(Intent intent) {
-        GameMode gameMode = intent.getItem("Game Mode");
+        gameMode = intent.getItem("Game Mode");
 
         // Create a game based on the game mode given
         if (gameMode == GameMode.TWO_PLAYER_MODE) {
@@ -227,10 +228,10 @@ public class GameScreenController extends ScreenController implements IMorrisGam
      * game
      * @throws IOException
      */
-    public void startTwoPlayerGame(ActionEvent event) throws IOException {
+    public void restartGame(ActionEvent event) throws IOException {
         // Place param into an intent
         Intent intent = new Intent();
-        intent.addItems("Game Mode", GameMode.TWO_PLAYER_MODE);
+        intent.addItems("Game Mode", gameMode);
 
         // Pass param to new scene
         switchScene(ScreenPage.GAME_SCREEN.toString(), intent);
