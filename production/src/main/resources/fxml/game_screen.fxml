@@ -43,7 +43,7 @@
                               </image>
                            </ImageView>
                         </HBox>
-                     <Text opacity="0.62" text="Player 1" wrappingWidth="73.763671875">
+                     <Text fx:id="player1Txt" opacity="0.62" text="Player 1" wrappingWidth="73.763671875">
                         <font>
                            <Font name="Galvji" size="18.0" />
                         </font>
@@ -53,7 +53,7 @@
                      </Text>
                   </children>
                </VBox>
-               <VBox alignment="CENTER" layoutX="748.0" layoutY="491.0" maxWidth="-Infinity" prefHeight="70.0">
+               <VBox alignment="CENTER_RIGHT" layoutX="727.0" layoutY="491.0" maxWidth="-Infinity" prefHeight="70.0" prefWidth="95.0">
                   <children>
                      <HBox alignment="CENTER" maxWidth="-Infinity" prefHeight="40.0" prefWidth="28.0" spacing="5">
                         <children>
@@ -69,7 +69,7 @@
                            </ImageView>
                         </children>
                      </HBox>
-                     <Text opacity="0.62" text="Player 2" wrappingWidth="73.763671875">
+                     <Text fx:id="player2Txt" opacity="0.62" text="Player 2" textAlignment="RIGHT" wrappingWidth="93.9747314453125">
                         <font>
                            <Font name="Galvji" size="18.0" />
                         </font>
@@ -204,12 +204,12 @@
                   <Image url="@../img/9mm_token_blue.png" />
                </image>
             </ImageView>
-            <Text layoutX="100.0" layoutY="396.0" opacity="0.62" text="Player 1" textAlignment="CENTER" wrappingWidth="70.40011596679688">
+            <Text fx:id="resPlayer1Txt" layoutX="100.0" layoutY="396.0" opacity="0.62" text="Player 1" textAlignment="CENTER" wrappingWidth="70.40011596679688">
                <font>
                   <Font name="Galvji" size="18.0" />
                </font>
             </Text>
-            <Text layoutX="312.0" layoutY="395.0" opacity="0.62" text="Player 2" textAlignment="CENTER" wrappingWidth="70.40011596679688">
+            <Text fx:id="resPlayer2Txt" layoutX="301.0" layoutY="395.0" opacity="0.62" text="Player 2" textAlignment="CENTER" wrappingWidth="99.13571166992188">
                <font>
                   <Font name="Galvji" size="18.0" />
                </font>

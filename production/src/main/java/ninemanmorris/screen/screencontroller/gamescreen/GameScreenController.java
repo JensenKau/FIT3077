@@ -35,6 +35,12 @@ public class GameScreenController extends ScreenController implements IMorrisGam
     private Text turn;
 
     @FXML
+    private Text player1Txt;
+
+    @FXML
+    private Text player2Txt;
+
+    @FXML
     private Label red_token_count;
 
     @FXML
@@ -50,6 +56,12 @@ public class GameScreenController extends ScreenController implements IMorrisGam
     private AnchorPane pausePane;
 
     @FXML
+    private Text resPlayer1Txt;
+
+    @FXML
+    private Text resPlayer2Txt;
+
+    @FXML
     private Text playerWonTxt;
 
     @FXML
@@ -62,6 +74,8 @@ public class GameScreenController extends ScreenController implements IMorrisGam
     private static int redWins = 0;
     private static int blueWins = 0; 
     private GameMode gameMode;
+    private String player1String;
+    private String player2String;
 
     private GameScreenGrid gameGrid;
 
@@ -81,6 +95,9 @@ public class GameScreenController extends ScreenController implements IMorrisGam
 
         // Create a game based on the game mode given
         if (gameMode == GameMode.TWO_PLAYER_MODE) {
+            player1String = "Player 1";
+            player2String = "Player 2";
+
             this.morrisGame = MorrisGameFactory.createMorrisGame(
                 MorrisGameFactory.createHumanRequest(true, this),
                 MorrisGameFactory.createHumanRequest(false, this),
@@ -88,12 +105,20 @@ public class GameScreenController extends ScreenController implements IMorrisGam
             );
 
         } else if (gameMode == GameMode.COMPUTER_MODE) {
+            player1String = "Player";
+            player2String = "Computer";
+
             this.morrisGame = MorrisGameFactory.createMorrisGame(
                 MorrisGameFactory.createHumanRequest(true, this),
                 MorrisGameFactory.createComputerRequest(false),
                 this
             );
         }
+
+        player1Txt.setText(player1String);
+        player2Txt.setText(player2String);
+        resPlayer1Txt.setText(player1String);
+        resPlayer2Txt.setText(player2String);
     }
 
     @Override
@@ -131,10 +156,10 @@ public class GameScreenController extends ScreenController implements IMorrisGam
         Color color;
         if (isRedTurn) {
             color = Color.RED;
-            turn.setText("Player 1's");
+            turn.setText(player1String + "'s");
         } else {
             color = Color.BLUE;
-            turn.setText("Player 2's");
+            turn.setText(player2String + "'s");
         }
         turn.setFill(color);
     }
@@ -174,10 +199,10 @@ public class GameScreenController extends ScreenController implements IMorrisGam
         // fill up result screen with winner details
         if (isRed) {
             redWins++;
-            playerWonTxt.setText("Player 1 Won!");
+            playerWonTxt.setText(player1String + " Won!");
         } else {
             blueWins++;
-            playerWonTxt.setText("Player 2 Won!");
+            playerWonTxt.setText(player2String + " Won!");
         }
         counterTxt.setText(redWins + " - " + blueWins);
     }
