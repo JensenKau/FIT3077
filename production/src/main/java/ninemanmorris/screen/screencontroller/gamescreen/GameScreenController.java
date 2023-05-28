@@ -9,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import ninemanmorris.gamelogic.IMorrisGameEndListener;
 import ninemanmorris.gamelogic.IMorrisGameInputHandler;
@@ -127,11 +128,15 @@ public class GameScreenController extends ScreenController implements IMorrisGam
      * @param isRedTurn - boolean is to indicate is red turn
      */
     private void updatePlayerTurn(boolean isRedTurn) {
+        Color color;
         if (isRedTurn) {
-            turn.setText("Red's Turn");
+            color = Color.RED;
+            turn.setText("Player 1's");
         } else {
-            turn.setText("Blue's Turn");
+            color = Color.BLUE;
+            turn.setText("Player 2's");
         }
+        turn.setFill(color);
     }
 
     /**
