@@ -81,13 +81,15 @@ public class GameScreenController extends ScreenController implements IMorrisGam
         if (gameMode == GameMode.TWO_PLAYER_MODE) {
             this.morrisGame = MorrisGameFactory.createMorrisGame(
                 MorrisGameFactory.createHumanRequest(true, this),
-                MorrisGameFactory.createHumanRequest(false, this)
+                MorrisGameFactory.createHumanRequest(false, this),
+                this
             );
 
         } else if (gameMode == GameMode.COMPUTER_MODE) {
             this.morrisGame = MorrisGameFactory.createMorrisGame(
                 MorrisGameFactory.createHumanRequest(true, this),
-                MorrisGameFactory.createComputerRequest(false)
+                MorrisGameFactory.createComputerRequest(false),
+                this
             );
         }
     }

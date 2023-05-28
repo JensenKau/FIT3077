@@ -24,16 +24,22 @@ public class MorrisGameFactory {
      * @return the newly created MorrisGame based on the specified 
      * parameters
      */
-    public static MorrisGame createMorrisGame(PlayerCreationReqRes p1, PlayerCreationReqRes p2) {
+    public static MorrisGame createMorrisGame(PlayerCreationReqRes p1, PlayerCreationReqRes p2, IMorrisGameEndListener... listeners) {
         p1 = PlayerCreationReqRes.createPlayer(p1);
         p2 = PlayerCreationReqRes.createPlayer(p2);
 
-        return new LocalGame(
+        MorrisGame output = new LocalGame(
             p1.getPlayer(), 
             p2.getPlayer(), 
             p1.getListener(), 
             p2.getListener()
         );
+
+        for (IMorrisGameEndListener listener : listeners) {
+            output.addGameEndListener(listener);
+        }
+
+        return output;
     }
 
     public static PlayerCreationReqRes createHumanRequest(boolean isRed, IMorrisGameStateListener listener) {

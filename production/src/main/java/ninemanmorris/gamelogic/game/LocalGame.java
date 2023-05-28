@@ -41,8 +41,10 @@ public class LocalGame extends MorrisGame {
             // game is a draw, declare draw
             if (getGameBoard().getWinPlayer() != null) {
                 delcareWinner(getGameBoard().getWinPlayer());
+                break;
             } if (getGameBoard().getIsDrawGame()) {
                 declareDraw();
+                break;
             }
 
             // switch to the next player's turn
