@@ -2,8 +2,9 @@ package ninemanmorris.gamelogic.game;
 
 import java.util.ArrayList;
 
+import ninemanmorris.gamelogic.IMorrisGameEndListener;
 import ninemanmorris.gamelogic.IMorrisGameInputHandler;
-import ninemanmorris.gamelogic.IMorrisGameSubscriber;
+import ninemanmorris.gamelogic.IMorrisGameStateListener;
 import ninemanmorris.gamelogic.MorrisBoard;
 import ninemanmorris.player.playertype.Player;
 
@@ -15,22 +16,25 @@ public abstract class MorrisGame implements IMorrisGameInputHandler {
     private MorrisBoard gameBoard;
     private Player[] players;
     private Player currentPlayerTurn;
-    private ArrayList<IMorrisGameSubscriber> subscribers;
+    private ArrayList<IMorrisGameStateListener> gameStateListeners;
+    private ArrayList<IMorrisGameEndListener> gameEndListeners;
 
     /**
      * Constructor to create a MorrisGame
-     * @param p1 - player 1 (red player)
-     * @param p2 - player 2 (blue player)
-     * @param subscriber - the subscriber who will be observing this 
-     * class
+     * @param p1 - the first player (red player)
+     * @param p2 - the second player (blue player)
+     * @param p1Listener - p1 game state listener
+     * @param p2Listener - p2 game state listener
      */
-    public MorrisGame(Player p1, Player p2, IMorrisGameSubscriber subscriber) {
-        subscribers = new ArrayList<>();
+    public MorrisGame(Player p1, Player p2, IMorrisGameStateListener p1Listener, IMorrisGameStateListener p2Listener) {
+        gameStateListeners = new ArrayList<>();
+        gameEndListeners = new ArrayList<>();
         players = new Player[] {p1, p2};
         currentPlayerTurn = p1;
         gameBoard = new MorrisBoard();
 
-        addSubscriber(subscriber);
+        addGameStateListener(p1Listener);
+        addGameStateListener(p2Listener);
     }
 
     /**
@@ -38,9 +42,9 @@ public abstract class MorrisGame implements IMorrisGameInputHandler {
      * the state of the board
      * @param subscriber - the new subscriber
      */
-    public void addSubscriber(IMorrisGameSubscriber subscriber) {
-        subscribers.add(subscriber);
-        subscriber.update(
+    public void addGameStateListener(IMorrisGameStateListener listener) {
+        gameStateListeners.add(listener);
+        listener.update(
             currentPlayerTurn.getIsRed(), 
             players[0].getTokenCount(), 
             players[1].getTokenCount(), 
@@ -52,13 +56,17 @@ public abstract class MorrisGame implements IMorrisGameInputHandler {
         );
     }
 
+    public void addGameEndListener(IMorrisGameEndListener listener) {
+        gameEndListeners.add(listener);
+    }
+
     /**
      * Update all of the subscribers subscribed to this class with the 
      * new state of the board
      */ 
-    public void udpateSubscribers() {
-        for (IMorrisGameSubscriber subscriber : subscribers) {
-            subscriber.update(
+    public void udpateGameStateListeners() {
+        for (IMorrisGameStateListener listener : gameStateListeners) {
+            listener.update(
                 currentPlayerTurn.getIsRed(), 
                 players[0].getTokenCount(), 
                 players[1].getTokenCount(), 
@@ -79,8 +87,8 @@ public abstract class MorrisGame implements IMorrisGameInputHandler {
      * and false if it is not
      */
     protected void delcareWinner(boolean isRed) {
-        for (IMorrisGameSubscriber subscriber : subscribers) {
-            subscriber.updateGameEnd(isRed);
+        for (IMorrisGameEndListener listener : gameEndListeners) {
+            listener.updateGameEnd(isRed);
         }
     }
 
@@ -89,8 +97,8 @@ public abstract class MorrisGame implements IMorrisGameInputHandler {
      * subscribed to this class
      */
     protected void declareDraw() {
-        for (IMorrisGameSubscriber subscriber : subscribers) {
-            subscriber.updateGameDraw();
+        for (IMorrisGameEndListener listener : gameEndListeners) {
+            listener.updateGameDraw();
         }
     }
 

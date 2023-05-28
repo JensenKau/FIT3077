@@ -10,10 +10,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import ninemanmorris.gamelogic.IMorrisGameEndListener;
 import ninemanmorris.gamelogic.IMorrisGameInputHandler;
-import ninemanmorris.gamelogic.IMorrisGameSubscriber;
+import ninemanmorris.gamelogic.IMorrisGameStateListener;
 import ninemanmorris.gamelogic.MorrisGameFactory;
-import ninemanmorris.player.PlayerType;
 import ninemanmorris.screen.ScreenPage;
 import ninemanmorris.screen.screencontroller.Intent;
 import ninemanmorris.screen.screencontroller.ScreenController;
@@ -22,7 +22,7 @@ import ninemanmorris.shared.MoveType;
 /**
  * Controller class for the game screen of the game
  */
-public class GameScreenController extends ScreenController implements IMorrisGameSubscriber, IInputHandler {
+public class GameScreenController extends ScreenController implements IMorrisGameStateListener, IMorrisGameEndListener, IInputHandler {
 
     @FXML
     private AnchorPane mainPane;
@@ -75,11 +75,20 @@ public class GameScreenController extends ScreenController implements IMorrisGam
 
     @Override
     public void retrieveIntent(Intent intent) {
+        GameMode gameMode = intent.getItem("Game Mode");
+
         // Create a game based on the game mode given
-        if (intent.getItem("Game Mode") == GameMode.TWO_PLAYER_MODE) {
-            this.morrisGame = MorrisGameFactory.createMorrisGame(PlayerType.HUMAN, 
-                                                                PlayerType.HUMAN, 
-                                                                this);
+        if (gameMode == GameMode.TWO_PLAYER_MODE) {
+            this.morrisGame = MorrisGameFactory.createMorrisGame(
+                MorrisGameFactory.createHumanRequest(true, this),
+                MorrisGameFactory.createHumanRequest(false, this)
+            );
+
+        } else if (gameMode == GameMode.COMPUTER_MODE) {
+            this.morrisGame = MorrisGameFactory.createMorrisGame(
+                MorrisGameFactory.createHumanRequest(true, this),
+                MorrisGameFactory.createComputerRequest(false)
+            );
         }
     }
 

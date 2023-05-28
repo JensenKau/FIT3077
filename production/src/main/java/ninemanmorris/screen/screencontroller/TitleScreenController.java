@@ -65,6 +65,13 @@ public class TitleScreenController extends ScreenController {
         switchScene(ScreenPage.GAME_SCREEN.toString(), intent);
     }
 
+    public void startOnePlayerGame(ActionEvent event) throws IOException {
+        Intent intent = new Intent();
+        intent.addItems("Game Mode", GameMode.COMPUTER_MODE);
+
+        switchScene(ScreenPage.GAME_SCREEN.toString(), intent);
+    }
+
     /**
      * Enable selection screen to allow player to choose to play one 
      * or two player game

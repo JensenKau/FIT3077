@@ -1,6 +1,6 @@
 package ninemanmorris.gamelogic.game;
 
-import ninemanmorris.gamelogic.IMorrisGameSubscriber;
+import ninemanmorris.gamelogic.IMorrisGameStateListener;
 import ninemanmorris.player.playertype.Player;
 
 /**
@@ -12,11 +12,11 @@ public class LocalGame extends MorrisGame {
      * LocalGame constructor
      * @param p1 - the first player (red player)
      * @param p2 - the second player (blue player)
-     * @param subscriber - the subscribers that will be listening to 
-     * this game
+     * @param p1Listener - p1 game state listener
+     * @param p2Listener - p2 game state listener
      */
-    public LocalGame(Player p1, Player p2, IMorrisGameSubscriber subscriber) {
-        super(p1, p2, subscriber);
+    public LocalGame(Player p1, Player p2, IMorrisGameStateListener p1Listener, IMorrisGameStateListener p2Listener) {
+        super(p1, p2, p1Listener, p2Listener);
     }
 
     @Override
@@ -52,9 +52,8 @@ public class LocalGame extends MorrisGame {
                 validatePlayerMove();
             }
 
-        } while (!getCurrentPlayerTurn().getIsRequireInput());
+            udpateGameStateListeners();
 
-        // update new state to subscribers
-        udpateSubscribers();
+        } while (!getCurrentPlayerTurn().getIsRequireInput());
     }
 }

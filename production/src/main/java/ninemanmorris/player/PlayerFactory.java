@@ -1,6 +1,7 @@
 package ninemanmorris.player;
 
 import ninemanmorris.player.playertype.*;
+import ninemanmorris.player.playertype.computer.ComputerAI;
 
 /**
  * A factory class for creating Players
