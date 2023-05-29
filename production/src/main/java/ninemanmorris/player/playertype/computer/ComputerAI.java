@@ -1,8 +1,7 @@
-package ninemanmorris.player.playertype;
-
-import java.util.Random;
+package ninemanmorris.player.playertype.computer;
 
 import ninemanmorris.move.Move;
+import ninemanmorris.player.playertype.Player;
 
 /**
  * Represents a Computer AI player
@@ -10,17 +9,8 @@ import ninemanmorris.move.Move;
 public class ComputerAI extends Player {
 
     private static final boolean IS_REQUIRE_INPUT = false;
-    private static final Random RAND_INSTANCE = new Random();
-
-    private static final int[][] AVAILABLE_POS = new int[][] {
-        {0, 0}, {0, 3}, {0, 6},
-        {1, 1}, {1, 3}, {1, 5},
-        {2, 2}, {2, 3}, {2, 4},
-        {3, 0}, {3, 1}, {3, 2}, {3, 4}, {3, 5}, {3, 6},
-        {4, 2}, {4, 3}, {4, 4},
-        {5, 1}, {5, 3}, {5, 5},
-        {6, 0}, {6, 3}, {6, 6},
-    };
+    
+    private ComputerBoard computerBoard;
 
     /**
      * Constructor for ComputerAI
@@ -29,6 +19,7 @@ public class ComputerAI extends Player {
      */
     public ComputerAI(boolean isRed) {
         super(isRed);
+        this.computerBoard = new ComputerBoard();
     }
 
     @Override
@@ -42,10 +33,14 @@ public class ComputerAI extends Player {
     @Override
     public Move getMove() {
         Move currentMove = super.getMove();
-        int[] randPos = AVAILABLE_POS[RAND_INSTANCE.nextInt(AVAILABLE_POS.length)];
+        int[] selectedPos = computerBoard.selectPosition();
 
-        currentMove.setMovePosition(randPos[0], randPos[1]);
+        currentMove.setMovePosition(selectedPos[0], selectedPos[1]);
 
         return currentMove;
+    }
+
+    public ComputerBoard getComputerBoard() {
+        return computerBoard;
     }
 }

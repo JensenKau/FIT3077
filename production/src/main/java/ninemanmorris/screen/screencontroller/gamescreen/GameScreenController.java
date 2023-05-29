@@ -9,11 +9,12 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import ninemanmorris.gamelogic.IMorrisGameEndListener;
 import ninemanmorris.gamelogic.IMorrisGameInputHandler;
-import ninemanmorris.gamelogic.IMorrisGameSubscriber;
+import ninemanmorris.gamelogic.IMorrisGameStateListener;
 import ninemanmorris.gamelogic.MorrisGameFactory;
-import ninemanmorris.player.PlayerType;
 import ninemanmorris.screen.ScreenPage;
 import ninemanmorris.screen.screencontroller.Intent;
 import ninemanmorris.screen.screencontroller.ScreenController;
@@ -22,7 +23,7 @@ import ninemanmorris.shared.MoveType;
 /**
  * Controller class for the game screen of the game
  */
-public class GameScreenController extends ScreenController implements IMorrisGameSubscriber, IInputHandler {
+public class GameScreenController extends ScreenController implements IMorrisGameStateListener, IMorrisGameEndListener, IInputHandler {
 
     @FXML
     private AnchorPane mainPane;
@@ -32,6 +33,12 @@ public class GameScreenController extends ScreenController implements IMorrisGam
 
     @FXML
     private Text turn;
+
+    @FXML
+    private Text player1Txt;
+
+    @FXML
+    private Text player2Txt;
 
     @FXML
     private Label red_token_count;
@@ -49,6 +56,12 @@ public class GameScreenController extends ScreenController implements IMorrisGam
     private AnchorPane pausePane;
 
     @FXML
+    private Text resPlayer1Txt;
+
+    @FXML
+    private Text resPlayer2Txt;
+
+    @FXML
     private Text playerWonTxt;
 
     @FXML
@@ -60,6 +73,9 @@ public class GameScreenController extends ScreenController implements IMorrisGam
     private IMorrisGameInputHandler morrisGame;
     private static int redWins = 0;
     private static int blueWins = 0; 
+    private GameMode gameMode;
+    private String player1String;
+    private String player2String;
 
     private GameScreenGrid gameGrid;
 
@@ -75,12 +91,34 @@ public class GameScreenController extends ScreenController implements IMorrisGam
 
     @Override
     public void retrieveIntent(Intent intent) {
+        gameMode = intent.getItem("Game Mode");
+
         // Create a game based on the game mode given
-        if (intent.getItem("Game Mode") == GameMode.TWO_PLAYER_MODE) {
-            this.morrisGame = MorrisGameFactory.createMorrisGame(PlayerType.HUMAN, 
-                                                                PlayerType.HUMAN, 
-                                                                this);
+        if (gameMode == GameMode.TWO_PLAYER_MODE) {
+            player1String = "Player 1";
+            player2String = "Player 2";
+
+            this.morrisGame = MorrisGameFactory.createMorrisGame(
+                MorrisGameFactory.createHumanRequest(true, this),
+                MorrisGameFactory.createHumanRequest(false, this),
+                this
+            );
+
+        } else if (gameMode == GameMode.COMPUTER_MODE) {
+            player1String = "Player";
+            player2String = "Computer";
+
+            this.morrisGame = MorrisGameFactory.createMorrisGame(
+                MorrisGameFactory.createHumanRequest(true, this),
+                MorrisGameFactory.createComputerRequest(false),
+                this
+            );
         }
+
+        player1Txt.setText(player1String);
+        player2Txt.setText(player2String);
+        resPlayer1Txt.setText(player1String);
+        resPlayer2Txt.setText(player2String);
     }
 
     @Override
@@ -115,11 +153,15 @@ public class GameScreenController extends ScreenController implements IMorrisGam
      * @param isRedTurn - boolean is to indicate is red turn
      */
     private void updatePlayerTurn(boolean isRedTurn) {
+        Color color;
         if (isRedTurn) {
-            turn.setText("Red's Turn");
+            color = Color.RED;
+            turn.setText(player1String + "'s");
         } else {
-            turn.setText("Blue's Turn");
+            color = Color.BLUE;
+            turn.setText(player2String + "'s");
         }
+        turn.setFill(color);
     }
 
     /**
@@ -157,10 +199,10 @@ public class GameScreenController extends ScreenController implements IMorrisGam
         // fill up result screen with winner details
         if (isRed) {
             redWins++;
-            playerWonTxt.setText("Player 1 Won!");
+            playerWonTxt.setText(player1String + " Won!");
         } else {
             blueWins++;
-            playerWonTxt.setText("Player 2 Won!");
+            playerWonTxt.setText(player2String + " Won!");
         }
         counterTxt.setText(redWins + " - " + blueWins);
     }
@@ -216,10 +258,10 @@ public class GameScreenController extends ScreenController implements IMorrisGam
      * game
      * @throws IOException
      */
-    public void startTwoPlayerGame(ActionEvent event) throws IOException {
+    public void restartGame(ActionEvent event) throws IOException {
         // Place param into an intent
         Intent intent = new Intent();
-        intent.addItems("Game Mode", GameMode.TWO_PLAYER_MODE);
+        intent.addItems("Game Mode", gameMode);
 
         // Pass param to new scene
         switchScene(ScreenPage.GAME_SCREEN.toString(), intent);
