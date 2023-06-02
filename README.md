@@ -24,6 +24,7 @@ The following tools must be installed already:
 - JDK 20
 - JavaFX version 19
 - Maven
+- JRE 11
 
 1. Clone the repository.
 ```
@@ -41,5 +42,4 @@ mvn clean javafx:run
 ```
 
 # Jar File
-The jar file can be downloaded from docs/sprint 3/MA_Friday2pm_Team8_Sprint3.jar or can be downloaded via this Google Drive link:  
-https://drive.google.com/file/d/1Kzn6a7dm6SovWwBDy5ZfXdFMJPB_8PfG/view?usp=sharing
+The jar file can be downloaded from docs/sprint 3/MA_Friday2pm_Team8_Sprint_4.jar.
