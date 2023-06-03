@@ -191,7 +191,7 @@
          <children>
             <Text fx:id="playerWonTxt" fill="#513d24" layoutX="26.0" layoutY="151.0" opacity="0.62" text="Player 1 Won!" textAlignment="CENTER" wrappingWidth="427.2000732421875">
                <font>
-                  <Font name="Galvji" size="64.0" />
+                  <Font name="Galvji" size="32.0" />
                </font>
             </Text>
             <ImageView fitHeight="160.0" fitWidth="160.0" layoutX="55.0" layoutY="206.0" pickOnBounds="true" preserveRatio="true">
