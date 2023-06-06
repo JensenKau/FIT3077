@@ -42,4 +42,4 @@ mvn clean javafx:run
 ```
 
 # Jar File
-The jar file can be downloaded from docs/sprint 3/MA_Friday2pm_Team8_Sprint_4.jar.
+[Sprint 4 Jar File](docs/sprint 4/MA_Friday2pm_Team8_Sprint_4.jar)
