@@ -40,6 +40,10 @@ public class ComputerAI extends Player {
         return currentMove;
     }
 
+    /**
+     * Get the computer board that this AI is using
+     * @return the computer board this ai has
+     */
     public ComputerBoard getComputerBoard() {
         return computerBoard;
     }

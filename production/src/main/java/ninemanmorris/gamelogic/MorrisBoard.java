@@ -197,7 +197,8 @@ public class MorrisBoard {
 
     /**
      * Get the winner of the game
-     * @return true if player 1 won and false if player 2 won
+     * @return true if player 1 won and false if player 2 won and null
+     * if no player win
      */
     public Boolean getWinPlayer() {
         return winPlayer;
@@ -229,8 +230,8 @@ public class MorrisBoard {
     /**
      * Get the selected position in a move
      * @param move - move to get the selected position from
-     * @return an array of integers representing positions that
-     * have been selected during a move
+     * @return an pair of integers that represent the row and col that
+     * has been selected for the current move
      */
     public int[] getSelectedPos(Move move) {
         return move.getSelectedPos();
@@ -268,7 +269,8 @@ public class MorrisBoard {
 
     /**
      * Generate mills on the board
-     * @return integer table of mill positions on the board
+     * @return a list of triplets that represents the mill positions
+     * on the board
      */
     public List<int[][]> generateMills() {
         List<int[][]> output = new ArrayList<>();

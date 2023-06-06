@@ -6,6 +6,10 @@ import java.util.List;
 import ninemanmorris.gamelogic.IMorrisGameStateListener;
 import ninemanmorris.shared.MoveType;
 
+/**
+ * A class that acts as a player and contains the logic required to
+ * make a move
+ */
 public class ComputerBoard implements IMorrisGameStateListener {
 
     private boolean[][] interactables;
@@ -15,6 +19,10 @@ public class ComputerBoard implements IMorrisGameStateListener {
         this.interactables = interactables;
     }
 
+    /**
+     * Select a valid position on the board
+     * @return A valid position on the board
+     */
     public int[] selectPosition() {
         ArrayList<int[]> availablePositions = new ArrayList<>(30);
 

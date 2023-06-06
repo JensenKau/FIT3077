@@ -1,6 +1,7 @@
 package ninemanmorris.gamelogic.game;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import ninemanmorris.gamelogic.IMorrisGameEndListener;
 import ninemanmorris.gamelogic.IMorrisGameInputHandler;
@@ -16,8 +17,8 @@ public abstract class MorrisGame implements IMorrisGameInputHandler {
     private MorrisBoard gameBoard;
     private Player[] players;
     private Player currentPlayerTurn;
-    private ArrayList<IMorrisGameStateListener> gameStateListeners;
-    private ArrayList<IMorrisGameEndListener> gameEndListeners;
+    private List<IMorrisGameStateListener> gameStateListeners;
+    private List<IMorrisGameEndListener> gameEndListeners;
 
     /**
      * Constructor to create a MorrisGame
@@ -38,9 +39,9 @@ public abstract class MorrisGame implements IMorrisGameInputHandler {
     }
 
     /**
-     * Add a subscriber to this class and update the subscriber with 
-     * the state of the board
-     * @param subscriber - the new subscriber
+     * Add a new listener to this class which would be updated about 
+     * the current state of the game
+     * @param listener - the new game state listener
      */
     public void addGameStateListener(IMorrisGameStateListener listener) {
         gameStateListeners.add(listener);
@@ -56,13 +57,18 @@ public abstract class MorrisGame implements IMorrisGameInputHandler {
         );
     }
 
+    /**
+     * Add a new listener to this class which would be updated about
+     * the game when the game end
+     * @param listener - the new game end listener
+     */
     public void addGameEndListener(IMorrisGameEndListener listener) {
         gameEndListeners.add(listener);
     }
 
     /**
-     * Update all of the subscribers subscribed to this class with the 
-     * new state of the board
+     * Update all of the game state listeners subscribed to this class 
+     * with the new state of the board
      */ 
     public void udpateGameStateListeners() {
         for (IMorrisGameStateListener listener : gameStateListeners) {
@@ -81,7 +87,7 @@ public abstract class MorrisGame implements IMorrisGameInputHandler {
 
     /**
      * Declare whether the winner of the game is the red token 
-     * (player 1) or blue token (player 2) for all subscribers 
+     * (player 1) or blue token (player 2) for all listeners 
      * subscribed to this class
      * @param isRed - true if the winner is the red token (player 1)
      * and false if it is not
@@ -93,7 +99,7 @@ public abstract class MorrisGame implements IMorrisGameInputHandler {
     }
 
     /**
-     * Declare that the game has come to a draw for all subscribers 
+     * Declare that the game has come to a draw to all listeners 
      * subscribed to this class
      */
     protected void declareDraw() {

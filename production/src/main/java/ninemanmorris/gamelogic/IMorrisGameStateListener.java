@@ -23,9 +23,14 @@ public interface IMorrisGameStateListener {
      * @param move - the type of move that can currently being executed
      * @param selectedPos - the position that has been selected
      */
-    void update(boolean isRed, int redToken, int blueToken, Boolean[][] board, 
-                boolean[][] interactables, List<int[][]> mills, MoveType move, 
-                int[] selectedPos);
-
-    
+    void update(
+        boolean isRed, 
+        int redToken, 
+        int blueToken, 
+        Boolean[][] board, 
+        boolean[][] interactables, 
+        List<int[][]> mills, 
+        MoveType move, 
+        int[] selectedPos
+    );
 }
