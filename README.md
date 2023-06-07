@@ -24,7 +24,7 @@ The following tools must be installed already:
 - JDK 20
 - JavaFX version 19
 - Maven
-- JRE 17
+- JRE 17+
 
 1. Clone the repository.
 ```
