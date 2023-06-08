@@ -54,3 +54,5 @@ mvn clean javafx:run
 ```
 java --module-path <Path to JavaFX SDK>/lib --add-modules javafx.controls,javafx.fxml,javafx.graphics,javafx.media -jar <Path to JAR File>
 ```
+- Replace `<Path to JavaFX SDK>` to the path of the JavaFX SDK that you have downloaded (Note: Ensure that your path does not contain spaces)
+- Replace `<Path to JAR File>` to the path of the JAR file that you have downloaded in step 1 (Note: Ensure that your path does not contain spaces)
