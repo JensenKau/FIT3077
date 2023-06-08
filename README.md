@@ -42,12 +42,15 @@ mvn clean javafx:run
 ```
 
 # Jar File
-1. Download JavaFX SDK 20 for your device's OS from this link: https://gluonhq.com/products/javafx/
 
-2. Download the executable Jar File:
+1. Download the executable Jar File:
 [Sprint 4 Jar File](docs/sprint 4/FIT3077_MA_FRIDAY_2PM_Sprint_4.jar)
 
-3. Run the executable jar file through the command line.
+2. Double click on the executable jar file to run it.
+
+3. As a backup, if this cannot be run on certain devices:
+- First, download JavaFX SDK 20 for your device's OS from this link: https://gluonhq.com/products/javafx/
+- Run the executable jar file through the command line.
 ```
 java --module-path <Path to JavaFX SDK>/lib --add-modules javafx.controls,javafx.fxml,javafx.graphics,javafx.media -jar <Path to JAR File>
 ```
