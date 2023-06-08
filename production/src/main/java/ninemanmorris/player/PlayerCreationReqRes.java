@@ -52,7 +52,8 @@ public class PlayerCreationReqRes {
      * @param listener - The game state listener of the player
      * @param player - The created player object
      */
-    private PlayerCreationReqRes(PlayerType playerType, boolean isRed, IMorrisGameStateListener listener, Player player) {
+    private PlayerCreationReqRes(PlayerType playerType, boolean isRed, 
+                                IMorrisGameStateListener listener, Player player) {
         this.playerType = playerType;
         this.listener = listener;
         this.isRed = isRed;
@@ -65,7 +66,8 @@ public class PlayerCreationReqRes {
      * @param isRed - true if red player, false otherwise
      * @param listener - The game state listener of the player
      */
-    public PlayerCreationReqRes(PlayerType playerType, boolean isRed, IMorrisGameStateListener listener) {
+    public PlayerCreationReqRes(PlayerType playerType, boolean isRed, 
+                                IMorrisGameStateListener listener) {
         this(playerType, isRed, listener, null);
     }
 

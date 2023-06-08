@@ -23,7 +23,9 @@ import ninemanmorris.shared.MoveType;
 /**
  * Controller class for the game screen of the game
  */
-public class GameScreenController extends ScreenController implements IMorrisGameStateListener, IMorrisGameEndListener, IInputHandler {
+public class GameScreenController extends ScreenController implements IMorrisGameStateListener, 
+                                                                      IMorrisGameEndListener, 
+                                                                      IInputHandler {
 
     @FXML
     private AnchorPane mainPane;

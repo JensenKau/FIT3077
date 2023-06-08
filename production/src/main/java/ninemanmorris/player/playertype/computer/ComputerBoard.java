@@ -15,7 +15,9 @@ public class ComputerBoard implements IMorrisGameStateListener {
     private boolean[][] interactables;
 
     @Override
-    public void update(boolean isRed, int redToken, int blueToken, Boolean[][] board, boolean[][] interactables, List<int[][]> mills, MoveType move, int[] selectedPos) {
+    public void update(boolean isRed, int redToken, int blueToken, Boolean[][] board, 
+                        boolean[][] interactables, List<int[][]> mills, 
+                        MoveType move, int[] selectedPos) {
         this.interactables = interactables;
     }
 

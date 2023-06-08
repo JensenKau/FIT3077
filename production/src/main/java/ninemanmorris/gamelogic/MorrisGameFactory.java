@@ -25,7 +25,8 @@ public class MorrisGameFactory {
      * @return the newly created MorrisGame based on the specified 
      * parameters
      */
-    public static MorrisGame createMorrisGame(PlayerCreationReqRes p1, PlayerCreationReqRes p2, IMorrisGameEndListener... listeners) {
+    public static MorrisGame createMorrisGame(PlayerCreationReqRes p1, PlayerCreationReqRes p2, 
+                                            IMorrisGameEndListener... listeners) {
         p1 = PlayerCreationReqRes.createPlayer(p1);
         p2 = PlayerCreationReqRes.createPlayer(p2);
 
@@ -50,7 +51,8 @@ public class MorrisGameFactory {
      * @return A request object containing the request to create a human
      * player
      */
-    public static PlayerCreationReqRes createHumanRequest(boolean isRed, IMorrisGameStateListener listener) {
+    public static PlayerCreationReqRes createHumanRequest(boolean isRed, 
+                                                        IMorrisGameStateListener listener) {
         return new PlayerCreationReqRes(PlayerType.HUMAN, isRed, listener);
     }
 
